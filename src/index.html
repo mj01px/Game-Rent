@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Rent</title>
+
+    <!-- External stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Inter:wght@600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="body">
+<main class="container main">
+
+    <!-- Logo section -->
+    <section class="logo">
+        <h1 class="logo__title">Game <span class="page-title__highlight">Rent
+        </h1>
+        <p class="logo__subtitle">Project created by: Mauro Junior</p>
+
+    <!-- Visual divider with lines and a bar -->
+    <section class="divider">
+        <div class="divider__line"></div>
+        <img src="img/fade_bar.svg" alt="Decorative bar" class="divider__bar">
+        <div class="divider__line"></div>
+    </section>
+
+    <!-- Main title -->
+    <h1 class="page-title">
+        Rent your favorite <span class="page-title__highlight">boardgames</span>
+    </h1>
+
+    <!-- Game dashboard -->
+    <section class="dashboard">
+        <ul class="dashboard__list">
+
+            <!-- Game card: Monopoly -->
+            <li class="dashboard__card" id="game-1">
+                <div class="dashboard__card-img">
+                    <img src="img/monopoly.png" alt="Monopoly game cover">
+                </div>
+                <p class="dashboard__card-name">Monopoly</p>
+                <a href="#" onclick="alterarStatus(1)" class="dashboard__card-btn">Rent</a>
+            </li>
+
+            <!-- Game card: Ticket to Ride -->
+            <li class="dashboard__card" id="game-2">
+                <div class="dashboard__card-img">
+                    <img src="img/ticket_to_ride.png" alt="Ticket to Ride game cover">
+                </div>
+                <p class="dashboard__card-name">Ticket to Ride</p>
+                <a href="#" onclick="alterarStatus(2)" class="dashboard__card-btn">Rent</a>
+            </li>
+
+            <!-- Game card: Takenoko (already rented) -->
+            <li class="dashboard__card--return" id="game-3">
+                <div class="dashboard__card-img dashboard__card-img--rented">
+                    <img src="img/takenoko.png" alt="Takenoko game cover">
+                </div>
+                <p class="dashboard__card-name">Takenoko</p>
+                <a href="#" onclick="alterarStatus(3)" class="dashboard__card-btn dashboard__card-btn--return">Return</a>
+            </li>
+
+        </ul>
+    </section>
+    </section>
+</main>
+
+
+<!-- App JS logic -->
+<script src="js/app.js"></script>
+</body>
+
+</html>
