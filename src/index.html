@@ -44,16 +44,16 @@
                     <img src="img/monopoly.png" alt="Monopoly game cover">
                 </div>
                 <p class="dashboard__card-name">Monopoly</p>
-                <a href="#" onclick="alterarStatus(1)" class="dashboard__card-btn">Rent</a>
+                <a href="#" onclick="statusChange(1)" class="dashboard__card-btn">Rent</a>
             </li>
 
             <!-- Game card: Ticket to Ride -->
             <li class="dashboard__card" id="game-2">
-                <div class="dashboard__card-img">
+                <div class="dashboard__card-img dashboard__card-img--rented">
                     <img src="img/ticket_to_ride.png" alt="Ticket to Ride game cover">
                 </div>
                 <p class="dashboard__card-name">Ticket to Ride</p>
-                <a href="#" onclick="alterarStatus(2)" class="dashboard__card-btn">Rent</a>
+                <a href="#" onclick="statusChange(2)" class="dashboard__card-btn">Rent</a>
             </li>
 
             <!-- Game card: Takenoko (already rented) -->
@@ -62,14 +62,13 @@
                     <img src="img/takenoko.png" alt="Takenoko game cover">
                 </div>
                 <p class="dashboard__card-name">Takenoko</p>
-                <a href="#" onclick="alterarStatus(3)" class="dashboard__card-btn dashboard__card-btn--return">Return</a>
+                <a href="#" onclick="statusChange(3)" class="dashboard__card-btn dashboard__card-btn--return">Return</a>
             </li>
 
         </ul>
     </section>
     </section>
 </main>
-
 
 <!-- App JS logic -->
 <script src="js/app.js"></script>

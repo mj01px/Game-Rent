@@ -134,7 +134,6 @@
 
 .dashboard__card-btn:hover {
     background-color: rgba(82, 168, 253, 0.63);
-
 }
 
 .dashboard__card--return {
@@ -146,7 +145,7 @@
     width: 100%;
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    color: #52A8FDFF;
+    color: white;
 }
 
 .dashboard__card--return:hover {
@@ -155,12 +154,11 @@
 }
 
 .dashboard__card-btn--return {
-    background-color: transparent;
-    border: 2px solid rgba(82, 168, 253, 0.63)
+    background-color: rgba(82, 168, 253, 0.63);
     }
 
 .dashboard__card-btn--return:hover {
-    background-color: rgba(82, 168, 253, 0.63);
+    background-color: #52A8FDFF;
     color: white;
 }
 
