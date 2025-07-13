@@ -1,0 +1,33 @@
+<!-- Cards for displaying board games in a dashboard -->
+<section class="dashboard">
+    <ul class="dashboard__list">
+
+        <!-- Game card: Monopoly -->
+        <li class="dashboard__card" id="game-1">
+            <div class="dashboard__card-img">
+                <img src="img/monopoly.png" alt="Monopoly game cover">
+            </div>
+            <p class="dashboard__card-name">Monopoly</p>
+            <a href="#" onclick="statusChange(1)" class="dashboard__card-btn">Rent</a>
+        </li>
+
+        <!-- Game card: Ticket to Ride -->
+        <li class="dashboard__card" id="game-2">
+            <div class="dashboard__card-img ">
+                <img src="img/ticket_to_ride.png" alt="Ticket to Ride game cover">
+            </div>
+            <p class="dashboard__card-name">Ticket to Ride</p>
+            <a href="#" onclick="statusChange(2)" class="dashboard__card-btn">Rent</a>
+        </li>
+
+        <!-- Game card: Takenoko (already rented) -->
+        <li class="dashboard__card--return" id="game-3">
+            <div class="dashboard__card-img ">
+                <img src="img/takenoko.png" alt="Takenoko game cover">
+            </div>
+            <p class="dashboard__card-name">Takenoko</p>
+            <a href="#" onclick="statusChange(3)" class="dashboard__card-btn">Rent</a>
+        </li>
+
+    </ul>
+</section>

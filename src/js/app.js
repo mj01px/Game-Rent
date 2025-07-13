@@ -16,25 +16,3 @@ function statusChange(id) {
         button.textContent = 'Return'; // Change the button text to 'Return'
     }
 }
-
-// Function to toggle the visibility of the cart modal
-const cartIcon = document.getElementById('cart-icon');
-const cartModal = document.getElementById('cart-modal');
-const closeCart = document.getElementById('close-cart');
-
-// Add event listeners to the cart icon and close button
-cartIcon.addEventListener('click', () => {
-    cartModal.style.display = 'flex';
-});
-
-// Close the cart modal when the close button is clicked
-closeCart.addEventListener('click', () => {
-    cartModal.style.display = 'none';
-});
-
-// Close the cart modal when clicking outside of it
-window.addEventListener('click', (e) => {
-    if (e.target === cartModal) {
-        cartModal.style.display = 'none';
-    }
-});

@@ -1,0 +1,63 @@
+
+/* ====== Nav Bar ====== */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem 2rem;
+    font-family: 'Chakra Petch', sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    gap: 2rem;
+}
+
+.navbar__list {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar__link {
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.navbar__link:hover {
+    color: #52A8FDFF;
+}
+
+.navbar__cart {
+    position: relative;
+    cursor: pointer;
+}
+
+.navbar__cart-icon {
+    width: 24px;
+    height: 24px;
+    transition: 0.3s ease;
+    content: url('../../img/cart-icon.png');
+}
+
+.navbar__cart-icon:hover {
+    content: url('../../img/cart-icon-hover.png');
+}
+
+.navbar__cart-count {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+
+
