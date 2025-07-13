@@ -4,7 +4,7 @@
 /* Import fonts (already in HTML, this is just in case) */
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Inter:wght@600;700&display=swap');
 
-
+/* ====== Global Styles ====== */
 .logo {
     font-family: 'Chakra Petch', sans-serif;
     text-align: center;
@@ -16,6 +16,59 @@
     font-size: 2.5rem;
     font-weight: 700;
     letter-spacing: 1px;
+}
+
+/* ====== Nav Bar ====== */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem 2rem;
+    font-family: 'Chakra Petch', sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    gap: 3rem;
+}
+
+.navbar__list {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar__link {
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.navbar__link:hover {
+    color: #52A8FDFF;
+}
+
+.navbar__cart {
+    position: relative;
+    cursor: pointer;
+}
+
+.navbar__cart-icon {
+    width: 32px;
+}
+
+.navbar__cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
 }
 
 /* ====== Main Layout ====== */
@@ -162,6 +215,38 @@
     color: white;
 }
 
+/* ====== Modal Styles====== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal__content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+.modal__close {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
 /* ====== Responsive Adjustments ====== */
 @media (max-width: 768px) {
