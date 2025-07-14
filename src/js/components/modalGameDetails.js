@@ -2,30 +2,48 @@ export function modalGameDetails(id) {
     const gameCard = document.getElementById(`game-${id}`);
     const modal = document.getElementById('game-modal');
     const closeModal = document.getElementById('close-game-modal');
+    const actionButton = modal.querySelector('.game-modal-button');
 
-    if (!gameCard || !modal || !closeModal) {
+    const titleEl = document.getElementById('modal-game-title');
+    const descEl = document.getElementById('modal-game-desc');
+    const imgEl = document.querySelector('.modal__game-img');
+    const priceEl = document.getElementById('modal-game-price');
+
+    // Check if all required elements exist
+    if (!gameCard || !modal || !closeModal || !titleEl || !descEl || !imgEl || !priceEl) {
         return;
     }
 
-    // Pega os dados do card
+    // Extract data from the selected game card
     const title = gameCard.querySelector('.dashboard__card-name')?.innerText || 'Game';
     const imgSrc = gameCard.querySelector('img')?.getAttribute('src') || 'img/game-placeholder.png';
+    const description = gameCard.getAttribute('data-description') || 'No description available';
+    const price = gameCard.getAttribute('data-price') || 'Price not available';
 
-    // Preenche o modal com os dados
-    document.getElementById('modal-game-title').innerText = title;
-    document.getElementById('modal-game-desc').innerText = `Game description to game"${title}".`;
-    document.querySelector('.modal__game-img').setAttribute('src', imgSrc);
+    // Fill modal fields with extracted data
+    titleEl.innerText = title;
+    descEl.innerText = description;
+    imgEl.setAttribute('src', imgSrc);
+    priceEl.innerText = price;
 
-    // Abre o modal
+    // Open the modal
     modal.style.display = 'flex';
 
-    // Fecha ao clicar no X
+    // Close the modal on X click
     closeModal.onclick = () => {
         modal.style.display = 'none';
     };
 
-    // Fecha ao clicar fora
+    if (actionButton) {
+        actionButton.onclick = () => {
+            modal.style.display = 'none';
+        };
+    }
+
+    // Close the modal when clicking outside the modal content
     window.onclick = (e) => {
-        if (e.target === modal) modal.style.display = 'none';
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
     };
 }

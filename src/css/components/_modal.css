@@ -15,11 +15,16 @@
     background: #fff;
     padding: 2rem;
     border-radius: 0.75rem;
-    width: 90%;
-    max-width: 400px;
+    width: 750px;
+    min-height: 350px;
+    max-height: 80vh;
     position: relative;
     font-family: 'Chakra Petch', sans-serif;
     text-align: center;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
 }
 
 .modal__close {
@@ -29,4 +34,5 @@
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
+    color: black;
 }

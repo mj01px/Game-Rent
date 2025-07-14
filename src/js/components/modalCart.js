@@ -4,6 +4,8 @@ export function initCartModal() {
     const cartModal = document.getElementById('cart-modal');
     const closeCart = document.getElementById('close-cart');
 
+    const cartProductsCounter = document.querySelector('.game-modal-button')
+
     // Verify if the elements exist before adding event listeners
     if (!cartIcon || !cartModal || !closeCart) {
         console.warn('[modalCart] Elements not find.');

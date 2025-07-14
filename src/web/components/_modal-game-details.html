@@ -1,13 +1,21 @@
-<!-- Modal Game Details -->
+<!-- Modal for Game Details -->
 <div id="game-modal" class="modal">
     <div class="modal__content">
         <span class="modal__close" id="close-game-modal">&times;</span>
 
         <div class="modal__game">
             <img src="" alt="Game Cover" class="modal__game-img">
+
             <div class="modal__game-info">
-                <h2 class="modal__game-title" id="modal-game-title">Game Title</h2>
-                <p class="modal__game-desc" id="modal-game-desc">This is a short description of the game. It will be dynamically filled based on the selected game.</p>
+                <h2 class="modal__game-title" id="modal-game-title"></h2>
+                <p class="modal__game-desc" id="modal-game-desc"></p>
+
+                <!-- Game Price -->
+                <p class="modal__game-price">
+                    Price: <span id="modal-game-price">--</span>
+                </p>
+
+                <a href="#" class="game-modal-button" id="add-to-cart-btn">Rent</a>
             </div>
         </div>
     </div>
