@@ -1,6 +1,8 @@
 // Imports
 import { initCartModal } from '../components/modalCart.js';
 import { modalGameDetails } from "../components/modalGameDetails.js";
+import { initButtonStatus } from "../components/buttonStatus.js";
+import {initCardButtonListeners} from "./handleCardButtonClick.js";
 
 // Function to load HTML components dynamically
 export function loadComponent(containerId, filePath, basePath ) {
@@ -24,8 +26,10 @@ Promise.all([
 ])
     .then(() => {
         // Initialize the modal cart component after loading
-        initCartModal()
         modalGameDetails()
+        initCartModal()
+        initButtonStatus()
+        initCardButtonListeners()
 
     })
     .catch(err => {

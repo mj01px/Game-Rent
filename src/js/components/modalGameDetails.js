@@ -1,5 +1,9 @@
+import {setSelectedGameId} from "./gameState.js";
+
 export function modalGameDetails(id) {
     const gameCard = document.getElementById(`game-${id}`);
+    setSelectedGameId(id)
+
     const modal = document.getElementById('game-modal');
     const closeModal = document.getElementById('close-game-modal');
     const actionButton = modal.querySelector('.game-modal-button');
@@ -8,6 +12,8 @@ export function modalGameDetails(id) {
     const descEl = document.getElementById('modal-game-desc');
     const imgEl = document.querySelector('.modal__game-img');
     const priceEl = document.getElementById('modal-game-price');
+
+    // Set the selected game ID in the state
 
     // Check if all required elements exist
     if (!gameCard || !modal || !closeModal || !titleEl || !descEl || !imgEl || !priceEl) {
@@ -47,3 +53,5 @@ export function modalGameDetails(id) {
         }
     };
 }
+
+
