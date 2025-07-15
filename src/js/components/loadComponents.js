@@ -2,7 +2,7 @@
 import { initCartModal } from '../components/modalCart.js';
 import { modalGameDetails } from "../components/modalGameDetails.js";
 import { initButtonStatus } from "../components/buttonStatus.js";
-import {initCardButtonListeners} from "./handleCardButtonClick.js";
+import {handleCardButtonClick} from "./handleCardButtonClick.js";
 
 // Function to load HTML components dynamically
 export function loadComponent(containerId, filePath, basePath ) {
@@ -29,7 +29,7 @@ Promise.all([
         modalGameDetails()
         initCartModal()
         initButtonStatus()
-        initCardButtonListeners()
+        handleCardButtonClick()
 
     })
     .catch(err => {
