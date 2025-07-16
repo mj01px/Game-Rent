@@ -1,8 +1,8 @@
 // Imports
-import { initCartModal } from '../components/modalCart.js';
-import { modalGameDetails } from "../components/modalGameDetails.js";
-import { initButtonStatus } from "../components/buttonStatus.js";
-import {handleCardButtonClick} from "./handleCardButtonClick.js";
+import { initCartModal } from '../components/cart/modalCart.js';
+import { modalGameDetails } from "./games/modalGameDetails.js";
+import { initButtonStatus } from "./games/buttonStatus.js";
+import {handleCardButtonClick} from "./games/handleCardButtonClick.js";
 
 // Function to load HTML components dynamically
 export function loadComponent(containerId, filePath, basePath ) {
@@ -18,11 +18,11 @@ export function loadComponent(containerId, filePath, basePath ) {
 
 // Get the game ID from the URL parameters
 Promise.all([
-    loadComponent('navbar-container', '_navbar.html', 'web/components/'),
-    loadComponent('game__card-container', 'game-card.html', 'web/' ),
-    loadComponent('fade__bar-container', '_fade-bar.html', 'web/components/'),
-    loadComponent('modal-container', '_modal-cart.html', 'web/components/'),
-    loadComponent('game-modal-container', '_modal-game-details.html', 'web/components/' ),
+    loadComponent('navbar-container', '_navbar.html', 'web/components/shared/'),
+    loadComponent('game__card-container', 'game-card.html', 'web/components/games/'),
+    loadComponent('fade__bar-container', '_fade-bar.html', 'web/components/shared/'),
+    loadComponent('modal-container', '_modal-cart.html', 'web/components/cart/'),
+    loadComponent('game-modal-container', '_modal-game-details.html', 'web/components/games/'),
 ])
     .then(() => {
         // Initialize the modal cart component after loading

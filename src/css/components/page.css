@@ -1,0 +1,56 @@
+
+/* Import reset styles */
+@import url(../base/_reset.css);
+
+/* Import fonts (already in HTML, this is just in case) */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Inter:wght@600;700&display=swap');
+
+
+
+/* ====== Global Styles ====== */
+.logo {
+    font-family: 'Chakra Petch', sans-serif;
+    text-align: center;
+    margin: 1rem;
+
+}
+
+.logo__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* ====== Main Layout ====== */
+.main {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ====== Title ====== */
+.page-title {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 2.75rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: #1b1b1b;
+}
+
+.page-title__highlight {
+    color: #52A8FDFF;
+}
+
+/* ====== Responsive Adjustments ====== */
+@media (max-width: 768px) {
+    .dashboard__list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dashboard__card {
+        max-width: 90%;
+    }
+}

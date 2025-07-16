@@ -40,11 +40,11 @@
     width: 24px;
     height: 24px;
     transition: 0.3s ease;
-    content: url('../../img/cart-icon.png');
+    content: url('../../../img/cart-icon.png');
 }
 
 .navbar__cart-icon:hover {
-    content: url('../../img/cart-icon-hover.png');
+    content: url('../../../img/cart-icon-hover.png');
 }
 
 .navbar__cart-count {

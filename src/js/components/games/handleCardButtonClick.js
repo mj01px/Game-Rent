@@ -1,11 +1,11 @@
 import { modalGameDetails } from './modalGameDetails.js';
 import { setSelectedGameId } from './gameState.js';
+import { updateRentedCount } from '../cart/updateRentedCounter.js';
 
-// Função isolada, não dentro do initCardButtonListeners
+// Function to handle the card button click event
 export function handleCardButtonClick(id) {
     const card = document.getElementById(`game-${id}`);
     if (!card) return;
-
     // Get the image and button elements within the game card
     const button = card.querySelector('.dashboard__card-btn');
     const image = card.querySelector('.dashboard__card-img');
@@ -23,6 +23,7 @@ export function handleCardButtonClick(id) {
     } else {
         setSelectedGameId(id);
         modalGameDetails(id);
+        updateRentedCount()
     }
 }
 
