@@ -1,22 +1,39 @@
-<!-- This file is part of the Board Game Rental Service project. -->
+<!--
+  GAME CARDS SECTION
+  Displays available board games for rental
+  Each card contains:
+  - Game cover image
+  - Title
+  - Description (in data attribute)
+  - Price (in data attribute)
+  - Rent button with click handler
+-->
+
+<!-- Main dashboard container -->
 <section class="dashboard">
+    <!-- List of game cards -->
     <ul class="dashboard__list">
 
-        <! -- Monopoly Game Card -->
+        <!-- Monopoly Game Card -->
         <li class="dashboard__card" id="game-1"
-            data-description="The classic real estate trading game where you buy, rent, and trade properties. Build houses and hotels, collect rent from opponents, and try to monopolize the market. Great for 2-6 players (ages 8+). Average playtime: 60-120 minutes."
+            data-description="The classic real estate trading game where you buy, rent, and trade properties..."
             data-price="$25.90">
 
+            <!-- Game cover image -->
             <div class="dashboard__card-img">
                 <img src="img/monopoly.png" alt="Monopoly game cover">
             </div>
+
+            <!-- Game title -->
             <p class="dashboard__card-name">Monopoly</p>
+
+            <!-- Rent button with click handler -->
             <a href="#" onclick="handleCardButtonClick(1)" class="dashboard__card-btn">Rent</a>
         </li>
 
-        <! -- Ticket to Ride Game Card -->
+        <!-- Ticket to Ride Game Card -->
         <li class="dashboard__card" id="game-2"
-            data-description="Connect cities in an exciting railway adventure across North America! Collect train cards, claim routes, and complete destination tickets. Strategic game for 2-5 players (ages 8+). Duration: 30-60 minutes."
+            data-description="Connect cities in an exciting railway adventure across North America!..."
             data-price="$20.50">
 
             <div class="dashboard__card-img">
@@ -26,9 +43,9 @@
             <a href="#" onclick="handleCardButtonClick(2)" class="dashboard__card-btn">Rent</a>
         </li>
 
-        <! -- Takenoko Game Card -->
+        <!-- Takenoko Game Card -->
         <li class="dashboard__card" id="game-3"
-            data-description="Grow colorful bamboo to feed the Emperor’s hungry panda! In this charming game, you manage irrigation, plant crops, and move the panda. Perfect for 2-4 players (ages 8+). Quick 45-minute sessions."
+            data-description="Grow colorful bamboo to feed the Emperor's hungry panda!..."
             data-price="$23.90">
 
             <div class="dashboard__card-img">

@@ -1,56 +1,64 @@
+/* 
+  GLOBAL STYLES AND LAYOUT
+  Contains site-wide styles and responsive rules
+*/
 
-/* Import reset styles */
+/* Import CSS reset to normalize browser defaults */
 @import url(../base/_reset.css);
 
-/* Import fonts (already in HTML, this is just in case) */
+/* Import Google Fonts (backup - fonts also loaded in HTML) */
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Inter:wght@600;700&display=swap');
 
-
-
-/* ====== Global Styles ====== */
+/* ====== LOGO STYLES ====== */
 .logo {
-    font-family: 'Chakra Petch', sans-serif;
-    text-align: center;
-    margin: 1rem;
-
+    font-family: 'Chakra Petch', sans-serif; /* Brand font */
+    text-align: center;                     /* Center alignment */
+    margin: 1rem;                           /* Spacing around logo */
 }
 
 .logo__title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-size: 2.5rem;                      /* Large text size */
+    font-weight: 700;                       /* Bold weight */
+    letter-spacing: 1px;                    /* Improved readability */
 }
 
-/* ====== Main Layout ====== */
+/* ====== MAIN LAYOUT STRUCTURE ====== */
 .main {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 100%;                           /* Full width */
+    max-width: 1200px;                     /* Maximum content width */
+    display: flex;                         /* Flex layout */
+    flex-direction: column;                /* Vertical stacking */
+    align-items: center;                   /* Center horizontally */
 }
 
-/* ====== Title ====== */
+/* ====== PAGE TITLE STYLES ====== */
 .page-title {
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: 2.75rem;
-    text-align: center;
-    margin-bottom: 2.5rem;
-    color: #1b1b1b;
+    font-family: 'Chakra Petch', sans-serif; /* Brand font */
+    font-size: 2.75rem;                     /* Extra large size */
+    text-align: center;                      /* Center alignment */
+    margin-bottom: 2.5rem;                   /* Bottom spacing */
+    color: #1b1b1b;                         /* Dark gray color */
 }
 
+/* Accented portion of title */
 .page-title__highlight {
-    color: #52A8FDFF;
+    color: #52A8FDFF;                       /* Brand blue color */
 }
 
-/* ====== Responsive Adjustments ====== */
+/* 
+  ====== RESPONSIVE ADJUSTMENTS ======
+  Mobile-first responsive design rules
+  Applies to screens up to 768px wide
+*/
 @media (max-width: 768px) {
+    /* Stack dashboard cards vertically on mobile */
     .dashboard__list {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: column;     /* Vertical layout */
+        align-items: center;       /* Center cards */
     }
 
+    /* Make cards wider on mobile */
     .dashboard__card {
-        max-width: 90%;
+        max-width: 90%;            /* Use most of screen width */
     }
 }

@@ -1,5 +1,116 @@
-.modal__cart-title {
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
-    color: #1a1a1a;
+/* 
+  CART MODAL STYLES
+  Styles for the shopping cart overlay modal
+*/
+
+/* Modal overlay container */
+.cart-modal {
+    position: fixed;            /* Fixed positioning */
+    top: 0;                     /* Full screen coverage */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    display: none;              /* Hidden by default */
+    justify-content: center;    /* Center horizontally */
+    align-items: center;        /* Center vertically */
+    z-index: 1000;              /* Ensure it appears above other content */
+}
+
+/* Modal content box */
+.cart-modal__content {
+    background-color: #fff;     /* White background */
+    padding: 24px;             /* Internal spacing */
+    border-radius: 10px;       /* Rounded corners */
+    max-width: 600px;          /* Maximum width */
+    width: 100%;               /* Responsive width */
+    max-height: 80%;           /* Maximum height */
+    overflow-y: auto;          /* Scrollable if content overflows */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    position: relative;        /* For absolute positioning of children */
+}
+
+/* Close button (X) */
+.cart-modal__close {
+    position: absolute;        /* Position relative to content box */
+    top: 12px;
+    right: 16px;
+    font-size: 24px;          /* Large clickable area */
+    cursor: pointer;          /* Indicates clickable */
+    color: #888;              /* Neutral gray color */
+}
+
+/* List of cart items */
+.cart-modal__list {
+    list-style: none;         /* Remove bullet points */
+    padding: 0;               /* Remove default padding */
+    margin: 24px 0;           /* Vertical spacing */
+}
+
+/* Individual cart item */
+.cart-modal__item {
+    display: flex;            /* Flex layout for item components */
+    align-items: flex-start;  /* Align items to top */
+    gap: 16px;                /* Space between elements */
+    padding: 12px 0;          /* Vertical padding */
+    border-bottom: 1px solid #eee; /* Separator between items */
+}
+
+/* Product image in cart */
+.cart-modal__item-img img {
+    width: 80px;             /* Fixed width */
+    height: auto;            /* Maintain aspect ratio */
+    border-radius: 8px;      /* Slightly rounded corners */
+}
+
+/* Product information container */
+.cart-modal__item-info {
+    flex: 1;                 /* Take remaining space */
+}
+
+/* Product title */
+.cart-modal__item-title {
+    font-weight: bold;       /* Emphasize product name */
+    margin-bottom: 4px;      /* Space below title */
+    font-size: 1rem;         /* Base font size */
+}
+
+/* Product price */
+.cart-modal__item-price {
+    color: #555;            /* Subdued text color */
+    margin-bottom: 8px;      /* Space below price */
+}
+
+/* Quantity selector container */
+.cart-modal__item-qty {
+    display: flex;           /* Flex layout */
+    align-items: center;     /* Center vertically */
+    gap: 6px;               /* Space between label and input */
+    font-size: 0.95rem;     /* Slightly smaller text */
+}
+
+/* Quantity input field */
+.cart-modal__item-qty-input {
+    width: 60px;            /* Fixed width */
+    padding: 4px 6px;       /* Internal spacing */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 6px;     /* Rounded corners */
+    font-size: 0.95rem;     /* Matching text size */
+    background-color: #fff; /* White background */
+    color: #333;            /* Dark text */
+    outline: none;          /* Remove default focus outline */
+    transition: border-color 0.2s ease; /* Smooth focus transition */
+}
+
+/* Quantity input focus state */
+.cart-modal__item-qty-input:focus {
+    border-color: #52A8FDFF; /* Blue border when focused */
+}
+
+/* Cart footer (total price) */
+.cart-modal__footer {
+    margin-top: 24px;       /* Space above footer */
+    font-weight: bold;      /* Emphasized text */
+    text-align: right;      /* Right-aligned */
+    font-size: 1.1rem;      /* Slightly larger text */
 }

@@ -1,7 +1,25 @@
+/*
+  MAIN STYLESHEET IMPORTS
+  Organizes all component stylesheets in a logical order
+*/
+
+/* Base page layout and global styles */
 @import url('components/page.css');
+
+/* Shopping cart modal component */
 @import url('components/cart/_modal-shopping-cart.css');
+
+/* Game details modal component */
 @import url('components/games/_modal-game-details.css');
+
+/* Game card components */
 @import url('components/games/_game-card.css');
+
+/* Decorative divider element */
 @import url('components/shared/_fade-bar.css');
+
+/* Main navigation bar */
 @import url('components/shared/_navbar.css');
+
+/* Base modal styles (used by all modals) */
 @import url('components/shared/_modal.css');

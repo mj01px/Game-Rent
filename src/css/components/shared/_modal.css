@@ -1,38 +1,44 @@
-/* ====== Modal Styles====== */
+/*
+  MODAL BASE STYLES
+  Core styles for modal dialogs and overlays
+*/
+
+/* Modal overlay container */
 .modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    display: none;                  /* Hidden by default */
+    position: fixed;                /* Fixed positioning */
+    top: 0; left: 0;               /* Cover entire viewport */
+    width: 100vw;                  /* Full viewport width */
+    height: 100vh;                 /* Full viewport height */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    justify-content: center;       /* Center horizontally */
+    align-items: center;           /* Center vertically */
+    z-index: 1000;                 /* Ensure it appears above other content */
 }
 
+/* Modal content box */
 .modal__content {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 0.75rem;
-    width: 750px;
-    min-height: 350px;
-    max-height: 80vh;
-    position: relative;
-    font-family: 'Chakra Petch', sans-serif;
-    text-align: center;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
+    background: #fff;              /* White background */
+    padding: 2rem;                 /* Internal spacing */
+    border-radius: 0.75rem;        /* Rounded corners */
+    width: 750px;                  /* Fixed width */
+    min-height: 350px;             /* Minimum height */
+    max-height: 80vh;              /* Maximum height (80% of viewport) */
+    position: relative;            /* Positioning context for children */
+    font-family: 'Chakra Petch', sans-serif; /* Consistent typography */
+    text-align: center;            /* Center text alignment */
+    overflow-y: auto;              /* Scrollable if content overflows */
+    display: flex;                 /* Flex layout */
+    flex-direction: column;       /* Vertical stacking */
+    box-sizing: border-box;        /* Include padding in dimensions */
 }
 
+/* Close button (X) styling */
 .modal__close {
-    position: absolute;
-    top: 10px;
-    right: 16px;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    color: black;
+    position: absolute;            /* Position relative to content box */
+    top: 10px; right: 16px;       /* Positioning in top-right corner */
+    font-size: 24px;              /* Large clickable area */
+    font-weight: bold;            /* Bold X symbol */
+    cursor: pointer;              /* Indicates clickable element */
+    color: black;                /* High contrast color */
 }

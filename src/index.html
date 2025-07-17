@@ -1,54 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Rent</title>
+    <!-- META TAGS -->
+    <meta charset="UTF-8"> <!-- Character encoding -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive viewport -->
+    <title>Game Rent</title> <!-- Page title in browser tab -->
 
-    <!-- External stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Main stylesheet -->
 
-    <!-- Google Fonts -->
+    <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Inter:wght@600;700&display=swap" rel="stylesheet">
 </head>
 
 <body class="body">
-    <main class="container main">
+<!-- MAIN CONTENT CONTAINER -->
+<main class="container main">
 
-            <!-- Navigation bar -->
-            <div id="navbar-container"></div>
+    <!-- NAVIGATION BAR (dynamically loaded) -->
+    <div id="navbar-container"></div>
 
-            <!-- Logo section -->
-        <section class="logo">
-                <h1 class="logo__title">
-                    Game <span class="page-title__highlight">Rent</span>
-                </h1>
+    <!-- LOGO SECTION -->
+    <section class="logo">
+        <!-- Application logo/title -->
+        <h1 class="logo__title">
+            Game <span class="page-title__highlight">Rent</span>
+        </h1>
 
-            <!-- Visual divider with lines and a bar -->
-                <div id="fade__bar-container"></div>
+        <!-- DECORATIVE DIVIDER (dynamically loaded) -->
+        <div id="fade__bar-container"></div>
 
-            <!-- Main title -->
-            <h1 class="page-title">
-                Rent your favorite <span class="page-title__highlight">boardgames</span>
-            </h1>
+        <!-- PAGE HEADER -->
+        <h1 class="page-title">
+            Rent your favorite <span class="page-title__highlight">boardgames</span>
+        </h1>
 
-            <!-- Game dashboard -->
-            <div id="game__card-container"></div>
+        <!-- GAME CARDS CONTAINER (dynamically loaded) -->
+        <div id="game__card-container"></div>
+    </section>
+</main>
 
-        </section>
-    </main>
+<!-- MODALS (dynamically loaded) -->
+<!-- Shopping Cart Modal -->
+<div id="modal-container"></div>
 
-    <!-- Modal for cart -->
-    <div id="modal-container"></div>
+<!-- Game Details Modal -->
+<div id="game-modal-container"></div>
 
-    <!-- Modal for game details -->
-    <div id="game-modal-container"></div>
-
-    <!-- App JS logic -->
-    <script type="module" src="js/app.js"></script>
-
-
+<!-- JAVASCRIPT -->
+<script type="module" src="js/app.js"></script> <!-- Main application script -->
 </body>
-
 </html>

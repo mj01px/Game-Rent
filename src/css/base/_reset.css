@@ -1,31 +1,39 @@
-/* Reset CSS to ensure consistent styling across browsers */
+/*
+  GLOBAL STYLES AND RESET
+  Establishes consistent baseline styles across the application
+*/
+
+/* Reset all elements to remove default browser styling */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0;          /* Remove default margins */
+    padding: 0;         /* Remove default padding */
+    box-sizing: border-box; /* Include padding/borders in element dimensions */
 }
 
+/* Base body styling */
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f5f5f5;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
+    font-family: 'Chakra Petch', sans-serif; /* Primary font for the app */
+    background-color: #f5f5f5;              /* Light gray background */
+    min-height: 100vh;                     /* Full viewport height minimum */
+    display: flex;                         /* Flex layout */
+    flex-direction: column;                /* Vertical stacking */
+    align-items: center;                   /* Center horizontally */
+    padding: 2rem;                         /* Spacing around content */
 }
 
+/* Responsive image handling */
 img {
-    max-width: 100%;
-    display: block;
+    max-width: 100%;    /* Prevent images from overflowing containers */
+    display: block;     /* Remove default inline spacing */
 }
 
+/* List styling */
 ul {
-    list-style: none;
+    list-style: none;   /* Remove default bullet points */
 }
 
+/* Link styling */
 a {
-    text-decoration: none;
-    color: inherit;
+    text-decoration: none;  /* Remove underline from links */
+    color: inherit;         /* Inherit text color from parent */
 }
-

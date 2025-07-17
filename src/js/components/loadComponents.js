@@ -1,11 +1,16 @@
-// Imports
+// Component initialization imports
 import { initCartModal } from '../components/cart/modalCart.js';
 import { modalGameDetails } from "./games/modalGameDetails.js";
 import { initButtonStatus } from "./games/buttonStatus.js";
-import {handleCardButtonClick} from "./games/handleCardButtonClick.js";
+import { handleCardButtonClick } from "./games/handleCardButtonClick.js";
 
-// Function to load HTML components dynamically
-export function loadComponent(containerId, filePath, basePath ) {
+/**
+ * Loads HTML components dynamically
+ * @param {string} containerId - Target container element ID
+ * @param {string} filePath - Component HTML file path
+ * @param {string} basePath - Base directory path
+ */
+export function loadComponent(containerId, filePath, basePath) {
     return fetch(`${basePath}${filePath}`)
         .then(res => {
             if (!res.ok) throw new Error(`Error loading ${filePath}`);
@@ -16,7 +21,7 @@ export function loadComponent(containerId, filePath, basePath ) {
         });
 }
 
-// Get the game ID from the URL parameters
+// Load all components in parallel
 Promise.all([
     loadComponent('navbar-container', '_navbar.html', 'web/components/shared/'),
     loadComponent('game__card-container', 'game-card.html', 'web/components/games/'),
@@ -25,14 +30,14 @@ Promise.all([
     loadComponent('game-modal-container', '_modal-game-details.html', 'web/components/games/'),
 ])
     .then(() => {
-        // Initialize the modal cart component after loading
-        modalGameDetails()
-        initCartModal()
-        initButtonStatus()
-        handleCardButtonClick()
+        // Initialize components in proper order
+        modalGameDetails();      // Game details modal
+        initCartModal();        // Shopping cart modal
+        handleCardButtonClick(); // Card button handlers
 
+        // Initialize button status last
+        initButtonStatus();
     })
     .catch(err => {
-        console.error("Error to load component:", err);
+        console.error("Error loading components:", err);
     });
-

@@ -1,26 +1,40 @@
-// Modal Cart Component Loader
+/**
+ * Initializes the shopping cart modal functionality
+ * Handles opening/closing of the cart modal and click events
+ */
 export function initCartModal() {
+    // Get DOM elements
     const cartIcon = document.getElementById('cart-icon');
     const cartModal = document.getElementById('cart-modal');
     const closeCart = document.getElementById('close-cart');
 
-    // Verify if the elements exist before adding event listeners
+    // Validate required elements exist
     if (!cartIcon || !cartModal || !closeCart) {
-        console.warn('[modalCart] Elements not find.');
+        console.warn('[modalCart] Required elements not found');
         return;
     }
 
-    // Add event listeners for opening and closing the cart modal
+    /**
+     * Event listener for cart icon click
+     * Opens the cart modal
+     */
     cartIcon.addEventListener('click', () => {
         cartModal.style.display = 'flex';
     });
 
-    // Close the cart modal when the close button is clicked or when clicking outside the modal
+    /**
+     * Event listener for close button click
+     * Closes the cart modal
+     */
     closeCart.addEventListener('click', () => {
         cartModal.style.display = 'none';
     });
 
-    // Close the cart modal when clicking outside of it
+    /**
+     * Event listener for window click
+     * Closes modal when clicking outside (on backdrop)
+     * @param {MouseEvent} e - The click event
+     */
     window.addEventListener('click', (e) => {
         if (e.target === cartModal) {
             cartModal.style.display = 'none';

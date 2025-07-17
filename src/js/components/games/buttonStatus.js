@@ -1,46 +1,78 @@
-import { getSelectedGameId } from './gameState.js';
+// Import dependencies
+import { getSelectedGameId } from './gameState.js'; // Helper to get currently selected game ID
+import { addToCart } from '../cart/functionModelCart.js'; // Function to handle adding items to cart
 
-// Modal Cart Component Loader
+// Stores reference to the click listener so we can remove it later
+let buttonClickListener = null;
+
+/**
+ * Initializes the button status functionality
+ * Handles both rent and return operations for games
+ * Manages click events on the add-to-cart/rent button
+ */
 export function initButtonStatus() {
+    // Get reference to the button element
     const buttonStatus = document.getElementById('add-to-cart-btn');
 
+    // Safety check if button doesn't exist
     if (!buttonStatus) {
         console.warn('[modalCart] Button not found.');
         return;
     }
 
-    // Add event listener to the button
-    buttonStatus.addEventListener('click', () => {
+    // Remove previous click listener if it exists
+    // This prevents multiple listeners from being attached
+    if (buttonClickListener) {
+        buttonStatus.removeEventListener('click', buttonClickListener);
+    }
+
+    /**
+     * Click handler function for the rent/return button
+     * Handles both renting and returning game scenarios
+     */
+    buttonClickListener = function handleClick() {
+        // Get currently selected game ID
         const gameId = getSelectedGameId();
+
+        // Get reference to the game card element
         const gameCard = document.getElementById(`game-${gameId}`);
 
-        // Check if the game card exists
+        // Validate game card exists
         if (!gameCard) {
             console.warn(`[buttonStatus] Game card #game-${gameId} not found.`);
             return;
         }
 
-        // Get the image and button elements within the game card
+        // Get references to image and button elements within the card
         const image = gameCard.querySelector('.dashboard__card-img');
         const button = gameCard.querySelector('.dashboard__card-btn');
 
+        // Validate required elements exist
         if (!image || !button) {
             console.warn('[buttonStatus] Missing image or button elements.');
             return;
         }
 
-        // Toggle rented status
+        // Check if game is currently rented (has rented class)
         if (image.classList.contains('dashboard__card-img--rented')) {
+            // RETURN LOGIC - Game is being returned
             image.classList.remove('dashboard__card-img--rented');
             button.classList.remove('dashboard__card-btn--return');
-            button.textContent = 'Rent';
+            button.textContent = 'Rent'; // Reset button text
         } else {
+            // RENT LOGIC - Game is being rented
             image.classList.add('dashboard__card-img--rented');
             button.classList.add('dashboard__card-btn--return');
-            button.textContent = 'Return';
+            button.textContent = 'Return'; // Update button text
+
+            // Add the game to cart (only when renting, not when returning)
+            addToCart(gameId);
         }
 
-        // Close the modal after updating the status
+        // Close the modal after operation
         document.getElementById('game-modal').style.display = 'none';
-    });
+    };
+
+    // Attach the new click listener to the button
+    buttonStatus.addEventListener('click', buttonClickListener);
 }

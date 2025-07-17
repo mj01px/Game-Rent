@@ -1,63 +1,74 @@
+/* 
+  NAVIGATION BAR STYLES
+  Styles for the main application navigation bar
+  Contains:
+  - Site navigation links
+  - Shopping cart icon with item counter
+*/
 
-/* ====== Nav Bar ====== */
+/* Main navbar container */
 .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 1rem 2rem;
-    font-family: 'Chakra Petch', sans-serif;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    gap: 2rem;
+    display: flex;                      /* Flex layout */
+    align-items: center;               /* Vertical centering */
+    justify-content: flex-start;       /* Left-aligned items */
+    padding: 1rem 2rem;               /* Internal spacing */
+    font-family: 'Chakra Petch', sans-serif; /* Consistent typography */
+    position: sticky;                 /* Sticks to top when scrolling */
+    top: 0;                          /* Position at very top */
+    z-index: 1000;                   /* Ensure navbar stays above other content */
+    gap: 2rem;                       /* Space between navbar items */
 }
 
+/* Navigation links list */
 .navbar__list {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    display: flex;                   /* Horizontal layout */
+    gap: 2rem;                      /* Space between links */
+    list-style: none;               /* Remove bullet points */
+    margin: 0;                      /* Remove default margins */
+    padding: 0;                     /* Remove default padding */
 }
 
+/* Navigation link styling */
 .navbar__link {
-    text-decoration: none;
-    color: #1a1a1a;
-    font-weight: 600;
-    transition: color 0.2s ease;
+    text-decoration: none;          /* Remove underline */
+    color: #1a1a1a;                /* Dark text color */
+    font-weight: 600;              /* Semi-bold text */
+    transition: color 0.2s ease;   /* Smooth color transition */
 }
 
+/* Navigation link hover state */
 .navbar__link:hover {
-    color: #52A8FDFF;
+    color: #52A8FDFF;              /* Brand blue on hover */
 }
 
+/* Shopping cart container */
 .navbar__cart {
-    position: relative;
-    cursor: pointer;
+    position: relative;            /* Positioning context for counter */
+    cursor: pointer;              /* Indicates clickable element */
 }
 
+/* Shopping cart icon */
 .navbar__cart-icon {
-    width: 24px;
+    width: 24px;                  /* Fixed size */
     height: 24px;
-    transition: 0.3s ease;
-    content: url('../../../img/cart-icon.png');
+    transition: 0.3s ease;        /* Smooth hover transition */
+    content: url('../../../img/cart-icon.png'); /* Default icon */
 }
 
+/* Shopping cart icon hover state */
 .navbar__cart-icon:hover {
-    content: url('../../../img/cart-icon-hover.png');
+    content: url('../../../img/cart-icon-hover.png'); /* Hover state icon */
 }
 
+/* Cart item counter badge */
 .navbar__cart-count {
-    position: absolute;
-    top: -12px;
-    right: -12px;
-    background: red;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 50%;
+    position: absolute;           /* Position relative to cart icon */
+    top: -12px;                   /* Position above icon */
+    right: -12px;                 /* Position right of icon */
+    background: red;              /* Red background */
+    color: white;                 /* White text */
+    font-size: 12px;              /* Small text */
+    font-weight: bold;            /* Bold text */
+    padding: 2px 6px;            /* Compact spacing */
+    border-radius: 50%;           /* Circular shape */
 }
-
-
-

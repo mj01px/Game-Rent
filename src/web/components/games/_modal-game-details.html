@@ -1,21 +1,43 @@
-<!-- Modal for Game Details -->
+<!--
+  GAME DETAILS MODAL COMPONENT
+  Displays detailed information about a selected game
+  Contains:
+  - Game cover image
+  - Title and description
+  - Price information
+  - Action button (Rent/Add to cart)
+-->
+
+<!-- Modal container with overlay background -->
 <div id="game-modal" class="modal">
+    <!-- Modal content container -->
     <div class="modal__content">
+        <!-- Close button (X icon) -->
         <span class="modal__close" id="close-game-modal">&times;</span>
 
+        <!-- Game details container -->
         <div class="modal__game">
+            <!-- Game cover image (dynamically populated) -->
             <img src="" alt="Game Cover" class="modal__game-img">
 
+            <!-- Game information section -->
             <div class="modal__game-info">
+                <!-- Game title (dynamically populated) -->
                 <h2 class="modal__game-title" id="modal-game-title"></h2>
+                <!-- Game description (dynamically populated) -->
                 <p class="modal__game-desc" id="modal-game-desc"></p>
 
-                <!-- Game Price -->
+                <!-- Price section -->
                 <p class="modal__game-price">
-                    Price: <span id="modal-game-price">--</span>
+                    Price: <span id="modal-game-price">--</span> <!-- Price will be dynamically inserted -->
                 </p>
 
+                <!-- Action button (Rent/Add to cart) -->
                 <a href="#" onclick="" class="game-modal-button" id="add-to-cart-btn">Rent</a>
+                <!--
+                  Note: The onclick handler will be added dynamically via JavaScript
+                  The button text may change between "Rent" and "Return" based on game status
+                -->
             </div>
         </div>
     </div>

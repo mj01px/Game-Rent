@@ -1,21 +1,29 @@
-/* ====== Divider ====== */
+/*
+  DIVIDER COMPONENT STYLES
+  Decorative horizontal rule with centered graphic
+  Used for visual separation between sections
+*/
+
+/* Main divider container */
 .divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    margin: 3rem 0;
-    width: 100%;
+    display: flex;               /* Flex layout for alignment */
+    align-items: center;         /* Vertical centering */
+    justify-content: center;     /* Horizontal centering */
+    gap: 2rem;                  /* Space between elements */
+    margin: 3rem 0;             /* Vertical spacing */
+    width: 100%;                /* Full width */
 }
 
+/* Decorative line on either side of graphic */
 .divider__line {
-    flex: 1;
-    height: 2px;
-    background-color: #52a8fd;
-    opacity: 0.5;
+    flex: 1;                    /* Take available space */
+    height: 2px;                /* Thin line */
+    background-color: #52a8fd;  /* Brand blue color */
+    opacity: 0.5;               /* Semi-transparent */
 }
 
+/* Centered decorative graphic */
 .divider__bar {
-    height: 24px;
-    opacity: 0.7;
+    height: 24px;               /* Fixed height */
+    opacity: 0.7;               /* Slightly transparent */
 }
