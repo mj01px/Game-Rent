@@ -109,8 +109,31 @@
 
 /* Cart footer (total price) */
 .cart-modal__footer {
-    margin-top: 24px;       /* Space above footer */
-    font-weight: bold;      /* Emphasized text */
-    text-align: right;      /* Right-aligned */
-    font-size: 1.1rem;      /* Slightly larger text */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 24px;
+    font-weight: bold;
+    font-size: 1.1rem;
 }
+
+/* Checkout button */
+.cart-modal__checkout-btn {
+    padding: 10px 20px;
+    background-color: #509140;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cart-modal__checkout-btn:hover {
+    background-color: #2c7c19;
+}
+

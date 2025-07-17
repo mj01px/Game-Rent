@@ -37,6 +37,7 @@ Promise.all([
 
         // Initialize button status last
         initButtonStatus();
+
     })
     .catch(err => {
         console.error("Error loading components:", err);

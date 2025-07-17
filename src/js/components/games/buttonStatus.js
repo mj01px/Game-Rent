@@ -1,6 +1,6 @@
 // Import dependencies
 import { getSelectedGameId } from './gameState.js'; // Helper to get currently selected game ID
-import { addToCart } from '../cart/functionModelCart.js'; // Function to handle adding items to cart
+import {addToCart} from '../cart/functionModelCart.js'; // Function to handle adding items to cart
 
 // Stores reference to the click listener so we can remove it later
 let buttonClickListener = null;
