@@ -5,6 +5,39 @@
  * @returns {void}
  *
  * This function:
+ * Checks if cart is empty and displays appropriate message
+ * @function checkCartEmpty
+ * @returns {void}
+ */
+export function checkCartEmpty() {
+    const cartItemsList = document.getElementById('cart-items');
+    const cartFooter = document.querySelector('.cart-modal__footer');
+
+    if (!cartItemsList || !cartFooter) return;
+
+    // Remove any existing empty messages
+    const emptyMessages = cartItemsList.querySelectorAll('.cart-modal__empty');
+    emptyMessages.forEach(msg => msg.remove());
+
+    // Count the number of items in the cart
+    const items = cartItemsList.querySelectorAll('.cart-modal__item');
+
+    if (items.length === 0) {
+        // if no items, show empty message
+        const emptyMsg = document.createElement('li');
+        emptyMsg.className = 'cart-modal__empty';
+        emptyMsg.textContent = 'Your cart is empty';
+        cartItemsList.appendChild(emptyMsg);
+
+        // Hide the footer when cart is empty
+        cartFooter.style.display = 'none';
+    } else {
+        // if there are items, ensure footer is visible
+        cartFooter.style.display = '';
+    }
+}
+
+ /**
  * 1. Retrieves game data from the game card
  * 2. Creates a new cart item element
  * 3. Appends it to the cart list
@@ -34,6 +67,7 @@ export function addToCart(id) {
             <img src="${imgSrc}" alt="${title}">
         </div>
         <div class="cart-modal__item-info">
+            <button class="cart-modal__remove-item"></button>
             <p class="cart-modal__item-title">${title}</p>
             <p class="cart-modal__item-price">${price}</p>
             <label class="cart-modal__item-qty">
@@ -48,6 +82,7 @@ export function addToCart(id) {
 
     // 5. Update cart counter
     updateCartCount();
+    checkCartEmpty();
 
     console.log('Item added to cart:', { title, price });
 }
@@ -59,12 +94,15 @@ export function addToCart(id) {
  *
  * Counts all cart items and updates the counter badge
  */
-function updateCartCount() {
-    const count = document.querySelectorAll('.cart-modal__item').length;
+export function updateCartCount() {
+    const cartItemsList = document.getElementById('cart-items');
+    if (!cartItemsList) return;
+
+    // Count only the items with class 'cart-modal__item'
+    const count = cartItemsList.querySelectorAll('.cart-modal__item').length;
     const countElement = document.getElementById('cart-count');
 
-    // Safely update counter if element exists
     if (countElement) {
-        countElement.textContent = count-1;
+        countElement.textContent = count;
     }
 }

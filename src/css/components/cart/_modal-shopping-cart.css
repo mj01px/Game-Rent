@@ -1,139 +1,273 @@
-/* 
+/*
   CART MODAL STYLES
   Styles for the shopping cart overlay modal
 */
 
 /* Modal overlay container */
 .cart-modal {
-    position: fixed;            /* Fixed positioning */
-    top: 0;                     /* Full screen coverage */
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-    display: none;              /* Hidden by default */
-    justify-content: center;    /* Center horizontally */
-    align-items: center;        /* Center vertically */
-    z-index: 1000;              /* Ensure it appears above other content */
+    position: fixed;       /* Fixed positioning */
+    top: 0;                /* Top edge of viewport */
+    left: 0;               /* Left edge of viewport */
+    width: 100%;           /* Full width */
+    height: 100%;          /* Full height */
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black overlay */
+    display: none;         /* Hidden by default */
+    justify-content: flex-end; /* Aligns content to the right */
+    z-index: 9999;         /* Ensures it appears above other elements */
+    backdrop-filter: blur(5px); /* Background blur effect */
 }
 
-/* Modal content box */
+/* The actual cart panel that slides in */
 .cart-modal__content {
-    background-color: #fff;     /* White background */
-    padding: 24px;             /* Internal spacing */
-    border-radius: 10px;       /* Rounded corners */
-    max-width: 600px;          /* Maximum width */
-    width: 100%;               /* Responsive width */
-    max-height: 80%;           /* Maximum height */
-    overflow-y: auto;          /* Scrollable if content overflows */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    position: relative;        /* For absolute positioning of children */
+    width: 450px;          /* Fixed width for the cart */
+    height: 100%;          /* Full viewport height */
+    background: #ffffff;   /* White background */
+    padding: 0;            /* No internal padding */
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3); /* Shadow on left side */
+    transform: translateX(100%); /* Starts off-screen to the right */
+    animation: slideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards; /* Smooth slide-in */
+    display: flex;         /* Flex container */
+    flex-direction: column; /* Vertical stacking */
 }
 
-/* Close button (X) */
+/* Cart title styling */
+.cart-modal__content h2 {
+    margin: 40px 40px 20px 10px; /* top | right | bottom | left margins */
+    font-size: 1.6rem;    /* Slightly larger font size */
+    color: #222;          /* Dark gray for better readability */
+    font-weight: 700;     /* Bold weight */
+    letter-spacing: -0.5px; /* Slightly tighter letter spacing */
+    line-height: 1.3;     /* Improved line spacing */
+    position: relative;   /* For pseudo-element positioning */
+}
+
+/* Decorative underline for the title */
+.cart-modal__content h2::after {
+    content: "";          /* Required for pseudo-elements */
+    display: block;       /* Block-level element */
+    width: 50px;          /* Width of the underline */
+    height: 3px;          /* Thickness of the underline */
+    background: #52A8FDFF; /* Blue accent color */
+    margin-top: 12px;     /* Space from text */
+    border-radius: 3px;   /* Rounded corners */
+}
+
+/* Animation definition for slide-in effect */
+@keyframes slideIn {
+    to { transform: translateX(0); } /* Final position - fully visible */
+}
+
+/* =============================================
+    HEADER - CART HEADER WITH CLOSE BUTTON
+   ============================================= */
+.cart-modal__header {
+    position: relative;    /* For absolute positioning of children */
+    padding: 20px;        /* Internal spacing */
+    border-bottom: 1px solid #f0f0f0; /* Subtle bottom border */
+    display: flex;         /* Flex layout */
+    justify-content: center; /* Center content horizontally */
+    align-items: center;  /* Center content vertically */
+    min-height: 60px;     /* Minimum height */
+}
+
+/* Close button styling */
 .cart-modal__close {
-    position: absolute;        /* Position relative to content box */
-    top: 12px;
-    right: 16px;
-    font-size: 24px;          /* Large clickable area */
-    cursor: pointer;          /* Indicates clickable */
-    color: #888;              /* Neutral gray color */
+    position: absolute;    /* Absolute positioning within header */
+    color: #888;           /* Medium gray color */
+    font-size: 28px;       /* Large size for better clickability */
+    cursor: pointer;       /* Pointer cursor on hover */
+    transition: all 0.2s;  /* Smooth transition for hover effects */
+    left: 20px;           /* Position from left */
+    margin: auto;         /* Vertical centering */
 }
 
-/* List of cart items */
+/* Close button hover state */
+.cart-modal__close:hover {
+    color: #333;          /* Darker gray on hover */
+}
+
+/* =============================================
+    ITEMS LIST - PRODUCT ITEMS IN CART
+   ============================================= */
 .cart-modal__list {
-    list-style: none;         /* Remove bullet points */
-    padding: 0;               /* Remove default padding */
-    margin: 24px 0;           /* Vertical spacing */
+    flex: 1;              /* Takes remaining vertical space */
+    overflow-y: auto;     /* Enables vertical scrolling if needed */
+    padding: 0 20px;     /* Horizontal padding */
+    margin: 0;           /* No external margins */
 }
 
-/* Individual cart item */
+/* Individual cart item container */
 .cart-modal__item {
-    display: flex;            /* Flex layout for item components */
-    align-items: flex-start;  /* Align items to top */
-    gap: 16px;                /* Space between elements */
-    padding: 12px 0;          /* Vertical padding */
-    border-bottom: 1px solid #eee; /* Separator between items */
+    display: flex;        /* Flex layout for horizontal alignment */
+    gap: 15px;           /* Space between elements */
+    padding: 20px 0;     /* Vertical padding */
+    border-bottom: 1px solid #ffffff; /* Invisible border (for hover effect) */
+    transition: all 0.3s; /* Smooth transitions */
+    position: relative;   /* For absolute positioning of children */
 }
 
-/* Product image in cart */
+/* Cart item hover effect */
+.cart-modal__item:hover {
+    background: #f9f9f9;  /* Light gray background */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02); /* Subtle shadow */
+}
+
+/* Product image styling */
 .cart-modal__item-img img {
-    width: 80px;             /* Fixed width */
-    height: auto;            /* Maintain aspect ratio */
-    border-radius: 8px;      /* Slightly rounded corners */
+    width: 120px;        /* Fixed width */
+    height: 120px;       /* Fixed height */
+    object-fit: cover;   /* Ensures proper image aspect ratio */
+    border-radius: 8px;  /* Rounded corners */
+    border: 1px solid #333; /* Border around image */
 }
 
-/* Product information container */
+/* Container for product info (name, price, etc.) */
 .cart-modal__item-info {
-    flex: 1;                 /* Take remaining space */
+    flex: 1;            /* Takes remaining horizontal space */
 }
 
-/* Product title */
+/* Product title styling */
 .cart-modal__item-title {
-    font-weight: bold;       /* Emphasize product name */
-    margin-bottom: 4px;      /* Space below title */
-    font-size: 1rem;         /* Base font size */
+    color: #000000;      /* Black color */
+    font-weight: 500;    /* Medium weight */
+    margin-bottom: 5px;  /* Space below title */
+    font-size: 15px;     /* Font size */
 }
 
-/* Product price */
+/* Product price styling */
 .cart-modal__item-price {
-    color: #555;            /* Subdued text color */
-    margin-bottom: 8px;      /* Space below price */
+    color: #ff5722;      /* Orange-red color for price */
+    font-weight: 600;    /* Semi-bold weight */
+    margin-bottom: 10px; /* Space below price */
+    display: block;      /* Block-level element */
 }
 
 /* Quantity selector container */
 .cart-modal__item-qty {
-    display: flex;           /* Flex layout */
-    align-items: center;     /* Center vertically */
-    gap: 6px;               /* Space between label and input */
-    font-size: 0.95rem;     /* Slightly smaller text */
+    display: flex;       /* Flex layout */
+    align-items: center; /* Vertical centering */
+    gap: 10px;          /* Space between elements */
 }
 
 /* Quantity input field */
 .cart-modal__item-qty-input {
-    width: 60px;            /* Fixed width */
-    padding: 4px 6px;       /* Internal spacing */
-    border: 1px solid #ccc; /* Light gray border */
-    border-radius: 6px;     /* Rounded corners */
-    font-size: 0.95rem;     /* Matching text size */
-    background-color: #fff; /* White background */
-    color: #333;            /* Dark text */
-    outline: none;          /* Remove default focus outline */
-    transition: border-color 0.2s ease; /* Smooth focus transition */
+    width: 50px;         /* Fixed width */
+    padding: 5px;        /* Internal spacing */
+    background: #ffffff; /* White background */
+    border: 2px solid #52A8FDFF; /* Blue border */
+    color: #000000;      /* Black text */
+    border-radius: 4px;  /* Slightly rounded corners */
+    text-align: center;  /* Centered text */
+    font-size: 14px;     /* Font size */
 }
 
-/* Quantity input focus state */
-.cart-modal__item-qty-input:focus {
-    border-color: #52A8FDFF; /* Blue border when focused */
+/* Remove item button */
+.cart-modal__remove-item {
+    position: absolute;  /* Absolute positioning */
+    top: 20px;          /* Distance from top */
+    right: 10px;        /* Distance from right */
+    background: transparent; /* Transparent background */
+    color: #ff4d4d;     /* Red color */
+    border: none;       /* No border */
+    width: 34px;        /* Fixed width */
+    height: 70%;       /* Height relative to item */
+    display: flex;      /* Flex layout */
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+    cursor: pointer;    /* Pointer cursor */
+    transition: all 0.2s; /* Smooth transitions */
+    font-size: 18px;    /* Icon size */
 }
 
-/* Cart footer (total price) */
+/* Remove button hover state */
+.cart-modal__remove-item:hover {
+    color: #ff1a1a;     /* Brighter red */
+    transform: scale(1.2); /* Slight enlargement */
+}
+
+/* Trash can icon using pseudo-element */
+.cart-modal__remove-item::before {
+    content: "🗑️";     /* Trash can emoji */
+    display: block;     /* Block-level element */
+}
+
+/* =============================================
+    FOOTER - CART TOTALS AND CHECKOUT
+   ============================================= */
 .cart-modal__footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 24px;
-    font-weight: bold;
-    font-size: 1.1rem;
+    padding: 20px;       /* Internal spacing */
+    background: #ffffff; /* White background */
+    border-top: 1px solid #454c52; /* Top border */
+}
+
+/* Total price display */
+.cart-modal__total {
+    display: flex;       /* Flex layout */
+    justify-content: space-between; /* Space between label and amount */
+    margin: 30px 0 20px 0; /* top | right | bottom | left margins */
+    color: #2c2a2a;     /* Dark gray color */
+    font-weight: 600;    /* Semi-bold weight */
+    font-size: 18px;     /* Larger font size */
 }
 
 /* Checkout button */
 .cart-modal__checkout-btn {
-    padding: 10px 20px;
-    background-color: #509140;
-    color: white;
-    text-decoration: none;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    width: 100%;        /* Full width */
+    padding: 15px;      /* Vertical padding */
+    background: #509140; /* Green background */
+    color: white;       /* White text */
+    border: none;       /* No border */
+    border-radius: 6px; /* Rounded corners */
+    font-weight: 600;   /* Semi-bold weight */
+    cursor: pointer;    /* Pointer cursor */
+    transition: all 0.3s; /* Smooth transitions */
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 2px; /* Increased letter spacing */
+    font-size: 16px;    /* Font size */
 }
 
+/* Checkout button hover state */
 .cart-modal__checkout-btn:hover {
-    background-color: #2c7c19;
+    background: #468536; /* Darker green */
+    transform: translateY(-2px); /* Slight lift */
 }
 
+/* =============================================
+    EMPTY CART STATE
+   ============================================= */
+.cart-modal__empty {
+    text-align: center;  /* Centered text */
+    padding: 3rem 2rem;  /* Generous padding */
+    color: #5a5a5a;     /* Medium gray color */
+    list-style: none;    /* No list styling */
+    display: flex;      /* Flex layout */
+    flex-direction: column; /* Vertical stacking */
+    align-items: center; /* Horizontal centering */
+    justify-content: center; /* Vertical centering */
+    min-height: 300px;  /* Minimum height */
+    height: 80%;       /* Relative height */
+    animation: fadeIn 0.5s ease-out forwards; /* Fade-in animation */
+    border-radius: 12px; /* Rounded corners */
+    margin: 1rem;       /* External margins */
+}
+
+/* Shopping cart icon for empty state */
+.cart-modal__empty::before {
+    content: "🛒";      /* Shopping cart emoji */
+    font-size: 5rem;    /* Large size */
+    margin-bottom: 1.5rem; /* Space below icon */
+    display: block;     /* Block-level element */
+    transform: translateY(-20px); /* Initial position */
+    animation: floatIcon 2s ease-in-out infinite alternate; /* Floating animation */
+}
+
+/* Floating animation for empty cart icon */
+@keyframes floatIcon {
+    0% {
+        transform: translateY(-20px) rotate(-5deg); /* Starting position */
+    }
+    100% {
+        transform: translateY(0) rotate(5deg); /* Ending position */
+    }
+}

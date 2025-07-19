@@ -1,3 +1,6 @@
+import { checkCartEmpty } from './functionModelCart.js';
+import { updateCartCount } from './functionModelCart.js';
+
 /**
  * Initializes the shopping cart modal functionality
  * Handles opening/closing of the cart modal and click events
@@ -40,4 +43,8 @@ export function initCartModal() {
             cartModal.style.display = 'none';
         }
     });
+
+    checkCartEmpty();
+    updateCartCount();
+
 }
