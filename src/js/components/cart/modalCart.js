@@ -1,5 +1,6 @@
-import { checkCartEmpty } from './functionModelCart.js';
+import {checkCartEmpty, getCartItemDetails} from './functionModelCart.js';
 import { updateCartCount } from './functionModelCart.js';
+import {finishBuy} from "./finishBuy.js";
 
 /**
  * Initializes the shopping cart modal functionality
@@ -44,7 +45,12 @@ export function initCartModal() {
         }
     });
 
+    // Initialize cart state
     checkCartEmpty();
+
+    // Update cart count on page load
     updateCartCount();
 
+    // Initialize finish buy functionality
+    finishBuy();
 }

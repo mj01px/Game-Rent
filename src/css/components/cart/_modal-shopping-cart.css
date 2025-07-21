@@ -164,32 +164,32 @@
 
 /* Remove item button */
 .cart-modal__remove-item {
-    position: absolute;  /* Absolute positioning */
-    top: 20px;          /* Distance from top */
-    right: 10px;        /* Distance from right */
-    background: transparent; /* Transparent background */
-    color: #ff4d4d;     /* Red color */
-    border: none;       /* No border */
-    width: 34px;        /* Fixed width */
-    height: 70%;       /* Height relative to item */
-    display: flex;      /* Flex layout */
-    align-items: center; /* Vertical centering */
-    justify-content: center; /* Horizontal centering */
-    cursor: pointer;    /* Pointer cursor */
-    transition: all 0.2s; /* Smooth transitions */
-    font-size: 18px;    /* Icon size */
+    position: absolute;      /* Absolute positioning */
+    top: 35%;              /* Distance from top */
+    right: 10px;            /* Distance from right */
+    background: transparent url("../../../img/trash-icon.png") center / contain no-repeat; /* Combined background properties */
+    width: 25px;            /* Fixed width */
+    height: 25px;           /* Fixed height */
+    border: none;           /* No border */
+    padding: 0;             /* Remove any default padding */
+    cursor: pointer;        /* Pointer cursor */
+    transition: all 0.2s ease;   /* Smooth transitions with easing */
+
+    /* Remove text content if this is purely an icon button */
+    text-indent: -9999px;
+    overflow: hidden;
+
+    /* Center the button content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Remove button hover state */
 .cart-modal__remove-item:hover {
-    color: #ff1a1a;     /* Brighter red */
-    transform: scale(1.2); /* Slight enlargement */
-}
+    transform: scale(1.2);  /* Slight enlargement */
+    background-image: url("../../../img/trash-icon-hover.png");
 
-/* Trash can icon using pseudo-element */
-.cart-modal__remove-item::before {
-    content: "🗑️";     /* Trash can emoji */
-    display: block;     /* Block-level element */
 }
 
 /* =============================================

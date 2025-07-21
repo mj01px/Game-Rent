@@ -60,14 +60,15 @@ export function addToCart(id) {
     const price = gameCard.getAttribute('data-price') || 'Price not available';
 
     // 3. Create new cart item element
-    const cartItem = document.createElement('li');
-    cartItem.className = 'cart-modal__item';
-    cartItem.innerHTML = `
+     const cartItem = document.createElement('li');
+     cartItem.dataset.gameId = id; // get the game ID from the card
+     cartItem.className = 'cart-modal__item';
+     cartItem.innerHTML = `
         <div class="cart-modal__item-img">
             <img src="${imgSrc}" alt="${title}">
         </div>
         <div class="cart-modal__item-info">
-            <button class="cart-modal__remove-item"></button>
+            <button class="cart-modal__remove-item"></button> 
             <p class="cart-modal__item-title">${title}</p>
             <p class="cart-modal__item-price">${price}</p>
             <label class="cart-modal__item-qty">
@@ -85,6 +86,66 @@ export function addToCart(id) {
     checkCartEmpty();
 
     console.log('Item added to cart:', { title, price });
+}
+
+/**
+ * Removes a game from the shopping cart and updates all related UI elements
+ * @function removeFromCart
+ * @returns {void}
+ *
+ * This function uses event delegation to handle all remove buttons in the cart.
+ * When a game is removed from cart, it:
+ * 1. Removes the item from cart DOM
+ * 2. Updates the cart item counter
+ * 3. Checks if cart is now empty
+ * 4. Resets the game card's rental status UI
+ */
+export function removeFromCart() {
+    const cartItemsList = document.getElementById('cart-items');
+
+    if (!cartItemsList) {
+        console.error('Cart items list not found');
+        return;
+    }
+
+    // Event delegation for all remove buttons
+    cartItemsList.addEventListener('click', (e) => {
+        // Check if clicked element is a remove button
+        if (e.target.classList.contains('cart-modal__remove-item')) {
+            const cartItem = e.target.closest('.cart-modal__item');
+
+            if (cartItem) {
+                // 1. Remove cart item from DOM
+                cartItem.remove();
+
+                // 2. Update cart counter display
+                updateCartCount();
+
+                // 3. Check if cart is now empty
+                checkCartEmpty();
+
+                // 4. Get game ID from data attribute
+                const gameId = cartItem.dataset.gameId;
+
+                if (gameId) {
+                    // 5. Reset game card rental status
+                    const gameCard = document.getElementById(`game-${gameId}`);
+                    if (gameCard) {
+                        const image = gameCard.querySelector('.dashboard__card-img');
+                        const button = gameCard.querySelector('.dashboard__card-btn');
+
+                        if (image && button) {
+                            // Remove rented visual indicators
+                            image.classList.remove('dashboard__card-img--rented');
+                            button.classList.remove('dashboard__card-btn--return');
+                            // Reset button text to default
+                            button.textContent = 'Rent';
+                        }
+                    }
+                }
+            }
+        }
+    });
 }
 
 /**

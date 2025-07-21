@@ -10,3 +10,4 @@ window.loadComponent = loadComponent;
 // Import the modalGameDetails function and make it globally available
 import { modalGameDetails } from './components/games/modalGameDetails.js';
 window.modalGameDetails = modalGameDetails;
+

@@ -29,10 +29,8 @@ export function handleCardButtonClick(id) {
     const isRented = image.classList.contains('dashboard__card-img--rented');
 
     if (isRented) {
-        // RETURN FLOW: Game is being returned
-        image.classList.remove('dashboard__card-img--rented');  // Remove visual indicator
-        button.classList.remove('dashboard__card-btn--return'); // Remove return styling
-        button.textContent = 'Rent';                           // Reset button text
+        button.disabled = true; // Disable button to prevent multiple clicks
+        console.log('To remove the game from the cart, please click the "Remove" button in the cart modal.');
     } else {
         // RENT FLOW: Game is being rented
         setSelectedGameId(id);      // Update global state with selected game ID

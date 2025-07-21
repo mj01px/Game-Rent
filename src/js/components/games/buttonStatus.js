@@ -1,6 +1,6 @@
 // Import dependencies
 import { getSelectedGameId } from './gameState.js'; // Helper to get currently selected game ID
-import {addToCart} from '../cart/functionModelCart.js'; // Function to handle adding items to cart
+import {addToCart, removeFromCart} from '../cart/functionModelCart.js'; // Function to handle adding items to cart
 
 // Stores reference to the click listener so we can remove it later
 let buttonClickListener = null;
@@ -55,18 +55,22 @@ export function initButtonStatus() {
 
         // Check if game is currently rented (has rented class)
         if (image.classList.contains('dashboard__card-img--rented')) {
-            // RETURN LOGIC - Game is being returned
+            // RETURN LOGIC - Game is being rented
             image.classList.remove('dashboard__card-img--rented');
             button.classList.remove('dashboard__card-btn--return');
             button.textContent = 'Rent'; // Reset button text
+
         } else {
             // RENT LOGIC - Game is being rented
             image.classList.add('dashboard__card-img--rented');
             button.classList.add('dashboard__card-btn--return');
-            button.textContent = 'Return'; // Update button text
+            button.textContent = 'Rented'; // Update button text
 
             // Add the game to cart (only when renting, not when returning)
             addToCart(gameId);
+
+            // Remove the game from cart if it was already rented
+            removeFromCart()
         }
 
         // Close the modal after operation
