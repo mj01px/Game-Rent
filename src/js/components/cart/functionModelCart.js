@@ -1,3 +1,5 @@
+import {updateCartValue} from "./finishBuy.js";
+
 /**
  * Adds a game to the shopping cart
  * @function addToCart
@@ -84,6 +86,7 @@ export function addToCart(id) {
     // 5. Update cart counter
     updateCartCount();
     checkCartEmpty();
+    updateCartValue()
 
     console.log('Item added to cart:', { title, price });
 }
@@ -124,8 +127,12 @@ export function removeFromCart() {
                 // 3. Check if cart is now empty
                 checkCartEmpty();
 
+                // Update cart value after removal
+                updateCartValue();
+
                 // 4. Get game ID from data attribute
                 const gameId = cartItem.dataset.gameId;
+
 
                 if (gameId) {
                     // 5. Reset game card rental status

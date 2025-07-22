@@ -3,6 +3,7 @@ import { initCartModal } from '../components/cart/modalCart.js';
 import { modalGameDetails } from "./games/modalGameDetails.js";
 import { initButtonStatus } from "./games/buttonStatus.js";
 import { handleCardButtonClick } from "./games/handleCardButtonClick.js";
+import {initCartValueUpdate} from "./cart/finishBuy.js";
 
 /**
  * Loads HTML components dynamically
@@ -37,6 +38,9 @@ Promise.all([
 
         // Initialize button status last
         initButtonStatus();
+
+        // Initialize cart value update functionality
+        initCartValueUpdate()
 
     })
     .catch(err => {

@@ -1,4 +1,4 @@
-import {checkCartEmpty, getCartItemDetails} from './functionModelCart.js';
+import {checkCartEmpty} from './functionModelCart.js';
 import { updateCartCount } from './functionModelCart.js';
 import {finishBuy} from "./finishBuy.js";
 
