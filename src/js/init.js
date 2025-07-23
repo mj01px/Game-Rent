@@ -1,4 +1,4 @@
-import {GameCardData} from "./modules/Games/GameCardData.js";
+import {LoadGameData} from "./modules/Games/LoadGameData.js";
 
 export function initContainer(containerId, filePath, basePath) {
     return fetch(`${basePath}${filePath}`)
@@ -12,16 +12,16 @@ export function initContainer(containerId, filePath, basePath) {
 }
 
 Promise.all([
-    initContainer('head-container', 'head.html', 'partials/'),
-    initContainer('navbar-container', 'navbar.html', 'partials/'),
-    initContainer('banner-container', 'banner.html', 'partials/'),
+    initContainer('head-container', 'head.html', 'partials/shared/'),
+    initContainer('navbar-container', 'navbar.html', 'partials/shared/'),
+    initContainer('banner-container', 'banner.html', 'partials/shared/'),
     initContainer('games-container', 'game-card.html', 'components/game-card/'),
     initContainer('category-container', 'game-category.html', 'components/game-category/'),
-    initContainer('how-it-works-container', 'how-it-works.html', 'partials/'),
-    initContainer('footer-container', 'footer.html', 'partials/'),
+    initContainer('workflow-container', 'workflow.html', 'partials/workflow/'),
+    initContainer('footer-container', 'footer.html', 'partials/shared/'),
 ])
     .then(() => {
-        new GameCardData('.featured'); // ou outro seletor que funcione pra ti
+        new LoadGameData('.featured'); // ou outro seletor que funcione pra ti
     })
     .catch(err => {
         console.error("Error loading navbar:", err);

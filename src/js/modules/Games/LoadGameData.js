@@ -1,6 +1,6 @@
 import {games} from "../../data/games.js";
 
-export class GameCardData {
+export class LoadGameData {
     constructor(containerSelector) {
         this.container = document.querySelector(containerSelector);
         if (!this.container) {

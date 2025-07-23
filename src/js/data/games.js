@@ -33,8 +33,8 @@ export const games = [
         id: 4,
         name: "Final Fantasy VII Remake",
         // image: "ff7_remake.webp",
-        platform: "ps5",
-        platformName: "PS5",
+        platform: "pc",
+        platformName: "PC",
         rating: 4.7,
         originalPrice: 79.90,
         rentalPrice: 29.90
