@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameRent - Aluguel de Jogos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./../css/main.css">
+</head>
+<body>
+<!-- Navbar -->
+<div id="navbar-container"></div>
+
+<!-- Carrinho de Compras (modal) -->
+<div class="cart-modal" id="cart-modal">
+    <div class="cart-content">
+        <div class="cart-header">
+            <h3>Seu Carrinho</h3>
+            <span class="close-cart">&times;</span>
+        </div>
+        <div class="cart-items">
+            <!-- Itens serão adicionados dinamicamente -->
+            <p class="empty-cart">Seu carrinho está vazio</p>
+        </div>
+        <div class="cart-total">
+            <span>Total: R$0,00</span>
+            <button class="checkout-btn">Finalizar Aluguel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Banner Principal -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Alugue os melhores jogos por um preço justo</h1>
+        <p>Mais de 1000 títulos disponíveis para todas as plataformas</p>
+        <button class="cta-btn">Ver Catálogo</button>
+    </div>
+</section>
+
+<!-- Destaques -->
+<section class="featured" id="destaques">
+    <h2 class="section-title">Jogos em Destaque</h2>
+    <div class="games-grid">
+        <!-- Jogo 1 -->
+        <div class="game-card">
+            <div class="game-image">
+                <img src="" alt="Jogo 1">
+                <span class="platform ps5">PS5</span>
+            </div>
+            <div class="game-info">
+                <h3>God of War: Ragnarok</h3>
+                <div class="game-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span>4.5</span>
+                </div>
+                <div class="game-price">
+                    <span class="original-price">R$79,90</span>
+                    <span class="rental-price">R$29,90/semana</span>
+                </div>
+                <button class="add-to-cart" data-id="1">Alugar</button>
+            </div>
+        </div>
+
+        <!-- Jogo 2 -->
+        <div class="game-card">
+            <div class="game-image">
+                <img src="" alt="Jogo 2">
+                <span class="platform xbox">XBOX</span>
+            </div>
+            <div class="game-info">
+                <h3>Halo Infinite</h3>
+                <div class="game-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span>4.0</span>
+                </div>
+                <div class="game-price">
+                    <span class="original-price">R$69,90</span>
+                    <span class="rental-price">R$24,90/semana</span>
+                </div>
+                <button class="add-to-cart" data-id="2">Alugar</button>
+            </div>
+        </div>
+
+        <!-- Jogo 3 -->
+        <div class="game-card">
+            <div class="game-image">
+                <img src="" alt="Jogo 3">
+                <span class="platform switch">Switch</span>
+            </div>
+            <div class="game-info">
+                <h3>The Legend of Zelda: Tears of the Kingdom</h3>
+                <div class="game-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>5.0</span>
+                </div>
+                <div class="game-price">
+                    <span class="original-price">R$89,90</span>
+                    <span class="rental-price">R$34,90/semana</span>
+                </div>
+                <button class="add-to-cart" data-id="3">Alugar</button>
+            </div>
+        </div>
+
+        <!-- Jogo 4 -->
+        <div class="game-card">
+            <div class="game-image">
+                <img src="" alt="Jogo 4">
+                <span class="platform pc">PC</span>
+            </div>
+            <div class="game-info">
+                <h3>Elden Ring</h3>
+                <div class="game-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>5.0</span>
+                </div>
+                <div class="game-price">
+                    <span class="original-price">R$99,90</span>
+                    <span class="rental-price">R$39,90/semana</span>
+                </div>
+                <button class="add-to-cart" data-id="4">Alugar</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categorias -->
+<section class="categories" id="categorias">
+    <h2 class="section-title">Categorias</h2>
+    <div class="categories-grid">
+        <div class="category-card">
+            <img src="" alt="Ação">
+            <h3>Ação</h3>
+        </div>
+        <div class="category-card">
+            <img src="" alt="Aventura">
+            <h3>Aventura</h3>
+        </div>
+        <div class="category-card">
+            <img src="" alt="RPG">
+            <h3>RPG</h3>
+        </div>
+        <div class="category-card">
+            <img src="" alt="FPS">
+            <h3>FPS</h3>
+        </div>
+        <div class="category-card">
+            <img src="" alt="Esportes">
+            <h3>Esportes</h3>
+        </div>
+    </div>
+</section>
+
+<!-- Como Funciona -->
+<section class="how-it-works" id="como-funciona">
+    <h2 class="section-title">Como Funciona</h2>
+    <div class="steps-container">
+        <div class="step">
+            <div class="step-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <h3>1. Escolha seu jogo</h3>
+            <p>Navegue pelo nosso catálogo e selecione os jogos que deseja alugar.</p>
+        </div>
+        <div class="step">
+            <div class="step-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h3>2. Adicione ao carrinho</h3>
+            <p>Adicione os jogos ao carrinho e prossiga para o pagamento.</p>
+        </div>
+        <div class="step">
+            <div class="step-icon">
+                <i class="fas fa-truck"></i>
+            </div>
+            <h3>3. Receba em casa</h3>
+            <p>Entregamos o jogo no endereço cadastrado em até 48 horas.</p>
+        </div>
+        <div class="step">
+            <div class="step-icon">
+                <i class="fas fa-gamepad"></i>
+            </div>
+            <h3>4. Jogue e devolva</h3>
+            <p>Após o período de aluguel, devolva o jogo usando nossa embalagem de retorno.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" id="contato">
+    <div class="footer-container">
+        <div class="footer-about">
+            <h3>Sobre a GameRent</h3>
+            <p>Somos a maior plataforma de aluguel de jogos do Brasil, oferecendo os melhores títulos para todas as plataformas por um preço acessível.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-links">
+            <h3>Links Úteis</h3>
+            <ul>
+                <li><a href="#">Termos de Uso</a></li>
+                <li><a href="#">Política de Privacidade</a></li>
+                <li><a href="#">Trocas e Devoluções</a></li>
+                <li><a href="#">Perguntas Frequentes</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contato</h3>
+            <ul>
+                <li><i class="fas fa-map-marker-alt"></i> Av. Paulista, 1000 - São Paulo/SP</li>
+                <li><i class="fas fa-phone"></i> (11) 1234-5678</li>
+                <li><i class="fas fa-envelope"></i> contato@gamerent.com.br</li>
+            </ul>
+        </div>
+
+        <div class="footer-newsletter">
+            <h3>Newsletter</h3>
+            <p>Assine nossa newsletter e receba ofertas exclusivas</p>
+            <form>
+                <input type="email" placeholder="Seu e-mail">
+                <button type="submit">Assinar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2023 GameRent - Todos os direitos reservados</p>
+    </div>
+</footer>
+
+<script type="module" src="./../js/app.js"></script>
+</body>
+</html>

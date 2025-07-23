@@ -10,6 +10,9 @@ export function finishBuy() {
     finishBuyBtn.addEventListener('click', () => {
         console.log('Finishing purchase...');
         // (Future implementation: Add checkout logic here)
+
+        // Redirect to the new page
+        window.location.href = 'web/components/checkout/checkout.html';
     });
 }
 
