@@ -1,3 +1,5 @@
+import {GameCardData} from "./modules/Games/GameCardData.js";
+
 export function initContainer(containerId, filePath, basePath) {
     return fetch(`${basePath}${filePath}`)
         .then(res => {
@@ -19,6 +21,7 @@ Promise.all([
     initContainer('footer-container', 'footer.html', 'partials/'),
 ])
     .then(() => {
+        new GameCardData('.featured'); // ou outro seletor que funcione pra ti
     })
     .catch(err => {
         console.error("Error loading navbar:", err);
