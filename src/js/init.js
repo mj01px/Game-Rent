@@ -10,11 +10,15 @@ export function initContainer(containerId, filePath, basePath) {
 }
 
 Promise.all([
-    initContainer('navbar-container', 'navbar.html', 'partials/')
+    initContainer('head-container', 'head.html', 'partials/'),
+    initContainer('navbar-container', 'navbar.html', 'partials/'),
+    initContainer('banner-container', 'banner.html', 'partials/'),
+    initContainer('games-container', 'game-card.html', 'components/game-card/'),
+    initContainer('category-container', 'game-category.html', 'components/game-category/'),
+    initContainer('how-it-works-container', 'how-it-works.html', 'partials/'),
+    initContainer('footer-container', 'footer.html', 'partials/'),
 ])
     .then(() => {
-        // Initialize any additional components or functionality here
-        console.log("Navbar loaded successfully");
     })
     .catch(err => {
         console.error("Error loading navbar:", err);
