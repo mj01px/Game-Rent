@@ -1,4 +1,5 @@
 import {LoadGameData} from "./modules/Games/LoadGameData.js";
+import {openCartModal} from "./modules/Cart/Cart.js";
 
 export function initContainer(containerId, filePath, basePath) {
     return fetch(`${basePath}${filePath}`)
@@ -19,10 +20,13 @@ Promise.all([
     initContainer('category-container', 'game-category.html', 'components/game-category/'),
     initContainer('workflow-container', 'workflow.html', 'partials/workflow/'),
     initContainer('footer-container', 'footer.html', 'partials/shared/'),
+    initContainer('cart-modal-container', 'cart-modal.html', 'components/cart-modal/'), // Note o ID diferente
+    initContainer('game-description-modal', 'game-modal.html', 'components/game-card/'),
 ])
     .then(() => {
-        new LoadGameData('.featured'); // ou outro seletor que funcione pra ti
+        new LoadGameData('.featured');
+        openCartModal();
     })
     .catch(err => {
-        console.error("Error loading navbar:", err);
+        console.error("Error loading components:", err);
     });

@@ -34,24 +34,24 @@ export class LoadGameData {
         }
 
         return `
-            <div class="game-card">
-<!--                <div class="game-image"
-                    <img src="./assets/images/games/${game.image}" alt="${game.name}" loading="lazy">
-                    <span class="platform ${game.platform}">${game.platformName}</span>
-                    </div>-->
-                <div class="game-info">
-                    <h3>${game.name}</h3>
-                    <div class="game-rating">
-                        ${starsHTML}
-                        <span>${game.rating.toFixed(1)}</span>
-                    </div>
-                    <div class="game-price">
-                        <span class="original-price">R$${game.originalPrice.toFixed(2)}</span>
-                        <span class="rental-price">R$${game.rentalPrice.toFixed(2)}/semana</span>
-                    </div>
-                    <button class="add-to-cart" data-id="${game.id}">Alugar</button>
-                </div>
+        <div class="game-card">
+            <div class="game-image">
+                <img src="../assets/images/games/${game.image}" alt="${game.name}" loading="lazy">
+                <span class="platform ${game.platform}">${game.platformName}</span>
             </div>
-        `;
+            <div class="game-info">
+                <h3>${game.name}</h3>
+                <div class="game-rating">
+                    ${starsHTML}
+                    <span>${game.rating.toFixed(1)}</span>
+                </div>
+                <div class="game-price">
+                    <span class="original-price">$${game.originalPrice.toFixed(2)}</span>
+                    <span class="rental-price">$${game.rentalPrice.toFixed(2)}/Week</span>
+                </div>
+                <button class="add-to-cart" data-id="${game.id}">Show Description</button>
+            </div>
+        </div>
+    `;
     }
 }
