@@ -1,31 +1,24 @@
-import {addToCart} from "./AddToCart.js";
-
 export function openDescriptionModal(games) {
     const modal = document.getElementById('game-description-modal');
-    if (!modal) return;
+    if (!modal) {
+        console.error("Modal element not found!");
+        return;
+    }
 
-    let currentGame = null; // Armazena o jogo atual
-
-    // Event delegation para abrir o modal
+    // Event delegation para lidar com clicks dinâmicos
     document.addEventListener('click', function(event) {
         if (event.target.classList.contains('show-description')) {
             event.preventDefault();
-            const gameId = parseInt(event.target.getAttribute('data-id'));
-            currentGame = games.find(g => g.id === gameId);
 
-            if (currentGame) {
-                updateModalContent(currentGame);
+            const button = event.target;
+            const gameId = parseInt(button.getAttribute('data-id'));
+            const game = games.find(g => g.id === gameId);
+
+            if (game) {
+                updateModalContent(game);
                 showModal();
             }
         }
-    });
-
-    // Configura o botão de adicionar ao carrinho
-    document.getElementById('modal-cart-btn').addEventListener('click', () => {
-        if (currentGame) {
-            addToCart(currentGame);
-        }
-        hideModal();
     });
 
     // Fechar modal
