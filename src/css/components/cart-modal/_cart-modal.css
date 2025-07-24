@@ -1,63 +1,159 @@
-/* Carrinho de Compras */
+/*
+  CART MODAL STYLES - RIGHT SIDE VERSION
+*/
+
+/* Modal overlay container */
 .cart-modal {
-    display: none;
     position: fixed;
     top: 0;
     right: 0;
-    width: 350px;
+    width: 100%;
     height: 100%;
-    background-color: white;
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1001;
-    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: flex-end; /* Alterado para flex-end para alinhar à direita */
+    align-items: stretch; /* Garante que o conteúdo ocupe toda a altura */
+    z-index: 9999;
+    backdrop-filter: blur(5px);
 }
 
+/* The actual cart panel */
 .cart-content {
-    padding: 20px;
-}
-
-.cart-header {
+    width: 450px;
+    height: 100%;
+    background: #ffffff;
+    padding: 0;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+    transform: translateX(100%); /* Começa fora da tela à direita */
+    animation: slideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    margin-left: auto; /* Garante que fique colado à direita */
+}
+
+/* Adicione esta animação se ainda não existir */
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+/* Header */
+.cart-header {
+    position: relative;
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    min-height: 60px;
 }
 
+.cart-header h3 {
+    margin: 5px 20px 5px 40px;
+    font-size: 1.6rem;
+    color: #222;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    position: relative;
+}
+
+.cart-header h3::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #52A8FDFF;
+    margin-top: 12px;
+    border-radius: 3px;
+}
+
+/* Close button - mantido à esquerda */
 .close-cart {
-    font-size: 1.5rem;
+    position: absolute;
+    color: #888;
+    font-size: 28px;
     cursor: pointer;
+    transition: all 0.2s;
+    left: 20px; /* Botão na esquerda */
+    margin: auto;
 }
 
+.close-cart:hover {
+    color: #333;
+}
+
+/* Items */
 .cart-items {
-    min-height: 200px;
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 20px;
+    margin: 0;
 }
 
 .empty-cart {
     text-align: center;
-    color: #7f8c8d;
-    margin-top: 50px;
+    padding: 3rem 2rem;
+    color: #5a5a5a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    height: 80%;
+    animation: fadeIn 0.5s ease-out forwards;
 }
 
+.empty-cart::before {
+    content: ":(";
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    animation: floatIcon 2s ease-in-out infinite alternate;
+}
+
+/* Footer */
 .cart-total {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
+    padding: 20px;
+    border-top: 1px solid #f0f0f0; /* ← ESTA LINHA CRI A BORDA INFERIOR */
+}
+
+.cart-total span {
+    display: block;
+    text-align: right;
+    margin: 30px 0 20px 0;
+    color: #2c2a2a;
+    font-weight: 600;
+    font-size: 18px;
 }
 
 .checkout-btn {
-    background-color: #3498db;
+    width: 100%;
+    padding: 15px;
+    background: #509140;
     color: white;
-    padding: 10px 15px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 16px;
 }
 
 .checkout-btn:hover {
-    background-color: #2980b9;
+    background: #468536;
+    transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes floatIcon {
+    0% { transform: translateY(-20px) rotate(-5deg); }
+    100% { transform: translateY(0) rotate(5deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

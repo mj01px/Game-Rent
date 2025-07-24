@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<!-- Add this modal structure at the bottom of your body (before closing </body>) -->
+<div class="modal-overlay" id=game-description-modal>
+    <div class="modal">
+        <button class="modal-close">&times;</button>
+        <div class="modal-content">
+            <div class="modal-game-image">
+                <img id="modalGameImage" src="" alt="" loading="lazy">
+                <span class="platform" id="modalPlatform"></span>
+            </div>
+            <div class="modal-game-info">
+                <h3 id="modalGameTitle"></h3>
+                <div class="game-rating" id="modalGameRating"></div>
+                <div class="game-price">
+                    <span class="original-price" id="modalOriginalPrice"></span>
+                    <span class="rental-price" id="modalRentalPrice"></span>
+                </div>
+                <p class="game-description" id="modalGameDescription"></p>
+            </div>
+        </div>
+    </div>
+</div>
