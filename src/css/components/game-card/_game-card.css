@@ -110,7 +110,7 @@
     font-size: 1.1rem;
 }
 
-.add-to-cart {
+.show-description {
     width: 100%;
     padding: 10px;
     background-color: #3498db;
@@ -120,6 +120,6 @@
     transition: background-color 0.3s;
 }
 
-.add-to-cart:hover {
+.show-description:hover {
     background-color: #2980b9;
 }

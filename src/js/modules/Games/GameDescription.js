@@ -1,27 +1,31 @@
+import {addToCart} from "./AddToCart.js";
+
 export function openDescriptionModal(games) {
-    console.log("Initializing description modal...");
-
     const modal = document.getElementById('game-description-modal');
-    if (!modal) {
-        console.error("Modal element not found!");
-        return;
-    }
+    if (!modal) return;
 
-    // Event delegation para lidar com clicks dinâmicos
+    let currentGame = null; // Armazena o jogo atual
+
+    // Event delegation para abrir o modal
     document.addEventListener('click', function(event) {
-        if (event.target.classList.contains('add-to-cart')) {
+        if (event.target.classList.contains('show-description')) {
             event.preventDefault();
-            console.log("Description button clicked");
+            const gameId = parseInt(event.target.getAttribute('data-id'));
+            currentGame = games.find(g => g.id === gameId);
 
-            const button = event.target;
-            const gameId = parseInt(button.getAttribute('data-id'));
-            const game = games.find(g => g.id === gameId);
-
-            if (game) {
-                updateModalContent(game);
+            if (currentGame) {
+                updateModalContent(currentGame);
                 showModal();
             }
         }
+    });
+
+    // Configura o botão de adicionar ao carrinho
+    document.getElementById('modal-cart-btn').addEventListener('click', () => {
+        if (currentGame) {
+            addToCart(currentGame);
+        }
+        hideModal();
     });
 
     // Fechar modal
@@ -60,14 +64,12 @@ export function openDescriptionModal(games) {
     function showModal() {
         modal.classList.add('active'); // ativa o CSS
         document.body.style.overflow = 'hidden';
-        console.log("Modal shown");
     }
 
 
     function hideModal() {
         modal.classList.remove('active');
         document.body.style.overflow = 'auto';
-        console.log("Modal hidden");
     }
 
     document.getElementById('modal-cart-btn').addEventListener('click', () => {

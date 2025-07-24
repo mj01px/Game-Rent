@@ -4,7 +4,6 @@ export function openCartModal() {
     const closeCart = document.getElementById('close-cart'); // corrigido
 
     cartIcon.addEventListener('click', () => {
-        console.log(cartModal);
         cartModal.style.display = 'block'; // Use 'block' to show the modal
     });
 

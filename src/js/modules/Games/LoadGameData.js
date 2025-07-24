@@ -49,7 +49,7 @@ export class LoadGameData {
                     <span class="original-price">$${game.originalPrice.toFixed(2)}</span>
                     <span class="rental-price">$${game.rentalPrice.toFixed(2)}/Week</span>
                 </div>
-                <button class="add-to-cart" data-id="${game.id}">Show Description</button>
+                <button class="show-description" data-id="${game.id}">Show Description</button>
             </div>
         </div>
     `;
