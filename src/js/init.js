@@ -1,5 +1,7 @@
 import {LoadGameData} from "./modules/Games/LoadGameData.js";
 import {openCartModal} from "./modules/Cart/Cart.js";
+import {openDescriptionModal} from "./modules/Games/GameDescription.js";
+import {games} from "./data/games.js";
 
 export function initContainer(containerId, filePath, basePath) {
     return fetch(`${basePath}${filePath}`)
@@ -21,11 +23,13 @@ Promise.all([
     initContainer('workflow-container', 'workflow.html', 'partials/workflow/'),
     initContainer('footer-container', 'footer.html', 'partials/shared/'),
     initContainer('cart-modal-container', 'cart-modal.html', 'components/cart-modal/'), // Note o ID diferente
-    initContainer('game-description-modal', 'game-modal.html', 'components/game-card/'),
+    initContainer('game-description-container', 'game-modal.html', 'components/game-card/'),
 ])
     .then(() => {
         new LoadGameData('.featured');
         openCartModal();
+        openDescriptionModal(games);
+
     })
     .catch(err => {
         console.error("Error loading components:", err);

@@ -1,98 +1,188 @@
-/* Modal Styles */
+/* Overlay base */
 .modal-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 1000;
-    opacity: 0;
+    justify-content: center;
     visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
 }
 
 .modal-overlay.active {
-    opacity: 1;
     visibility: visible;
+    opacity: 1;
 }
 
+/* Modal card (alinhado ao estilo dos game cards) */
 .modal {
-    background-color: white;
+    background: white;
     border-radius: 8px;
     width: 90%;
-    max-width: 600px;
+    max-width: 700px;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     position: relative;
     transform: translateY(20px);
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
 }
 
 .modal-overlay.active .modal {
     transform: translateY(0);
 }
 
-.modal-close {
+/* Botão de fechar */
+.modal__close {
     position: absolute;
-    top: 15px;
+    top: 0px;
     right: 15px;
     background: none;
     border: none;
     font-size: 1.5rem;
-    cursor: pointer;
     color: #7f8c8d;
-    transition: color 0.3s;
+    cursor: pointer;
     z-index: 10;
 }
 
-.modal-close:hover {
+.modal__close:hover {
     color: #e74c3c;
 }
 
-.modal-content {
+/* Layout do conteúdo */
+.modal__content {
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    gap: 20px;
 }
 
-.modal-game-image {
+.modal__image-wrapper {
     position: relative;
-    height: 250px;
+    width: 100%;
+    height: 300px;
     overflow: hidden;
+    border-radius: 8px;
 }
 
-.modal-game-image img {
+.modal__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s;
 }
 
-.modal-game-info {
-    padding: 20px;
+.modal__platform-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
 }
 
-.game-description {
-    margin-top: 15px;
+.modal__platform-badge.ps5 {
+    background-color: #003087;
+}
+
+.modal__platform-badge.xbox {
+    background-color: #107c10;
+}
+
+.modal__platform-badge.switch {
+    background-color: #e60012;
+}
+
+.modal__platform-badge.pc {
+    background-color: #333;
+}
+
+/* Infos do jogo */
+.modal__info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal__title {
+    font-size: 1.2rem;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.modal__rating {
+    display: flex;
+    align-items: center;
+    color: #f39c12;
+}
+
+.modal__rating span {
+    margin-left: 5px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.modal__desc {
+    font-size: 0.95rem;
     color: #555;
     line-height: 1.6;
 }
 
-/* Responsive adjustments */
+/* Preços */
+.modal__price-group {
+    margin-top: 10px;
+}
+
+.modal__price--original {
+    text-decoration: line-through;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-right: 10px;
+}
+
+.modal__price--rental {
+    font-weight: bold;
+    color: #2ecc71;
+    font-size: 1.1rem;
+}
+
+/* Botão de ação (padronizado com .add-to-cart) */
+.modal__action-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.modal__action-btn:hover {
+    background-color: #2980b9;
+}
+
 @media (min-width: 768px) {
-    .modal-content {
+    .modal__content {
         flex-direction: row;
     }
 
-    .modal-game-image {
-        height: auto;
+    .modal__image-wrapper,
+    .modal__info {
         flex: 1;
     }
 
-    .modal-game-info {
-        flex: 1;
+    .modal__image-wrapper {
+        height: 300px; /* fixado */
+        max-height: 300px;
     }
 }

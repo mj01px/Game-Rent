@@ -34,7 +34,7 @@ export class LoadGameData {
         }
 
         return `
-        <div class="game-card">
+        <div class="game-card" id="game-${game.id}">
             <div class="game-image">
                 <img src="../assets/images/games/${game.image}" alt="${game.name}" loading="lazy">
                 <span class="platform ${game.platform}">${game.platformName}</span>

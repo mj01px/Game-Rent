@@ -1,20 +1,44 @@
-<!-- Add this modal structure at the bottom of your body (before closing </body>) -->
-<div class="modal-overlay" id=game-description-modal>
+<!--
+  GAME DETAILS MODAL COMPONENT
+  Exibe informações detalhadas de um jogo selecionado
+  Contém:
+  - Capa do jogo
+  - Título, descrição e avaliação
+  - Preços (original e aluguel)
+  - Botão de ação (alugar ou ir para o carrinho)
+-->
+
+<!-- Modal overlay -->
+<div id="game-description-modal" class="modal-overlay">
+    <!-- Modal content -->
     <div class="modal">
-        <button class="modal-close">&times;</button>
-        <div class="modal-content">
-            <div class="modal-game-image">
-                <img id="modalGameImage" src="" alt="" loading="lazy">
-                <span class="platform" id="modalPlatform"></span>
+        <!-- Close button -->
+        <button class="modal__close" id="close-game-modal" aria-label="Fechar modal">&times;</button>
+
+        <!-- Modal body -->
+        <div class="modal__content">
+            <!-- Game image -->
+            <div class="modal__image-wrapper">
+                <img id="modalGameImage" src="" alt="Game Cover" class="modal__image" loading="lazy" />
+                <span id="modalPlatform" class="modal__platform-badge"></span>
             </div>
-            <div class="modal-game-info">
-                <h3 id="modalGameTitle"></h3>
-                <div class="game-rating" id="modalGameRating"></div>
-                <div class="game-price">
-                    <span class="original-price" id="modalOriginalPrice"></span>
-                    <span class="rental-price" id="modalRentalPrice"></span>
+
+            <!-- Game info -->
+            <div class="modal__info">
+                <h2 id="modalGameTitle" class="modal__title"></h2>
+                <div id="modalGameRating" class="modal__rating"></div>
+
+                <p id="modalGameDescription" class="modal__desc"></p>
+
+                <div class="modal__price-group">
+                    <span id="modalOriginalPrice" class="modal__price modal__price--original"></span>
+                    <span id="modalRentalPrice" class="modal__price modal__price--rental"></span>
                 </div>
-                <p class="game-description" id="modalGameDescription"></p>
+
+                <!-- Action Button -->
+                <button id="modal-cart-btn" class="modal__action-btn">
+                    Rent Now
+                </button>
             </div>
         </div>
     </div>
