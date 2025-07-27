@@ -1,7 +1,7 @@
 import {LoadGameData} from "./modules/Games/LoadGameData.js";
 import {openDescriptionModal} from "./modules/Games/GameDescription.js";
 import {openCartModal} from "./modules/Cart/Cart.js";
-import {initializeCart, updateCartUI} from "./modules/Games/AddToCart.js";
+import {initializeCart, updateCartUI} from "./modules/Cart/CartUI.js";
 import {games} from "./data/games.js";
 
 export function initContainer(containerId, filePath, basePath) {

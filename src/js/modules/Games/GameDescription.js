@@ -1,4 +1,4 @@
-import { addToCart } from "../Games/AddToCart.js";
+import { addToCart } from "../Cart/CartUI.js";
 
 let currentGame = null; // Variável para armazenar o jogo atual
 

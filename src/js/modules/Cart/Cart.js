@@ -1,4 +1,4 @@
-import {updateCartUI} from "../Games/AddToCart.js";
+import {updateCartUI} from "../Cart/CartUI.js";
 
 export function openCartModal() {
     const cartModal = document.getElementById('cart-modal');
