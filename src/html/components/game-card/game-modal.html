@@ -1,41 +1,45 @@
-<!--
-  GAME DETAILS MODAL COMPONENT
-  Exibe informações detalhadas de um jogo selecionado
-  Contém:
-  - Capa do jogo
-  - Título, descrição e avaliação
-  - Preços (original e aluguel)
-  - Botão de ação (alugar ou ir para o carrinho)
--->
-
-<!-- Modal overlay -->
+<!-- Modal overlay (dark background behind the modal) -->
 <div id="game-description-modal" class="modal-overlay">
-    <!-- Modal content -->
-    <div class="modal">
-        <!-- Close button -->
-        <button class="modal__close" id="close-game-modal" aria-label="Fechar modal">&times;</button>
 
-        <!-- Modal body -->
+    <!-- Main modal container -->
+    <div class="modal">
+
+        <!-- Close button (closes the modal) -->
+        <button class="modal__close" id="close-game-modal" aria-label="Close modal">&times;</button>
+
+        <!-- Modal content area -->
         <div class="modal__content">
-            <!-- Game image -->
+
+            <!-- Game cover image and platform badge -->
             <div class="modal__image-wrapper">
-                <img id="modalGameImage" src="" alt="Game Cover" class="modal__image" loading="lazy" />
+                <img
+                        id="modalGameImage"
+                        src=""
+                        alt="Game Cover"
+                        class="modal__image"
+                        loading="lazy"
+                />
                 <span id="modalPlatform" class="modal__platform-badge"></span>
             </div>
 
-            <!-- Game info -->
+            <!-- Game text details -->
             <div class="modal__info">
+                <!-- Game title -->
                 <h2 id="modalGameTitle" class="modal__title"></h2>
+
+                <!-- Game rating (e.g. stars or numeric) -->
                 <div id="modalGameRating" class="modal__rating"></div>
 
+                <!-- Game description -->
                 <p id="modalGameDescription" class="modal__desc"></p>
 
+                <!-- Price display: original vs rental -->
                 <div class="modal__price-group">
                     <span id="modalOriginalPrice" class="modal__price modal__price--original"></span>
                     <span id="modalRentalPrice" class="modal__price modal__price--rental"></span>
                 </div>
 
-                <!-- Action Button -->
+                <!-- Rent Now button (adds item to cart or redirects) -->
                 <button id="modal-cart-btn" class="modal__action-btn">
                     Rent Now
                 </button>

@@ -1,7 +1,13 @@
+<!-- Navigation bar component -->
 <nav class="navbar">
+
+    <!-- Wrapper for all navbar elements -->
     <div class="navbar-container" id="navbar-container">
+
+        <!-- Logo (clickable, returns to top/home) -->
         <a href="#" class="logo">Game<span>Rent</span></a>
 
+        <!-- Navigation links to key sections of the site -->
         <div class="navbar-links">
             <ul>
                 <li><a href="#featured">Featured</a></li>
@@ -11,15 +17,23 @@
             </ul>
         </div>
 
+        <!-- Right-side navbar actions -->
         <div class="navbar-actions">
+
+            <!-- Search button (icon only) -->
             <button class="search-btn">
                 <i class="fas fa-search"></i>
             </button>
+
+            <!-- Shopping cart icon with dynamic item count -->
             <div class="cart-icon" id="cart-icon">
                 <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count" id="cart-count">0</span>
+                <span class="cart-count" id="cart-count">0</span> <!-- Updated via JS -->
             </div>
+
+            <!-- Login button -->
             <button class="login-btn">Login</button>
         </div>
+
     </div>
 </nav>
