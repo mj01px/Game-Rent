@@ -1,3 +1,7 @@
+import { addToCart } from "../Games/AddToCart.js";
+
+let currentGame = null; // Variável para armazenar o jogo atual
+
 export function openDescriptionModal(games) {
     const modal = document.getElementById('game-description-modal');
     if (!modal) {
@@ -5,17 +9,15 @@ export function openDescriptionModal(games) {
         return;
     }
 
-    // Event delegation para lidar com clicks dinâmicos
     document.addEventListener('click', function(event) {
         if (event.target.classList.contains('show-description')) {
             event.preventDefault();
-
             const button = event.target;
             const gameId = parseInt(button.getAttribute('data-id'));
-            const game = games.find(g => g.id === gameId);
+            currentGame = games.find(g => g.id === gameId);
 
-            if (game) {
-                updateModalContent(game);
+            if (currentGame) {
+                updateModalContent(currentGame);
                 showModal();
             }
         }
@@ -55,10 +57,9 @@ export function openDescriptionModal(games) {
     }
 
     function showModal() {
-        modal.classList.add('active'); // ativa o CSS
+        modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
-
 
     function hideModal() {
         modal.classList.remove('active');
@@ -66,6 +67,9 @@ export function openDescriptionModal(games) {
     }
 
     document.getElementById('modal-cart-btn').addEventListener('click', () => {
-        hideModal(); // fecha o modal atual
+        if (currentGame) {
+            addToCart(currentGame);
+            hideModal();
+        }
     });
 }

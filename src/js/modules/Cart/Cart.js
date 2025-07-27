@@ -1,27 +1,28 @@
-export function openCartModal() {
-    const cartIcon = document.getElementById('cart-icon');
-    const cartModal = document.getElementById('cart-modal');
-    const closeCart = document.getElementById('close-cart'); // corrigido
+import {updateCartUI} from "../Games/AddToCart.js";
 
-    cartIcon.addEventListener('click', () => {
-        cartModal.style.display = 'block'; // Use 'block' to show the modal
+export function openCartModal() {
+    const cartModal = document.getElementById('cart-modal');
+    const closeCart = document.getElementById('close-cart');
+    const openCartBtn = document.querySelector('.cart-icon');
+
+    if (!cartModal || !closeCart || !openCartBtn) {
+        console.warn('Cart modal elements not found, retrying in 100ms');
+        setTimeout(openCartModal, 100);
+        return;
+    }
+
+    openCartBtn.addEventListener('click', () => {
+        cartModal.style.display = 'block';
+        updateCartUI();
     });
 
     closeCart.addEventListener('click', () => {
-        cartModal.style.display = 'none'; // Use 'none' to hide the modal
+        cartModal.style.display = 'none';
     });
 
-    window.addEventListener('click', (event) => {
-        if (event.target === cartModal) {
-            cartModal.style.display = 'none'; // Hide modal when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === cartModal) {
+            cartModal.style.display = 'none';
         }
     });
-
-    //close cart modal on escape key press esc
-    window.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-            cartModal.style.display = 'none'; // Hide modal on Escape key
-        }
-    });
-
 }

@@ -78,7 +78,8 @@
     cursor: pointer;
 }
 
-.cart-count {
+/* Contador do Carrinho */
+#cart-count {
     position: absolute;
     top: -10px;
     right: -10px;
@@ -87,9 +88,36 @@
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    display: flex;
+    display: none; /* Inicialmente escondido */
     justify-content: center;
     align-items: center;
     font-size: 0.7rem;
     font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* Quando tiver itens no carrinho */
+#cart-count:not(:empty) {
+    display: flex;
+    animation: pulse 0.5s ease;
+}
+
+/* Efeito de pulsar quando atualiza */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Efeito visual quando o contador é atualizado */
+#cart-count.counter-update {
+    transform: scale(1.1);
+    background-color: #c0392b;
+}
+
+/* Garante que o contador fique visível mesmo com números grandes */
+#cart-count {
+    min-width: 20px;
+    padding: 0 2px;
+    box-sizing: border-box;
 }
