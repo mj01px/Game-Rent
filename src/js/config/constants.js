@@ -3,6 +3,7 @@ import {openDescriptionModal} from "../modules/Games/GameDescription.js";
 import {openCartModal} from "../modules/Cart/Cart.js";
 import {initializeCart, updateCartUI} from "../modules/Cart/CartUI.js";
 import {games} from "../data/games.js";
+import {initCatalog} from "../modules/Catalog/catalog.js";
 
 /**
  * Loads an HTML partial asynchronously and injects it into the DOM element specified by containerId.
@@ -51,6 +52,8 @@ Promise.all([
 
         // Render the initial state of the cart UI
         updateCartUI();
+
+        initCatalog()
     })
     .catch(err => {
         // Handle any errors in loading the partials
