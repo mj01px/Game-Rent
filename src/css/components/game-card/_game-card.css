@@ -1,53 +1,79 @@
-/* Featured games section with padding and white background */
+/* ===== Featured Section Styles ===== */
+/* Main container for the featured games section */
 .featured {
     padding: 80px 15%;
     background-color: white;
 }
 
-/* Grid layout for game cards, responsive with auto-fill */
-.games-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* flexible columns */
-    gap: 30px;
+/* ===== Carousel Container ===== */
+/* Wrapper for the horizontal carousel and navigation controls */
+.carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
     margin-top: 30px;
+    gap: 15px;
 }
 
+/* Scrollable horizontal carousel holding game cards */
+.games-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 30px;
+    width: 100%;
+    padding: 10px 0;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.games-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+/* ===== Game Card Styles ===== */
 /* Individual game card styling */
 .game-card {
     background-color: white;
     border-radius: 8px;
-    overflow: hidden; /* prevents content overflow */
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* subtle shadow */
-    transition: transform 0.3s, box-shadow 0.3s; /* smooth hover effects */
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    flex: 0 0 calc(25% - 23px); /* 4 cards per row with gap */
+    min-width: 0;
+    scroll-snap-align: start;
 }
 
-/* Hover effect: lift card and intensify shadow */
+/* Hover effect for game cards */
 .game-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Container for game image with fixed height and clipping */
+/* ===== Game Image Container ===== */
+/* Wrapper for game image */
 .game-image {
     position: relative;
     height: 300px;
     overflow: hidden;
 }
 
-/* Image fills container, covers fully */
+/* Image inside the game card */
 .game-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s; /* smooth zoom on hover */
+    transition: transform 0.5s;
 }
 
-/* Zoom effect on image when card hovered */
+/* Zoom effect on image hover */
 .game-card:hover .game-image img {
     transform: scale(1.05);
 }
 
-/* Platform label styling, positioned top-right */
+/* ===== Platform Badges ===== */
+/* Positioning and style for platform labels */
 .platform {
     position: absolute;
     top: 10px;
@@ -59,29 +85,19 @@
     font-weight: bold;
 }
 
-/* Platform-specific background colors */
-.platform.ps5 {
-    background-color: #003087; /* PlayStation blue */
-}
+/* Color variations for each platform */
+.platform.ps5 { background-color: #003087; }
+.platform.xbox { background-color: #107c10; }
+.platform.switch { background-color: #e60012; }
+.platform.pc { background-color: #333; }
 
-.platform.xbox {
-    background-color: #107c10; /* Xbox green */
-}
-
-.platform.switch {
-    background-color: #e60012; /* Nintendo red */
-}
-
-.platform.pc {
-    background-color: #333; /* Neutral dark */
-}
-
-/* Game info container padding */
+/* ===== Game Info Section ===== */
+/* Text content area inside the game card */
 .game-info {
     padding: 20px;
 }
 
-/* Game title with ellipsis for overflow */
+/* Game title */
 .game-info h3 {
     margin-bottom: 10px;
     font-size: 1.2rem;
@@ -90,27 +106,29 @@
     text-overflow: ellipsis;
 }
 
-/* Rating section styling */
+/* ===== Rating Styles ===== */
+/* Container for rating icon and value */
 .game-rating {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    color: #f39c12; /* gold/yellow */
+    color: #f39c12;
 }
 
-/* Rating number styling */
+/* Rating value */
 .game-rating span {
     margin-left: 5px;
-    color: #7f8c8d; /* muted gray */
+    color: #7f8c8d;
     font-size: 0.9rem;
 }
 
-/* Price section margin */
+/* ===== Price Styles ===== */
+/* Pricing section */
 .game-price {
     margin-bottom: 15px;
 }
 
-/* Original price with strikethrough */
+/* Original price (strikethrough) */
 .original-price {
     text-decoration: line-through;
     color: #7f8c8d;
@@ -118,37 +136,44 @@
     margin-right: 10px;
 }
 
-/* Rental price highlighted */
+/* Rental price (highlighted) */
 .rental-price {
     font-weight: bold;
-    color: #2ecc71; /* green */
+    color: #2ecc71;
     font-size: 1.1rem;
 }
 
-/* Button to show description with styling */
+/* ===== Button Styles ===== */
+/* Button to open the game description modal */
 .show-description {
     width: 100%;
     padding: 10px;
-    background-color: #3498db; /* blue */
+    background-color: #3498db;
     color: white;
     border-radius: 4px;
     font-weight: bold;
     transition: background-color 0.3s;
+    cursor: pointer;
+    border: none;
 }
 
-/* Hover effect for description button */
+/* Button hover effect */
 .show-description:hover {
-    background-color: #2980b9; /* darker blue */
+    background-color: #2980b9;
 }
 
-/* No games message styling */
+/* ===== Empty State Message ===== */
+/* Message container when no featured games are available */
 .no-games-message {
-    grid-column: 1 / -1; /* spans all columns */
+    width: 100%;
     text-align: center;
     padding: 40px;
+    background-color: #f8f9fa;
     border-radius: 8px;
+    color: #6c757d;
 }
 
+/* Icon in the empty message */
 .no-games-message i {
     font-size: 2rem;
     color: #ffc107;
@@ -156,9 +181,77 @@
     display: block;
 }
 
+/* Emphasized message text */
 .no-games-message strong {
     display: block;
     font-size: 1.2rem;
     color: #343a40;
     margin: 10px 0;
+}
+
+/* ===== Carousel Controls ===== */
+/* Navigation button (left/right) */
+.carousel-control {
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+/* Hover effect for control buttons */
+.carousel-control:hover {
+    background: #2980b9;
+    transform: scale(1.1);
+}
+
+/* Disabled control style */
+.carousel-control:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+    transform: none;
+    opacity: 0.6;
+}
+
+/* ===== Responsive Adjustments ===== */
+/* 3 cards per row on medium screens */
+@media (max-width: 1200px) {
+    .game-card {
+        flex: 0 0 calc(33.333% - 20px);
+    }
+}
+
+/* 2 cards per row on tablets */
+@media (max-width: 900px) {
+    .featured {
+        padding: 60px 10%;
+    }
+
+    .game-card {
+        flex: 0 0 calc(50% - 15px);
+    }
+}
+
+/* 1 card per row on mobile */
+@media (max-width: 600px) {
+    .featured {
+        padding: 40px 5%;
+    }
+
+    .game-card {
+        flex: 0 0 100%;
+    }
+
+    .carousel-control {
+        width: 35px;
+        height: 35px;
+    }
 }

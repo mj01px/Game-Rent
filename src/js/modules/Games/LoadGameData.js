@@ -1,89 +1,158 @@
 import {games} from "../../data/games.js";
 
 /**
- * Class responsible for loading and rendering game cards
- * into a specified container element in the DOM.
+ * Class responsible for loading and rendering a carousel of featured games
  */
 export class LoadGameData {
-    /**
-     * @param {string} containerSelector - CSS selector of the container where games will be rendered
-     */
     constructor(containerSelector) {
-        // Find container element by selector
+        // Selects the container for the game section
         this.container = document.querySelector(containerSelector);
+        this.currentIndex = 0;       // Current scroll index
+        this.cardsPerView = 4;       // Number of cards visible at once
 
-        // If container doesn't exist, log error and abort
         if (!this.container) {
             console.error('Container not found!');
             return;
         }
 
-        // Trigger initial rendering of game cards
+        // Initial render and event setup
         this.render();
+        this.setupEventListeners();
     }
 
     /**
-     * Renders featured games section based on rating filter.
-     * Hides the section title and shows a placeholder message when no games meet the criteria.
-     * Displays all games with rating >= 4.5 when available.
+     * Renders the featured games into the carousel
      */
     render() {
-        // Get DOM elements
-        const grid = this.container.querySelector('.games-grid');
+        const carouselContainer = this.container.querySelector('.carousel-container');
+        const carousel = this.container.querySelector('.games-carousel');
         const sectionTitle = this.container.querySelector('.section-title');
 
-        // Validate required elements exist
-        if (!grid || !sectionTitle) {
+        if (!carouselContainer || !carousel || !sectionTitle) {
             console.error('Required elements not found in container');
             return;
         }
 
-        // Filter games with minimum 4.5 rating
+        // Filter games by rating (only 4.5+)
         const featuredGames = games.filter(game => game.rating >= 4.5);
 
-        // Handle empty results
         if (featuredGames.length === 0) {
-            // Hide section title and display empty state message
+            // Hide section if no featured games are available
             sectionTitle.style.display = 'none';
-            grid.innerHTML = `
+            carouselContainer.style.display = 'none';
+
+            // Show a message inside the container
+            this.container.innerHTML += `
             <div class="no-games-message">
                 <i class="fas fa-gamepad"></i>
                 <strong>No Featured Games Available</strong>
-                We couldn't find any games with a rating of 4.5 or higher at the moment. 
-                Please check back later or browse our full collection.
+                We couldn't find any games with a rating of 4.5 or higher.
             </div>
-        `;
+            `;
             return;
         }
 
-        // Show section title and render game cards
+        // Show the section and render the game cards
         sectionTitle.style.display = '';
-        grid.innerHTML = featuredGames.map(game => this.createCardHTML(game)).join('');
+        carouselContainer.style.display = 'flex';
+        carousel.innerHTML = featuredGames.map(game => this.createCardHTML(game)).join('');
+
+        this.updateControls(featuredGames.length);
+        this.setupDescriptionButtons();
     }
 
     /**
-     * Generates HTML string for a single game card with rating stars and prices
-     * @param {Object} game - Single game object from the catalog
-     * @returns {string} - HTML markup for the game card
+     * Binds event listeners to carousel navigation buttons
+     */
+    setupEventListeners() {
+        const prevBtn = this.container.querySelector('.carousel-control.prev');
+        const nextBtn = this.container.querySelector('.carousel-control.next');
+
+        prevBtn?.addEventListener('click', () => {
+            this.currentIndex = Math.max(this.currentIndex - 1, 0);
+            this.scrollCarousel();
+        });
+
+        nextBtn?.addEventListener('click', () => {
+            const carousel = this.container.querySelector('.games-carousel');
+            const maxIndex = Math.ceil(carousel.children.length / this.cardsPerView) - 1;
+            this.currentIndex = Math.min(this.currentIndex + 1, maxIndex);
+            this.scrollCarousel();
+        });
+    }
+
+    /**
+     * Enables or disables navigation buttons based on current index
+     * @param {number} totalCards - Total number of cards in the carousel
+     */
+    updateControls(totalCards) {
+        const prevBtn = this.container.querySelector('.carousel-control.prev');
+        const nextBtn = this.container.querySelector('.carousel-control.next');
+
+        if (prevBtn && nextBtn) {
+            prevBtn.disabled = this.currentIndex <= 0;
+            nextBtn.disabled = this.currentIndex >= Math.ceil(totalCards / this.cardsPerView) - 1;
+        }
+    }
+
+    /**
+     * Scrolls the carousel based on current index
+     */
+    scrollCarousel() {
+        const carousel = this.container.querySelector('.games-carousel');
+        const card = carousel.querySelector('.game-card');
+        if (!card) return;
+
+        const cardWidth = card.offsetWidth + 30; // Add margin/gap
+        carousel.scrollTo({
+            left: this.currentIndex * this.cardsPerView * cardWidth,
+            behavior: 'smooth'
+        });
+
+        this.updateControls(carousel.children.length);
+    }
+
+    /**
+     * Attaches click events to description buttons on each game card
+     */
+    setupDescriptionButtons() {
+        const buttons = this.container.querySelectorAll('.show-description');
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const gameId = e.target.dataset.id;
+                this.showGameDescription(gameId);
+            });
+        });
+    }
+
+    /**
+     * Displays game description (placeholder - customize as needed)
+     * @param {string} gameId - ID of the game to show description for
+     */
+    showGameDescription(gameId) {
+        console.log(`Showing description for game ${gameId}`);
+        // TODO: Implement modal or tooltip behavior
+    }
+
+    /**
+     * Generates the HTML structure for a single game card
+     * @param {Object} game - Game data object
+     * @returns {string} - HTML string of the card
      */
     createCardHTML(game) {
-        // Calculate number of full stars and whether to show a half star
         const fullStars = Math.floor(game.rating);
         const halfStar = game.rating % 1 >= 0.5;
 
-        // Build star icons HTML: full stars, optional half star, and empty stars up to 5 total
         let starsHTML = '';
         for (let i = 0; i < fullStars; i++) {
-            starsHTML += '<i class="fas fa-star"></i>'; // full star icon
+            starsHTML += '<i class="fas fa-star"></i>';
         }
-        if (halfStar) starsHTML += '<i class="fas fa-star-half-alt"></i>'; // half star icon
+        if (halfStar) starsHTML += '<i class="fas fa-star-half-alt"></i>';
 
-        // Count stars added so far (full + half), fill rest with empty stars
         for (let i = starsHTML.match(/fa-star/g)?.length || 0; i < 5; i++) {
-            starsHTML += '<i class="far fa-star"></i>'; // empty star icon
+            starsHTML += '<i class="far fa-star"></i>';
         }
 
-        // Return complete card markup with game info, image, rating, prices and description button
         return `
         <div class="game-card" id="game-${game.id}">
             <div class="game-image">
@@ -103,6 +172,6 @@ export class LoadGameData {
                 <button class="show-description" data-id="${game.id}">Show Description</button>
             </div>
         </div>
-    `;
+        `;
     }
 }

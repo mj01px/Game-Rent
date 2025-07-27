@@ -1,10 +1,25 @@
-<!-- Featured Games Section -->
+<!-- ===== Featured Games Section ===== -->
 <section class="featured" id="featured">
-
-    <!-- Section title -->
+    <!-- Section title for accessibility and UX -->
     <h2 class="section-title">Featured Games</h2>
 
-    <!-- Container where game cards will be rendered dynamically -->
-    <div class="games-grid"></div>
+    <!-- Container that holds the carousel and its navigation buttons -->
+    <div class="carousel-container">
 
+        <!-- Left arrow button to scroll the carousel to previous games -->
+        <!-- Starts disabled when at the beginning of the list -->
+        <button class="carousel-control prev" aria-label="Previous games" disabled>
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <!-- Scrollable area where game cards will be injected dynamically via JavaScript -->
+        <div class="games-carousel">
+            <!-- Game cards will be injected here using JS -->
+        </div>
+
+        <!-- Right arrow button to scroll the carousel to next games -->
+        <button class="carousel-control next" aria-label="Next games">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
 </section>

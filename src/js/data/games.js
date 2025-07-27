@@ -47,4 +47,49 @@ export const games = [
         rentalPrice: 0.70,
         description: "A stunning reimagining of the classic RPG. Join Cloud and Avalanche in their fight against Shinra, with breathtaking visuals, deep combat, and an expanded story."
     },
+    {
+        id: 4,
+        name: "Final Fantasy VII Remake",
+        image: "final_fantasy-VII-remake.jpg",
+        platform: "pc",
+        platformName: "PC",
+        rating: 4.7,
+        originalPrice: 1.90,
+        rentalPrice: 0.70,
+        description: "A stunning reimagining of the classic RPG. Join Cloud and Avalanche in their fight against Shinra, with breathtaking visuals, deep combat, and an expanded story."
+    },
+    {
+        id: 4,
+        name: "Final Fantasy VII Remake",
+        image: "final_fantasy-VII-remake.jpg",
+        platform: "pc",
+        platformName: "PC",
+        rating: 4.7,
+        originalPrice: 1.90,
+        rentalPrice: 0.70,
+        description: "A stunning reimagining of the classic RPG. Join Cloud and Avalanche in their fight against Shinra, with breathtaking visuals, deep combat, and an expanded story."
+    },
+    {
+        id: 4,
+        name: "Final Fantasy VII Remake",
+        image: "final_fantasy-VII-remake.jpg",
+        platform: "pc",
+        platformName: "PC",
+        rating: 4.7,
+        originalPrice: 1.90,
+        rentalPrice: 0.70,
+        description: "A stunning reimagining of the classic RPG. Join Cloud and Avalanche in their fight against Shinra, with breathtaking visuals, deep combat, and an expanded story."
+    },
+    {
+        id: 4,
+        name: "Final Fantasy VII Remake",
+        image: "final_fantasy-VII-remake.jpg",
+        platform: "pc",
+        platformName: "PC",
+        rating: 4.7,
+        originalPrice: 1.90,
+        rentalPrice: 0.70,
+        description: "A stunning reimagining of the classic RPG. Join Cloud and Avalanche in their fight against Shinra, with breathtaking visuals, deep combat, and an expanded story."
+    },
+
 ];
