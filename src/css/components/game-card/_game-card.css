@@ -1,46 +1,53 @@
-/* Jogos em Destaque */
+/* Featured games section with padding and white background */
 .featured {
     padding: 80px 15%;
     background-color: white;
 }
 
+/* Grid layout for game cards, responsive with auto-fill */
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* flexible columns */
     gap: 30px;
     margin-top: 30px;
 }
 
+/* Individual game card styling */
 .game-card {
     background-color: white;
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden; /* prevents content overflow */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* subtle shadow */
+    transition: transform 0.3s, box-shadow 0.3s; /* smooth hover effects */
 }
 
+/* Hover effect: lift card and intensify shadow */
 .game-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Container for game image with fixed height and clipping */
 .game-image {
     position: relative;
     height: 300px;
     overflow: hidden;
 }
 
+/* Image fills container, covers fully */
 .game-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s;
+    transition: transform 0.5s; /* smooth zoom on hover */
 }
 
+/* Zoom effect on image when card hovered */
 .game-card:hover .game-image img {
     transform: scale(1.05);
 }
 
+/* Platform label styling, positioned top-right */
 .platform {
     position: absolute;
     top: 10px;
@@ -52,26 +59,29 @@
     font-weight: bold;
 }
 
+/* Platform-specific background colors */
 .platform.ps5 {
-    background-color: #003087;
+    background-color: #003087; /* PlayStation blue */
 }
 
 .platform.xbox {
-    background-color: #107c10;
+    background-color: #107c10; /* Xbox green */
 }
 
 .platform.switch {
-    background-color: #e60012;
+    background-color: #e60012; /* Nintendo red */
 }
 
 .platform.pc {
-    background-color: #333;
+    background-color: #333; /* Neutral dark */
 }
 
+/* Game info container padding */
 .game-info {
     padding: 20px;
 }
 
+/* Game title with ellipsis for overflow */
 .game-info h3 {
     margin-bottom: 10px;
     font-size: 1.2rem;
@@ -80,23 +90,27 @@
     text-overflow: ellipsis;
 }
 
+/* Rating section styling */
 .game-rating {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    color: #f39c12;
+    color: #f39c12; /* gold/yellow */
 }
 
+/* Rating number styling */
 .game-rating span {
     margin-left: 5px;
-    color: #7f8c8d;
+    color: #7f8c8d; /* muted gray */
     font-size: 0.9rem;
 }
 
+/* Price section margin */
 .game-price {
     margin-bottom: 15px;
 }
 
+/* Original price with strikethrough */
 .original-price {
     text-decoration: line-through;
     color: #7f8c8d;
@@ -104,22 +118,47 @@
     margin-right: 10px;
 }
 
+/* Rental price highlighted */
 .rental-price {
     font-weight: bold;
-    color: #2ecc71;
+    color: #2ecc71; /* green */
     font-size: 1.1rem;
 }
 
+/* Button to show description with styling */
 .show-description {
     width: 100%;
     padding: 10px;
-    background-color: #3498db;
+    background-color: #3498db; /* blue */
     color: white;
     border-radius: 4px;
     font-weight: bold;
     transition: background-color 0.3s;
 }
 
+/* Hover effect for description button */
 .show-description:hover {
-    background-color: #2980b9;
+    background-color: #2980b9; /* darker blue */
+}
+
+/* No games message styling */
+.no-games-message {
+    grid-column: 1 / -1; /* spans all columns */
+    text-align: center;
+    padding: 40px;
+    border-radius: 8px;
+}
+
+.no-games-message i {
+    font-size: 2rem;
+    color: #ffc107;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.no-games-message strong {
+    display: block;
+    font-size: 1.2rem;
+    color: #343a40;
+    margin: 10px 0;
 }

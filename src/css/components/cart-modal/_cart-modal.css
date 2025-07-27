@@ -1,55 +1,52 @@
-/*
-  CART MODAL STYLES - RIGHT SIDE VERSION
-*/
-
-/* Modal overlay container */
+/* Modal overlay container: fullscreen dark semi-transparent background when cart opens */
 .cart-modal {
     position: fixed;
     top: 0;
     right: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: none;
-    justify-content: flex-end; /* Alterado para flex-end para alinhar à direita */
-    align-items: stretch; /* Garante que o conteúdo ocupe toda a altura */
-    z-index: 9999;
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.7);  /* semi-transparent black */
+    display: none;                   /* hidden by default */
+    justify-content: flex-end;       /* align cart panel to the right */
+    align-items: stretch;            /* make content take full height */
+    z-index: 9999;                   /* on top of everything */
+    backdrop-filter: blur(5px);      /* blur background effect */
 }
 
-/* The actual cart panel */
+/* Cart panel itself, sliding from the right */
 .cart-content {
-    width: 450px;
-    height: 100%;
-    background: #ffffff;
+    width: 450px;                    /* fixed width */
+    height: 100%;                   /* full viewport height */
+    background: #ffffff;             /* white background */
     padding: 0;
-    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
-    transform: translateX(100%); /* Começa fora da tela à direita */
-    animation: slideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3); /* subtle shadow */
+    transform: translateX(100%);    /* starts offscreen right */
+    animation: slideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards; /* slide in animation */
     display: flex;
     flex-direction: column;
-    margin-left: auto; /* Garante que fique colado à direita */
+    margin-left: auto;              /* stick to the right */
 }
 
-/* Adicione esta animação se ainda não existir */
+/* Animation to slide the cart panel in from the right */
 @keyframes slideIn {
     from { transform: translateX(100%); }
     to { transform: translateX(0); }
 }
 
-/* Header */
+/* Cart header container */
 .cart-header {
     position: relative;
     padding: 20px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0; /* subtle bottom border */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 60px;
 }
 
+/* Cart title */
 .cart-header h3 {
-    margin: 5px 20px 5px 40px;
+    margin: 5px 20px 5px 40px;  /* spacing */
     font-size: 1.6rem;
     color: #222;
     font-weight: 700;
@@ -58,6 +55,7 @@
     position: relative;
 }
 
+/* Decorative blue line under the cart title */
 .cart-header h3::after {
     content: "";
     display: block;
@@ -68,29 +66,30 @@
     border-radius: 3px;
 }
 
-/* Close button - mantido à esquerda */
+/* Close button positioned on the left */
 .close-cart {
     position: absolute;
     color: #888;
     font-size: 28px;
     cursor: pointer;
     transition: all 0.2s;
-    left: 20px; /* Botão na esquerda */
+    left: 20px; /* left aligned */
     margin: auto;
 }
 
 .close-cart:hover {
-    color: #333;
+    color: #333; /* darker on hover */
 }
 
-/* Items */
+/* Container for cart items list */
 .cart-items {
-    flex: 1;
-    overflow-y: auto;
+    flex: 1;                     /* fills remaining vertical space */
+    overflow-y: auto;            /* vertical scroll if content overflows */
     padding: 0 20px;
     margin: 0;
 }
 
+/* Empty cart message styling */
 .empty-cart {
     text-align: center;
     padding: 3rem 2rem;
@@ -101,9 +100,10 @@
     justify-content: center;
     min-height: 300px;
     height: 80%;
-    animation: fadeIn 0.5s ease-out forwards;
+    animation: fadeIn 0.5s ease-out forwards; /* fade-in effect */
 }
 
+/* Animated sad face icon for empty cart */
 .empty-cart::before {
     content: ":(";
     font-size: 5rem;
@@ -112,13 +112,14 @@
     animation: floatIcon 2s ease-in-out infinite alternate;
 }
 
-/* Footer */
+/* Cart footer container (total + checkout button) */
 .cart-total {
     padding: 20px;
     border-top: 1px solid #f0f0f0;
     transition: all 0.3s ease;
 }
 
+/* Hidden state for the footer (used when cart is empty) */
 .cart-footer-hidden {
     opacity: 0;
     height: 0;
@@ -128,6 +129,7 @@
     overflow: hidden;
 }
 
+/* Total price text styling */
 .cart-total span {
     display: block;
     text-align: right;
@@ -137,10 +139,11 @@
     font-size: 18px;
 }
 
+/* Checkout button styles */
 .checkout-btn {
     width: 100%;
     padding: 15px;
-    background: #509140;
+    background: #509140;       /* green */
     color: white;
     border: none;
     border-radius: 6px;
@@ -153,22 +156,23 @@
 }
 
 .checkout-btn:hover {
-    background: #468536;
-    transform: translateY(-2px);
+    background: #468536;       /* darker green on hover */
+    transform: translateY(-2px); /* subtle lift */
 }
 
-/* Animations */
+/* Animation for floating icon (used in empty cart) */
 @keyframes floatIcon {
     0% { transform: translateY(-20px) rotate(-5deg); }
     100% { transform: translateY(0) rotate(5deg); }
 }
 
+/* Simple fade in */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-/* Estilos para os itens do carrinho */
+/* Each cart item container */
 .cart-item {
     display: flex;
     gap: 15px;
@@ -177,6 +181,7 @@
     align-items: center;
 }
 
+/* Product image in the cart */
 .cart-item img {
     width: 80px;
     height: 100px;
@@ -184,15 +189,18 @@
     border-radius: 4px;
 }
 
+/* Container for item details */
 .cart-item-details {
     flex: 1;
 }
 
+/* Product title */
 .cart-item-details h4 {
     margin: 0 0 5px 0;
     font-size: 1.1rem;
 }
 
+/* Controls for quantity and remove */
 .cart-item-controls {
     display: flex;
     align-items: center;
@@ -200,6 +208,7 @@
     margin-top: 10px;
 }
 
+/* Buttons to adjust quantity */
 .quantity-btn {
     width: 25px;
     height: 25px;
@@ -210,27 +219,29 @@
     font-weight: bold;
 }
 
+/* Remove item button */
 .remove-btn {
     background: none;
     border: none;
-    color: #e74c3c;
+    color: #e74c3c; /* warning red */
     cursor: pointer;
     margin-left: 10px;
     font-size: 0.9rem;
 }
 
+/* Price text for each item */
 .cart-item-price {
     font-weight: bold;
     min-width: 80px;
     text-align: right;
 }
 
-/* Notificação */
+/* Notification popup when adding items */
 .cart-notification {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #27ae60;
+    background: #27ae60; /* success green */
     color: white;
     padding: 12px 20px;
     border-radius: 4px;
@@ -239,15 +250,18 @@
     animation: slideIn 0.3s ease-out;
 }
 
+/* Fade out animation for notification */
 .cart-notification.fade-out {
     animation: fadeOut 0.5s ease-out forwards;
 }
 
+/* Slide in animation for notification */
 @keyframes slideIn {
     from { transform: translateX(100%); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
 }
 
+/* Fade out with slide down for notification */
 @keyframes fadeOut {
     to { opacity: 0; transform: translateY(20px); }
 }

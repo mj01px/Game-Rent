@@ -1,4 +1,5 @@
-/* Reset e Estilos Globais */
+/* Reset and Global Styles */
+/* Remove default margin/padding and set consistent box-sizing and font */
 * {
     margin: 0;
     padding: 0;
@@ -6,33 +7,39 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Basic body setup: light background, default text color, and line height */
 body {
     background-color: #f5f5f5;
     color: #333;
     line-height: 1.6;
 }
 
+/* Remove underline on links and inherit text color */
 a {
     text-decoration: none;
     color: inherit;
 }
 
+/* Remove bullets from lists */
 ul {
     list-style: none;
 }
 
+/* Buttons get pointer cursor and no borders/outlines by default */
 button {
     cursor: pointer;
     border: none;
     outline: none;
 }
 
+/* Central container with max width and horizontal padding */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
+/* Section title style: centered, margin below, big font, and dark color */
 .section-title {
     text-align: center;
     margin-bottom: 40px;
@@ -41,6 +48,7 @@ button {
     position: relative;
 }
 
+/* Decorative underline below section titles, centered, blue bar */
 .section-title::after {
     content: '';
     display: block;

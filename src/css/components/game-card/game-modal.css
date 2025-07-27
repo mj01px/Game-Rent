@@ -1,58 +1,61 @@
-/* Overlay base */
+/* Overlay base: fullscreen dark background with fade-in/out */
 .modal-overlay {
     position: fixed;
-    inset: 0;
+    inset: 0; /* shorthand for top/right/bottom/left: 0 */
     background-color: rgba(0, 0, 0, 0.75);
     display: flex;
     align-items: center;
     justify-content: center;
-    visibility: hidden;
+    visibility: hidden; /* hidden by default */
     opacity: 0;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    z-index: 1000;
+    z-index: 1000; /* above most stuff */
 }
 
+/* Overlay active state: make visible and fade in */
 .modal-overlay.active {
     visibility: visible;
     opacity: 1;
 }
 
-/* Modal card (alinhado ao estilo dos game cards) */
+/* Modal container: white card, rounded corners, shadow, slide up animation */
 .modal {
     background: white;
     border-radius: 8px;
     width: 90%;
     max-width: 700px;
     max-height: 90vh;
-    overflow-y: auto;
+    overflow-y: auto; /* scroll if content is tall */
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     position: relative;
-    transform: translateY(20px);
+    transform: translateY(20px); /* start slightly below */
     transition: transform 0.3s ease;
 }
 
+/* Modal slide-up effect on active overlay */
 .modal-overlay.active .modal {
     transform: translateY(0);
 }
 
-/* Botão de fechar */
+/* Close button: top right corner, simple icon style */
 .modal__close {
     position: absolute;
-    top: 0px;
+    top: 0;
     right: 15px;
     background: none;
     border: none;
     font-size: 1.5rem;
     color: #7f8c8d;
     cursor: pointer;
-    z-index: 10;
+    z-index: 10; /* above modal content */
 }
 
+/* Close button hover: get red to signal danger */
 .modal__close:hover {
     color: #e74c3c;
 }
 
-/* Layout do conteúdo */
+/* Modal content wrapper: vertical stack with padding and spacing */
 .modal__content {
     display: flex;
     flex-direction: column;
@@ -60,6 +63,7 @@
     gap: 20px;
 }
 
+/* Image container: fixed height, rounded corners, hides overflow */
 .modal__image-wrapper {
     position: relative;
     width: 100%;
@@ -68,6 +72,7 @@
     border-radius: 8px;
 }
 
+/* Image inside modal: fully covers container, smooth scale transition */
 .modal__image {
     width: 100%;
     height: 100%;
@@ -75,6 +80,7 @@
     transition: transform 0.5s;
 }
 
+/* Platform badge: top-right corner on image, colored by platform */
 .modal__platform-badge {
     position: absolute;
     top: 10px;
@@ -86,29 +92,20 @@
     font-weight: bold;
 }
 
-.modal__platform-badge.ps5 {
-    background-color: #003087;
-}
+/* Platform badge colors for PS5, Xbox, Switch, PC */
+.modal__platform-badge.ps5 { background-color: #003087; }
+.modal__platform-badge.xbox { background-color: #107c10; }
+.modal__platform-badge.switch { background-color: #e60012; }
+.modal__platform-badge.pc { background-color: #333; }
 
-.modal__platform-badge.xbox {
-    background-color: #107c10;
-}
-
-.modal__platform-badge.switch {
-    background-color: #e60012;
-}
-
-.modal__platform-badge.pc {
-    background-color: #333;
-}
-
-/* Infos do jogo */
+/* Modal info: stacked column with spacing */
 .modal__info {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
+/* Title with ellipsis for overflow */
 .modal__title {
     font-size: 1.2rem;
     margin: 0;
@@ -117,6 +114,7 @@
     text-overflow: ellipsis;
 }
 
+/* Rating: flex row, gold color stars, gray text for count */
 .modal__rating {
     display: flex;
     align-items: center;
@@ -129,17 +127,19 @@
     font-size: 0.9rem;
 }
 
+/* Description text: smaller, gray, easy to read */
 .modal__desc {
     font-size: 0.95rem;
     color: #555;
     line-height: 1.6;
 }
 
-/* Preços */
+/* Price group: some margin on top */
 .modal__price-group {
     margin-top: 10px;
 }
 
+/* Original price: strikethrough and gray */
 .modal__price--original {
     text-decoration: line-through;
     color: #7f8c8d;
@@ -147,13 +147,14 @@
     margin-right: 10px;
 }
 
+/* Rental price: bold, greenish to highlight */
 .modal__price--rental {
     font-weight: bold;
     color: #2ecc71;
     font-size: 1.1rem;
 }
 
-/* Botão de ação (padronizado com .show-description) */
+/* Action button: full width, blue background, white text, rounded corners */
 .modal__action-btn {
     width: 100%;
     padding: 10px;
@@ -167,22 +168,25 @@
     cursor: pointer;
 }
 
+/* Button hover: darker blue */
 .modal__action-btn:hover {
     background-color: #2980b9;
 }
 
+/* Responsive layout: on tablets+ show content side by side */
 @media (min-width: 768px) {
     .modal__content {
         flex-direction: row;
     }
 
+    /* Image and info share equal width */
     .modal__image-wrapper,
     .modal__info {
         flex: 1;
     }
 
     .modal__image-wrapper {
-        height: 300px; /* fixado */
+        height: 300px; /* fixed height */
         max-height: 300px;
     }
 }

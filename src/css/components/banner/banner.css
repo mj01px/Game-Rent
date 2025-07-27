@@ -1,8 +1,7 @@
-/* Hero Section */
+/* Hero Section - main banner with dark overlay and centered content */
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
     background-size: cover;
-    background-position: center;
     height: 500px;
     display: flex;
     align-items: center;
@@ -10,22 +9,26 @@
     text-align: center;
 }
 
+/* Centered content wrapper with max width and horizontal padding */
 .hero-content {
     max-width: 800px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
+/* Main headline styles */
 .hero h1 {
     font-size: 3rem;
     margin-bottom: 20px;
 }
 
+/* Subheadline styles */
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 30px;
 }
 
+/* Call-to-action button styling */
 .cta-btn {
     background-color: #3498db;
     color: white;
@@ -35,10 +38,12 @@
     transition: background-color 0.3s;
 }
 
+/* Hover effect for CTA button */
 .cta-btn:hover {
     background-color: #2980b9;
 }
 
+/* Small devices (phones) responsiveness */
 @media (max-width: 576px) {
     .hero {
         height: 350px;
@@ -56,11 +61,13 @@
         padding: 10px 20px;
     }
 
+    /* Footer grid layout becomes single column */
     .footer-container {
         grid-template-columns: 1fr;
     }
 }
 
+/* Medium devices (tablets) responsiveness */
 @media (max-width: 768px) {
     .hero {
         height: 400px;
@@ -75,13 +82,17 @@
     }
 }
 
-/* Responsividade */
+/* Larger tablets and small desktops responsiveness */
 @media (max-width: 992px) {
+    /* Hide navbar links on smaller screens, probably for hamburger menu */
     .navbar-links {
         display: none;
     }
 
+    /* Slightly smaller hero headline */
     .hero h1 {
         font-size: 2.5rem;
     }
 }
+
+

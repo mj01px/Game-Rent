@@ -1,5 +1,4 @@
-
-/* Navbar */
+/* Navbar: sticky top bar with dark background and subtle shadow */
 .navbar {
     background-color: #2c3e50;
     color: white;
@@ -10,6 +9,7 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Container inside navbar to align content with max width and horizontal padding */
 .navbar-container {
     display: flex;
     justify-content: space-between;
@@ -19,36 +19,43 @@
     padding: 0 20px;
 }
 
+/* Logo styling: bigger, bold and white */
 .logo {
     font-size: 1.8rem;
     font-weight: bold;
     color: white;
 }
 
+/* Accent color on part of the logo */
 .logo span {
     color: #3498db;
 }
 
+/* Nav links container: horizontal flex with spacing */
 .navbar-links ul {
     display: flex;
     gap: 25px;
 }
 
+/* Nav links style: semi-bold and smooth color transition */
 .navbar-links a {
     font-weight: 500;
     transition: color 0.3s;
 }
 
+/* Nav link hover effect: change to accent blue */
 .navbar-links a:hover {
     color: #3498db;
 }
 
+/* Container for buttons and icons on the right */
 .navbar-actions {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
+/* Buttons style: transparent background, white text, padding and smooth transition */
 .search-btn, .login-btn {
     background: transparent;
     color: white;
@@ -57,28 +64,32 @@
     transition: all 0.3s;
 }
 
+/* Search button tweak: bigger icon size, smaller padding */
 .search-btn {
     font-size: 1.2rem;
     padding: 5px;
 }
 
+/* Login button style: white border and rounded corners */
 .login-btn {
     border: 1px solid white;
     border-radius: 4px;
 }
 
+/* Login hover: invert colors for clear feedback */
 .login-btn:hover {
     background-color: white;
     color: #2c3e50;
 }
 
+/* Cart icon styling: relative positioning for badge, pointer cursor */
 .cart-icon {
     position: relative;
     font-size: 1.2rem;
     cursor: pointer;
 }
 
-/* Contador do Carrinho */
+/* Cart counter badge: red circle, positioned top-right, hidden by default */
 #cart-count {
     position: absolute;
     top: -10px;
@@ -88,7 +99,7 @@
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    display: none; /* Inicialmente escondido */
+    display: none; /* Hidden initially */
     justify-content: center;
     align-items: center;
     font-size: 0.7rem;
@@ -96,26 +107,26 @@
     transition: all 0.3s ease;
 }
 
-/* Quando tiver itens no carrinho */
+/* Show counter and pulse animation when it has value */
 #cart-count:not(:empty) {
     display: flex;
     animation: pulse 0.5s ease;
 }
 
-/* Efeito de pulsar quando atualiza */
+/* Pulse animation: scale up and down */
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.2); }
     100% { transform: scale(1); }
 }
 
-/* Efeito visual quando o contador é atualizado */
+/* Visual feedback for counter update: slight scale and darker red */
 #cart-count.counter-update {
     transform: scale(1.1);
     background-color: #c0392b;
 }
 
-/* Garante que o contador fique visível mesmo com números grandes */
+/* Ensure counter is visible and padded even with larger numbers */
 #cart-count {
     min-width: 20px;
     padding: 0 2px;

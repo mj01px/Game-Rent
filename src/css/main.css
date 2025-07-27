@@ -1,12 +1,26 @@
+/* Import reset styles to normalize browser defaults */
 @import url('base/_reset.css');
+
+/* Import styles for the banner component */
 @import url('components/banner/banner.css');
+
+/* Import styles for the cart modal component */
 @import url('components/cart-modal/_cart-modal.css');
+
+/* Import styles for the category component */
 @import url('components/category/category.css');
+
+/* Import styles for the game card component */
 @import url('components/game-card/_game-card.css');
+
+/* Import styles for the navbar component */
 @import url('components/navbar/_navbar.css');
+
+/* Import styles for the footer layout */
 @import url('layout/_footer.css');
+
+/* Import styles for the 'how it works' layout section */
 @import url('layout/how-it-works.css');
+
+/* Import styles for the game modal component inside game-card */
 @import url('components/game-card/game-modal.css');
-
-
-
