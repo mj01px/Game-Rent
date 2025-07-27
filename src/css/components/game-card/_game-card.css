@@ -86,7 +86,7 @@
 }
 
 /* Color variations for each platform */
-.platform.ps5 { background-color: #003087; }
+.platform.playstation { background-color: #003087; }
 .platform.xbox { background-color: #107c10; }
 .platform.switch { background-color: #e60012; }
 .platform.pc { background-color: #333; }

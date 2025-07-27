@@ -8,7 +8,7 @@ export class LoadGameData {
         // Selects the container for the game section
         this.container = document.querySelector(containerSelector);
         this.currentIndex = 0;       // Current scroll index
-        this.cardsPerView = 4;       // Number of cards visible at once
+        this.cardsPerView = 3;       // Number of cards visible at once
 
         if (!this.container) {
             console.error('Container not found!');

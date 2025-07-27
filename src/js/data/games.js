@@ -1,95 +1,159 @@
 // Array of game objects representing the catalog
 export const games = [
     {
-        id: 1,                           // Unique identifier
-        name: "God of War: Ragnarok",   // Game title
-        image: "god_of_war-ragnarok.jpg", // Image filename (used to load cover image)
-        platform: "ps5",                // Platform CSS class (for styling badges, etc.)
-        platformName: "PS5",            // Display name of the platform
-        rating: 4.5,                    // Average user rating (out of 5)
-        originalPrice: 3.29,            // Original purchase price in USD
-        rentalPrice: 1.20,              // Weekly rental price in USD
-        category: ["action", "adventure"],          // Game category (used for filtering)
-        description: "The epic continuation of Kratos and Atreus' journey through a Norse world filled with gods and monsters. Unravel the secrets of Ragnarök in this action-packed adventure." // Game description
+        "id": 1,
+        "name": "God of War: Ragnarok",
+        "image": "god_of_war-ragnarok.jpg",
+        "platform": "playstation",
+        "platformName": "PS5",
+        "rating": 4.6,
+        "originalPrice": 3.29,
+        "rentalPrice": 1.20,
+        "category": ["action", "adventure"],
+        "description": "The epic continuation of Kratos and Atreus' journey through a Norse world filled with gods and monsters. Unravel the secrets of Ragnarök in this action-packed adventure."
     },
     {
-        id: 2,
-        name: "Halo Infinite",
-        image: "halo-infinite.jpg",
-        platform: "xbox",
-        platformName: "XBOX",
-        rating: 4.5,
-        originalPrice: 2.30,
-        rentalPrice: 0.90,
-        category: ["fps", "adventure"],
-        description: "Master Chief returns in this thrilling chapter of the Halo saga. Experience expansive combat, a gripping story, and the iconic multiplayer that defined a generation."
+        "id": 2,
+        "name": "Halo Infinite",
+        "image": "halo-infinite.jpg",
+        "platform": "xbox",
+        "platformName": "XBOX",
+        "rating": 4.2,
+        "originalPrice": 2.30,
+        "rentalPrice": 0.90,
+        "category": ["fps", "adventure"],
+        "description": "Master Chief returns in this thrilling chapter of the Halo saga. Experience expansive combat, a gripping story, and the iconic multiplayer that defined a generation."
     },
     {
-        id: 3,
-        name: "The Legend of Zelda: Breath of the Wild",
-        image: "zelda_btw.jpg",
-        platform: "switch",
-        platformName: "SWITCH",
-        rating: 4.8,
-        originalPrice: 2.30,
-        rentalPrice: 0.90,
-        category: ["fps", "adventure"],
-        description: "Explore a vast open world as Link in this revolutionary Zelda adventure. Solve puzzles, battle enemies, and uncover the mysteries of Hyrule in a game that redefines freedom."
+        "id": 3,
+        "name": "The Legend of Zelda: Breath of the Wild",
+        "image": "zelda_btw.jpg",
+        "platform": "switch",
+        "platformName": "SWITCH",
+        "rating": 4.1,
+        "originalPrice": 2.30,
+        "rentalPrice": 0.90,
+        "category": ["adventure", "action"],
+        "description": "Explore a vast open world as Link in this revolutionary Zelda adventure. Solve puzzles, battle enemies, and uncover the mysteries of Hyrule in a game that redefines freedom."
     },
     {
-        id: 4,
-        name: "Final Fantasy VII Remake",
-        image: "final_fantasy-VII-remake.jpg",
-        platform: "pc",
-        platformName: "PC",
-        rating: 4.7,
-        originalPrice: 1.90,
-        rentalPrice: 0.70,
-        description: "A stunning reimagining of the classic RPG. Join Cloud and Avalanche in their fight against Shinra, with breathtaking visuals, deep combat, and an expanded story."
+        "id": 4,
+        "name": "Final Fantasy VII Remake",
+        "image": "final_fantasy-VII-remake.jpg",
+        "platform": "pc",
+        "platformName": "PC",
+        "rating": 4.4,
+        "originalPrice": 1.90,
+        "rentalPrice": 0.70,
+        "category": ["rpg", "action"],
+        "description": "A stunning reimagining of the classic RPG. Join Cloud and Avalanche in their fight against Shinra, with breathtaking visuals, deep combat, and an expanded story."
     },
     {
-        id: 4,
-        name: "Final Fantasy VII Remake",
-        image: "final_fantasy-VII-remake.jpg",
-        platform: "pc",
-        platformName: "PC",
-        rating: 4.7,
-        originalPrice: 1.90,
-        rentalPrice: 0.70,
-        description: "A stunning reimagining of the classic RPG. Join Cloud and Avalanche in their fight against Shinra, with breathtaking visuals, deep combat, and an expanded story."
+        "id": 5,
+        "name": "The Witcher 3: Wild Hunt",
+        "image": "the_witcher_3.jpg",
+        "platform": "pc",
+        "platformName": "PC",
+        "rating": 4.9,
+        "originalPrice": 2.50,
+        "rentalPrice": 0.90,
+        "category": ["rpg", "action"],
+        "description": "An epic open-world RPG where you play as Geralt of Rivia, a monster hunter searching for his adopted daughter in a war-torn fantasy world."
     },
     {
-        id: 4,
-        name: "Final Fantasy VII Remake",
-        image: "final_fantasy-VII-remake.jpg",
-        platform: "pc",
-        platformName: "PC",
-        rating: 4.7,
-        originalPrice: 1.90,
-        rentalPrice: 0.70,
-        description: "A stunning reimagining of the classic RPG. Join Cloud and Avalanche in their fight against Shinra, with breathtaking visuals, deep combat, and an expanded story."
+        "id": 6,
+        "name": "Red Dead Redemption 2",
+        "image": "red_dead_redemption_2.jpg",
+        "platform": "playstation",
+        "platformName": "PS4",
+        "rating": 4.8,
+        "originalPrice": 2.20,
+        "rentalPrice": 0.85,
+        "category": ["action", "adventure"],
+        "description": "An immersive Wild West adventure following Arthur Morgan and the Van der Linde gang as they survive in a rapidly changing America."
     },
     {
-        id: 4,
-        name: "Final Fantasy VII Remake",
-        image: "final_fantasy-VII-remake.jpg",
-        platform: "pc",
-        platformName: "PC",
-        rating: 4.7,
-        originalPrice: 1.90,
-        rentalPrice: 0.70,
-        description: "A stunning reimagining of the classic RPG. Join Cloud and Avalanche in their fight against Shinra, with breathtaking visuals, deep combat, and an expanded story."
+        "id": 7,
+        "name": "Cyberpunk 2077",
+        "image": "cyberpunk_2077.jpg",
+        "platform": "pc",
+        "platformName": "PC",
+        "rating": 3.9,
+        "originalPrice": 1.80,
+        "rentalPrice": 0.65,
+        "category": ["rpg", "fps"],
+        "description": "A futuristic RPG set in Night City, where you play as V, a mercenary navigating a world of cyber-enhanced criminals and corporate intrigue."
     },
     {
-        id: 4,
-        name: "Final Fantasy VII Remake",
-        image: "final_fantasy-VII-remake.jpg",
-        platform: "pc",
-        platformName: "PC",
-        rating: 4.7,
-        originalPrice: 1.90,
-        rentalPrice: 0.70,
-        description: "A stunning reimagining of the classic RPG. Join Cloud and Avalanche in their fight against Shinra, with breathtaking visuals, deep combat, and an expanded story."
+        "id": 8,
+        "name": "Hollow Knight",
+        "image": "hollow_knight.jpg",
+        "platform": "pc",
+        "platformName": "PC",
+        "rating": 4.7,
+        "originalPrice": 0.80,
+        "rentalPrice": 0.30,
+        "category": ["action", "adventure"],
+        "description": "A beautifully hand-drawn metroidvania where you explore the ruined kingdom of Hallownest, battling insects and uncovering dark secrets."
     },
-
+    {
+        "id": 9,
+        "name": "Elden Ring",
+        "image": "elden_ring.jpg",
+        "platform": "playstation",
+        "platformName": "PS5",
+        "rating": 4.8,
+        "originalPrice": 2.60,
+        "rentalPrice": 1.10,
+        "category": ["rpg", "action"],
+        "description": "FromSoftware's open-world masterpiece where you explore the Lands Between, battling monstrous creatures to become the Elden Lord."
+    },
+    {
+        "id": 10,
+        "name": "Stardew Valley",
+        "image": "stardew_valley.jpg",
+        "platform": "pc",
+        "platformName": "PC",
+        "rating": 4.6,
+        "originalPrice": 0.70,
+        "rentalPrice": 0.25,
+        "category": ["adventure"],
+        "description": "A charming farming simulator where you inherit a run-down farm and must restore it while building relationships with the townspeople."
+    },
+    {
+        "id": 11,
+        "name": "Resident Evil Village",
+        "image": "resident_evil_village.jpg",
+        "platform": "xbox",
+        "platformName": "XBOX",
+        "rating": 4.4,
+        "originalPrice": 1.90,
+        "rentalPrice": 0.75,
+        "category": ["action", "adventure"],
+        "description": "Ethan Winters returns in this survival horror game, searching for his kidnapped daughter in a village full of terrifying creatures and dark secrets."
+    },
+    {
+        "id": 12,
+        "name": "Hades",
+        "image": "hades.jpg",
+        "platform": "switch",
+        "platformName": "SWITCH",
+        "rating": 4.8,
+        "originalPrice": 1.20,
+        "rentalPrice": 0.50,
+        "category": ["action", "rpg"],
+        "description": "A rogue-like dungeon crawler where you play as Zagreus, son of Hades, attempting to escape the Underworld while battling mythical foes."
+    },
+    {
+        "id": 13,
+        "name": "EA FC 25",
+        "image": "eafc25.jpg",
+        "platform": "pc",
+        "platformName": "PC",
+        "rating": 4.8,
+        "originalPrice": 3.20,
+        "rentalPrice": 0.60,
+        "category": ["sports"],
+        "description": "A rogue-like dungeon crawler where you play as Zagreus, son of Hades, attempting to escape the Underworld while battling mythical foes."
+    }
 ];
