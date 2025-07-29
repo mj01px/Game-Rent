@@ -121,7 +121,7 @@ export function updateCartUI() {
     // Render cart items markup
     cartItemsContainer.innerHTML = cart.map(item => `
         <div class="cart-item">
-            <img src="../assets/images/games/${item.image}" alt="${item.name}">
+            <img src="../../../assets/images/games/${item.image}" alt="${item.name}">
             <div class="cart-item-details">
                 <h4>${item.name}</h4>
                 <div class="cart-item-controls">

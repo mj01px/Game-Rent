@@ -2,19 +2,19 @@
 @import url('base/_reset.css');
 
 /* Import styles for the banner component */
-@import url('components/banner/banner.css');
+@import url('layout/banner/banner.css');
 
 /* Import styles for the cart modal component */
-@import url('components/cart-modal/_cart-modal.css');
+@import url('components/homepage/cart-modal/_cart-modal.css');
 
 /* Import styles for the category component */
-@import url('components/category/category.css');
+@import url('components/homepage/category/category.css');
 
 /* Import styles for the game card component */
-@import url('components/game-card/_game-card.css');
+@import url('components/homepage/game-card/_game-card.css');
 
 /* Import styles for the navbar component */
-@import url('components/navbar/_navbar.css');
+@import url('layout/navbar/_navbar.css');
 
 /* Import styles for the footer layout */
 @import url('layout/_footer.css');
@@ -23,4 +23,4 @@
 @import url('layout/how-it-works.css');
 
 /* Import styles for the game modal component inside game-card */
-@import url('components/game-card/game-modal.css');
+@import url('components/homepage/game-card/game-modal.css');

@@ -1,38 +1,63 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login - Game Rental</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/components/loginpage/loginpage.css">
 
-<!-- Dynamic <head> content will be injected here via JavaScript -->
-<div id="head-container"></div>
-
+</head>
 <body>
+<div class="container" id="container">
+    <div class="glass-container flex-container">
+        <!-- Sign Up -->
+        <div class="form-container sign-up-container">
+            <form action="#" class="form-wrapper" id="signUpForm">
+                <h1 class="form-title">Create Account</h1>
+                <input type="text" placeholder="Name" class="input-field" id="signupName" />
+                <div class="error-message" id="nameError">Name is required</div>
+                <input type="email" placeholder="Email" class="input-field" id="signupEmail" />
+                <div class="error-message" id="emailError">Valid email is required</div>
+                <input type="password" placeholder="Password" class="input-field" id="signupPassword" />
+                <div class="error-message" id="passwordError">Password must be at least 6 characters</div>
+                <button type="submit" class="btn-primary">Sign Up</button>
+                <p class="text-sm mt-4 text-gray-600 text-center">Already have an account? <button class="text-link" id="signIn">Login</button></p>
+            </form>
+        </div>
 
-<!-- Navigation bar (dynamically loaded) -->
-<div id="navbar-container"></div>
+        <!-- Sign In -->
+        <div class="form-container sign-in-container">
+            <form action="#" class="form-wrapper" id="signInForm">
+                <h1 class="form-title">Sign in</h1>
+                <input type="email" placeholder="Email" class="input-field" id="signinEmail" />
+                <div class="error-message" id="signinEmailError">Valid email is required</div>
+                <input type="password" placeholder="Password" class="input-field" id="signinPassword" />
+                <div class="error-message" id="signinPasswordError">Password is required</div>
+                <button type="submit" class="btn-primary">Sign In</button>
+                <p class="text-sm mt-4 text-gray-600 text-center">Don't have an account? <button class="text-link" id="signUp">Sign Up</button></p>
+            </form>
+        </div>
 
-<!-- Shopping cart modal (hidden by default, opened on user interaction) -->
-<div id="cart-modal-container"></div>
+        <!-- Overlay -->
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1 class="overlay-title">Welcome Back!</h1>
+                    <p class="overlay-text">To keep connected with us please login with your personal info</p>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1 class="overlay-title">Hello, Friend!</h1>
+                    <p class="overlay-text">Enter your personal details and start your journey with us</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- Main banner section (promotional or featured content) -->
-<div id="banner-container"></div>
-
-<!-- Featured games section (dynamically populated with product cards) -->
-<div id="games-container"></div>
-
-<!-- Game description modal (shown when a game card is clicked) -->
-<div id="game-description-container"></div>
-
-<!-- Game category filters or sections -->
-<div id="category-container"></div>
-
-<!-- "How It Works" section to explain the game rental process -->
-<div id="workflow-container"></div>
-
-<!-- Footer section (includes contact, terms, etc.) -->
-<div id="footer-container"></div>
-
-<!-- Main JavaScript entry point (ES module) -->
-<script type="module" src="./../js/app.js"></script>
+<script type="module" src="../js/modules/loginpage/loginpage.js"></script>
 
 </body>
-
 </html>

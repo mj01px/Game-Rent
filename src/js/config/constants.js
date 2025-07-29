@@ -1,9 +1,9 @@
-import {LoadGameData} from "../modules/Games/LoadGameData.js";
-import {openDescriptionModal} from "../modules/Games/GameDescription.js";
-import {openCartModal} from "../modules/Cart/Cart.js";
-import {initializeCart, updateCartUI} from "../modules/Cart/CartUI.js";
+import {LoadGameData} from "../modules/homepage/Games/LoadGameData.js";
+import {openDescriptionModal} from "../modules/homepage/Games/GameDescription.js";
+import {openCartModal} from "../modules/homepage/Cart/Cart.js";
+import {initializeCart, updateCartUI} from "../modules/homepage/Cart/CartUI.js";
 import {games} from "../data/games.js";
-import {initCatalog} from "../modules/Catalog/catalog.js";
+import {initCatalog} from "../modules/homepage/Catalog/catalog.js";
 
 /**
  * Loads an HTML partial asynchronously and injects it into the DOM element specified by containerId.
@@ -25,15 +25,15 @@ export function initContainer(containerId, filePath, basePath) {
 
 // Load all page components asynchronously
 Promise.all([
-    initContainer('head-container', 'head.html', 'partials/shared/'),
-    initContainer('navbar-container', 'navbar.html', 'partials/shared/'),
-    initContainer('banner-container', 'banner.html', 'partials/shared/'),
-    initContainer('games-container', 'game-card.html', 'components/game-card/'),
-    initContainer('category-container', 'game-category.html', 'components/game-category/'),
-    initContainer('workflow-container', 'workflow.html', 'partials/workflow/'),
-    initContainer('footer-container', 'footer.html', 'partials/shared/'),
-    initContainer('cart-modal-container', 'cart-modal.html', 'components/cart-modal/'),
-    initContainer('game-description-container', 'game-modal.html', 'components/game-card/'),
+    initContainer('head-container', 'head.html', '../../partials/shared/'),
+    initContainer('navbar-container', 'navbar.html', '../../partials/shared/'),
+    initContainer('banner-container', 'banner.html', '../../partials/shared/'),
+    initContainer('games-container', 'game-card.html', '../../components/homepage/game-card/'),
+    initContainer('category-container', 'game-category.html', '../../components/homepage/game-category/'),
+    initContainer('workflow-container', 'workflow.html', '../../partials/workflow/'),
+    initContainer('footer-container', 'footer.html', '../../partials/shared/'),
+    initContainer('cart-modal-container', 'cart-modal.html', '../../components/homepage/cart-modal/'),
+    initContainer('game-description-container', 'game-modal.html', '../../components/homepage/game-card/'),
 ])
     .then(() => {
         // After all HTML components are loaded:

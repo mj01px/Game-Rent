@@ -66,7 +66,7 @@ export function openDescriptionModal(games) {
     function updateModalContent(game) {
         document.getElementById('modalGameTitle').textContent = game.name;
         document.getElementById('modalGameDescription').textContent = game.description;
-        document.getElementById('modalGameImage').src = `../assets/images/games/${game.image}`;
+        document.getElementById('modalGameImage').src = `../../../assets/images/games/${game.image}`;
 
         // Set platform text and dynamic class for styling (e.g., PC, Xbox)
         const platformElem = document.getElementById('modalPlatform');

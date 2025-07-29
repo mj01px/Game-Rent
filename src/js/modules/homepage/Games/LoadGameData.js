@@ -1,4 +1,4 @@
-import {games} from "../../data/games.js";
+import {games} from "../../../data/games.js";
 
 /**
  * Class responsible for loading and rendering a carousel of featured games
@@ -120,18 +120,8 @@ export class LoadGameData {
         buttons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const gameId = e.target.dataset.id;
-                this.showGameDescription(gameId);
             });
         });
-    }
-
-    /**
-     * Displays game description (placeholder - customize as needed)
-     * @param {string} gameId - ID of the game to show description for
-     */
-    showGameDescription(gameId) {
-        console.log(`Showing description for game ${gameId}`);
-        // TODO: Implement modal or tooltip behavior
     }
 
     /**
@@ -156,7 +146,7 @@ export class LoadGameData {
         return `
         <div class="game-card" id="game-${game.id}">
             <div class="game-image">
-                <img src="../assets/images/games/${game.image}" alt="${game.name}" loading="lazy">
+                <img src="../../../assets/images/games/${game.image}" alt="${game.name}" loading="lazy">
                 <span class="platform ${game.platform}">${game.platformName}</span>
             </div>
             <div class="game-info">
