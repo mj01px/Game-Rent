@@ -4,7 +4,7 @@ export const games = [
         "id": 1,
         "name": "God of War: Ragnarok",
         "image": "god_of_war-ragnarok.jpg",
-        "platform": "playstation",
+            "platform": "playstation",
         "platformName": "PS5",
         "rating": 4.6,
         "originalPrice": 3.29,
@@ -154,6 +154,6 @@ export const games = [
         "originalPrice": 3.20,
         "rentalPrice": 0.60,
         "category": ["sports"],
-        "description": "A rogue-like dungeon crawler where you play as Zagreus, son of Hades, attempting to escape the Underworld while battling mythical foes."
+        "description": "Experience the latest in football simulation with EA FC 25. Build your dream squad in Ultimate Team, compete in Career Mode, and enjoy hyper-realistic gameplay powered by cutting-edge technology."
     }
 ];
