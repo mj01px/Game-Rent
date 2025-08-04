@@ -102,10 +102,8 @@ body {
 }
 
 .overlay {
-    background: linear-gradient(to right, var(--primary-color) 0%, var(--accent-color) 100%);
-    background-repeat: no-repeat;
+    background: #2c3e50;
     background-size: cover;
-    background-position: 0 0;
     color: #FFFFFF;
     position: relative;
     left: -100%;
