@@ -129,6 +129,11 @@ export class LoadGameData {
      * @param {Object} game - Game data object
      * @returns {string} - HTML string of the card
      */
+    /**
+     * Generates the HTML structure for a single game card
+     * @param {Object} game - Game data object
+     * @returns {string} - HTML string of the card
+     */
     createCardHTML(game) {
         const fullStars = Math.floor(game.rating);
         const halfStar = game.rating % 1 >= 0.5;
@@ -143,25 +148,32 @@ export class LoadGameData {
             starsHTML += '<i class="far fa-star"></i>';
         }
 
+        // Determina as classes e estado do botão baseado na disponibilidade
+        const cardClasses = `game-card ${game.available ? '' : 'unavailable'}`;
+        const buttonHTML = game.available
+            ? `<button class="show-description" data-id="${game.id}">Show Description</button>`
+            : `<button class="show-description" data-id="${game.id}" disabled>Unavailable</button>`;
+
         return `
-        <div class="game-card" id="game-${game.id}">
-            <div class="game-image">
-                <img src="../../../assets/images/games/${game.image}" alt="${game.name}" loading="lazy">
-                <span class="platform ${game.platform}">${game.platformName}</span>
-            </div>
-            <div class="game-info">
-                <h3>${game.name}</h3>
-                <div class="game-rating">
-                    ${starsHTML}
-                    <span>${game.rating.toFixed(1)}</span>
-                </div>
-                <div class="game-price">
-                    <span class="original-price">$${game.originalPrice.toFixed(2)}</span>
-                    <span class="rental-price">$${game.rentalPrice.toFixed(2)}/Week</span>
-                </div>
-                <button class="show-description" data-id="${game.id}">Show Description</button>
-            </div>
+    <div class="${cardClasses}" id="game-${game.id}">
+        <div class="game-image">
+            <img src="../../../assets/images/games/${game.image}" alt="${game.name}" loading="lazy">
+            <span class="platform ${game.platform}">${game.platformName}</span>
+            ${!game.available ? '<span class="unavailable-badge">Unavailable</span>' : ''}
         </div>
-        `;
+        <div class="game-info">
+            <h3>${game.name}</h3>
+            <div class="game-rating">
+                ${starsHTML}
+                <span>${game.rating.toFixed(1)}</span>
+            </div>
+            <div class="game-price">
+                <span class="original-price">$${game.originalPrice.toFixed(2)}</span>
+                <span class="rental-price">$${game.rentalPrice.toFixed(2)}/Week</span>
+            </div>
+            ${buttonHTML}
+        </div>
+    </div>
+    `;
     }
 }

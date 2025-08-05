@@ -112,3 +112,41 @@
     color: #6c757d;
     margin-bottom: 0;
 }
+
+
+/* Adicione ao seu arquivo CSS */
+.game-card.unavailable {
+    opacity: 0.8;
+    filter: grayscale(70%);
+    position: relative;
+}
+
+.game-card.unavailable::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(128, 128, 128, 0.16);
+    z-index: 1;
+}
+
+.unavailable-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff3d3d;
+    color: white;
+    padding: 6px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.show-description:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}

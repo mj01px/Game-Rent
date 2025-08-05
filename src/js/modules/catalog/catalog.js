@@ -1,7 +1,6 @@
 import { games } from '../../data/games.js';
 import { FilterManager } from './filter/filter.js';
 import { PaginationManager } from './pagination/pagination.js';
-import { openDescriptionModal } from "../homepage/Games/GameDescription.js";
 
 export class GameCatalog {
     constructor(containerSelector, options = {}) {
@@ -111,29 +110,36 @@ export class GameCatalog {
             starsHTML += '<i class="far fa-star"></i>';
         }
 
+        // Determina as classes CSS baseado na disponibilidade
+        const cardClasses = `game-card ${game.available ? '' : 'unavailable'}`;
+        const buttonHTML = game.available
+            ? `<button class="show-description" data-id="${game.id}">Show Description</button>`
+            : `<button class="show-description" data-id="${game.id}" disabled>Unavailable</button>`;
+
         return `
-        <div class="game-card" data-id="${game.id}" data-rating="${game.rating}" 
-             data-price="${game.rentalPrice}" data-platform="${game.platform}">
-            <div class="game-image">
-                <img src="${this.config.baseImagePath}${game.image}" 
-                     alt="${game.name}" 
-                     ${this.config.lazyLoad ? 'loading="lazy"' : ''}>
-                <span class="platform ${game.platform}">${game.platformName}</span>
-            </div>
-            <div class="game-info">
-                <h3>${game.name}</h3>
-                <div class="game-rating">
-                    ${starsHTML}
-                    <span>${game.rating.toFixed(1)}</span>
-                </div>
-                <div class="game-price">
-                    <span class="original-price">From: $${game.originalPrice.toFixed(2)}</span>
-                    <span class="rental-price">$${game.rentalPrice.toFixed(2)}/week</span>
-                </div>
-                <button class="show-description" data-id="${game.id}">Show Description</button>
-            </div>
+    <div class="${cardClasses}" data-id="${game.id}" data-rating="${game.rating}" 
+         data-price="${game.rentalPrice}" data-platform="${game.platform}">
+        <div class="game-image">
+            <img src="${this.config.baseImagePath}${game.image}" 
+                 alt="${game.name}" 
+                 ${this.config.lazyLoad ? 'loading="lazy"' : ''}>
+            <span class="platform ${game.platform}">${game.platformName}</span>
+            ${!game.available ? '<span class="unavailable-badge">Unavailable</span>' : ''}
         </div>
-        `;
+        <div class="game-info">
+            <h3>${game.name}</h3>
+            <div class="game-rating">
+                ${starsHTML}
+                <span>${game.rating.toFixed(1)}</span>
+            </div>
+            <div class="game-price">
+                <span class="original-price">From: $${game.originalPrice.toFixed(2)}</span>
+                <span class="rental-price">$${game.rentalPrice.toFixed(2)}/week</span>
+            </div>
+            ${buttonHTML}
+        </div>
+    </div>
+    `;
     }
 
 // No método setupCardInteractions()

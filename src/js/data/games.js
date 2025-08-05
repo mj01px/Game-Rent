@@ -10,7 +10,8 @@ export const games = [
         "originalPrice": 3.29,
         "rentalPrice": 1.20,
         "category": ["action", "adventure"],
-        "description": "The epic continuation of Kratos and Atreus' journey through a Norse world filled with gods and monsters. Unravel the secrets of Ragnarök in this action-packed adventure."
+        "description": "The epic continuation of Kratos and Atreus' journey through a Norse world filled with gods and monsters. Unravel the secrets of Ragnarök in this action-packed adventure.",
+        "available": true
     },
     {
         "id": 2,
@@ -22,7 +23,8 @@ export const games = [
         "originalPrice": 2.30,
         "rentalPrice": 0.90,
         "category": ["fps", "adventure"],
-        "description": "Master Chief returns in this thrilling chapter of the Halo saga. Experience expansive combat, a gripping story, and the iconic multiplayer that defined a generation."
+        "description": "Master Chief returns in this thrilling chapter of the Halo saga. Experience expansive combat, a gripping story, and the iconic multiplayer that defined a generation.",
+        "available": true
     },
     {
         "id": 3,
@@ -34,7 +36,8 @@ export const games = [
         "originalPrice": 2.30,
         "rentalPrice": 0.90,
         "category": ["adventure", "action"],
-        "description": "Explore a vast open world as Link in this revolutionary Zelda adventure. Solve puzzles, battle enemies, and uncover the mysteries of Hyrule in a game that redefines freedom."
+        "description": "Explore a vast open world as Link in this revolutionary Zelda adventure. Solve puzzles, battle enemies, and uncover the mysteries of Hyrule in a game that redefines freedom.",
+        "available": true
     },
     {
         "id": 4,
@@ -46,7 +49,8 @@ export const games = [
         "originalPrice": 1.90,
         "rentalPrice": 0.70,
         "category": ["rpg", "action"],
-        "description": "A stunning reimagining of the classic RPG. Join Cloud and Avalanche in their fight against Shinra, with breathtaking visuals, deep combat, and an expanded story."
+        "description": "A stunning reimagining of the classic RPG. Join Cloud and Avalanche in their fight against Shinra, with breathtaking visuals, deep combat, and an expanded story.",
+        "available": true
     },
     {
         "id": 5,
@@ -58,7 +62,8 @@ export const games = [
         "originalPrice": 2.50,
         "rentalPrice": 0.90,
         "category": ["rpg", "action"],
-        "description": "An epic open-world RPG where you play as Geralt of Rivia, a monster hunter searching for his adopted daughter in a war-torn fantasy world."
+        "description": "An epic open-world RPG where you play as Geralt of Rivia, a monster hunter searching for his adopted daughter in a war-torn fantasy world.",
+        "available": false
     },
     {
         "id": 6,
@@ -70,7 +75,8 @@ export const games = [
         "originalPrice": 2.20,
         "rentalPrice": 0.85,
         "category": ["action", "adventure"],
-        "description": "An immersive Wild West adventure following Arthur Morgan and the Van der Linde gang as they survive in a rapidly changing America."
+        "description": "An immersive Wild West adventure following Arthur Morgan and the Van der Linde gang as they survive in a rapidly changing America.",
+        "available": true
     },
     {
         "id": 7,
@@ -82,7 +88,8 @@ export const games = [
         "originalPrice": 1.80,
         "rentalPrice": 0.65,
         "category": ["rpg", "fps"],
-        "description": "A futuristic RPG set in Night City, where you play as V, a mercenary navigating a world of cyber-enhanced criminals and corporate intrigue."
+        "description": "A futuristic RPG set in Night City, where you play as V, a mercenary navigating a world of cyber-enhanced criminals and corporate intrigue.",
+        "available": true
     },
     {
         "id": 8,
@@ -94,7 +101,8 @@ export const games = [
         "originalPrice": 0.80,
         "rentalPrice": 0.30,
         "category": ["action", "adventure"],
-        "description": "A beautifully hand-drawn metroidvania where you explore the ruined kingdom of Hallownest, battling insects and uncovering dark secrets."
+        "description": "A beautifully hand-drawn metroidvania where you explore the ruined kingdom of Hallownest, battling insects and uncovering dark secrets.",
+        "available": true
     },
     {
         "id": 9,
@@ -106,7 +114,8 @@ export const games = [
         "originalPrice": 2.60,
         "rentalPrice": 1.10,
         "category": ["rpg", "action"],
-        "description": "FromSoftware's open-world masterpiece where you explore the Lands Between, battling monstrous creatures to become the Elden Lord."
+        "description": "FromSoftware's open-world masterpiece where you explore the Lands Between, battling monstrous creatures to become the Elden Lord.",
+        "available": true
     },
     {
         "id": 10,
@@ -118,7 +127,8 @@ export const games = [
         "originalPrice": 0.70,
         "rentalPrice": 0.25,
         "category": ["adventure"],
-        "description": "A charming farming simulator where you inherit a run-down farm and must restore it while building relationships with the townspeople."
+        "description": "A charming farming simulator where you inherit a run-down farm and must restore it while building relationships with the townspeople.",
+        "available": true
     },
     {
         "id": 11,
@@ -130,7 +140,8 @@ export const games = [
         "originalPrice": 1.90,
         "rentalPrice": 0.75,
         "category": ["action", "adventure"],
-        "description": "Ethan Winters returns in this survival horror game, searching for his kidnapped daughter in a village full of terrifying creatures and dark secrets."
+        "description": "Ethan Winters returns in this survival horror game, searching for his kidnapped daughter in a village full of terrifying creatures and dark secrets.",
+        "available": true
     },
     {
         "id": 12,
@@ -142,7 +153,8 @@ export const games = [
         "originalPrice": 1.20,
         "rentalPrice": 0.50,
         "category": ["action", "rpg"],
-        "description": "A rogue-like dungeon crawler where you play as Zagreus, son of Hades, attempting to escape the Underworld while battling mythical foes."
+        "description": "A rogue-like dungeon crawler where you play as Zagreus, son of Hades, attempting to escape the Underworld while battling mythical foes.",
+        "available": false
     },
     {
         "id": 13,
@@ -154,6 +166,7 @@ export const games = [
         "originalPrice": 3.20,
         "rentalPrice": 0.60,
         "category": ["sports"],
-        "description": "Experience the latest in football simulation with EA FC 25. Build your dream squad in Ultimate Team, compete in Career Mode, and enjoy hyper-realistic gameplay powered by cutting-edge technology."
+        "description": "Experience the latest in football simulation with EA FC 25. Build your dream squad in Ultimate Team, compete in Career Mode, and enjoy hyper-realistic gameplay powered by cutting-edge technology.",
+        "available": true
     }
 ];
