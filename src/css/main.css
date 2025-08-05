@@ -25,3 +25,4 @@
 /* Import styles for the game modal component inside game-card */
 @import url('components/homepage/game-card/game-modal.css');
 
+@import url('components/catalog/catalog.css');

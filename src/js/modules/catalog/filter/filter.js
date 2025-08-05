@@ -19,29 +19,6 @@ export class FilterManager {
     renderControls() {
         const controlsContainer = this.container.querySelector('.catalog-controls');
         controlsContainer.innerHTML = `
-            <div class="filter-group search-group">
-                <label for="search-name">Search:</label>
-                <input type="text" id="search-name" class="search-input" placeholder="Game name...">
-            </div>
-            
-            <div class="filter-group">
-                <label for="price-range">Price Range:</label>
-                <div class="price-range-container">
-                    <input type="number" id="min-price" class="price-input" placeholder="Min" min="0">
-                    <span>to</span>
-                    <input type="number" id="max-price" class="price-input" placeholder="Max" min="0">
-                </div>
-            </div>
-            
-            <div class="filter-group">
-                <label for="sort-by">Sort by:</label>
-                <select id="sort-by" class="sort-select">
-                    <option value="name" ${this.sortBy === 'name' ? 'selected' : ''}>Name</option>
-                    <option value="rating" ${this.sortBy === 'rating' ? 'selected' : ''}>Rating</option>
-                    <option value="price" ${this.sortBy === 'price' ? 'selected' : ''}>Price</option>
-                </select>
-            </div>
-            
             <div class="filter-group">
                 <label for="platform-filter">Platform:</label>
                 <select id="platform-filter" class="platform-filter">
@@ -52,6 +29,13 @@ export class FilterManager {
                     <option value="pc">PC</option>
                 </select>
             </div>
+            
+            <div class="filter-group search-group">
+                <label for="search-name">Search:</label>
+                <input type="text" id="search-name" class="search-input" placeholder="Game name...">
+            </div>
+            
+            <button class="clear-filters-btn">Clear Filters</button>
         `;
     }
 
@@ -62,37 +46,37 @@ export class FilterManager {
             this.onFilterChange();
         });
 
-        // Price range
-        this.container.querySelector('#min-price').addEventListener('change', (e) => {
-            this.minPrice = parseFloat(e.target.value) || 0;
-            this.onFilterChange();
-        });
-
-        this.container.querySelector('#max-price').addEventListener('change', (e) => {
-            this.maxPrice = parseFloat(e.target.value) || Infinity;
-            this.onFilterChange();
-        });
-
-        // Sorting
-        this.container.querySelector('#sort-by').addEventListener('change', (e) => {
-            this.sortBy = e.target.value;
-            this.onFilterChange();
-        });
-
         // Platform filter
         this.container.querySelector('#platform-filter').addEventListener('change', (e) => {
             this.platform = e.target.value;
             this.onFilterChange();
         });
+
+        // Clear filters button
+        this.container.querySelector('.clear-filters-btn').addEventListener('click', () => {
+            this.clearFilters();
+        });
+    }
+
+    clearFilters() {
+        // Reset all filter values
+        this.searchTerm = '';
+        this.platform = 'all';
+
+        // Update UI elements to reflect cleared state
+        this.container.querySelector('#search-name').value = '';
+        this.container.querySelector('#platform-filter').value = 'all';
+
+        // Trigger filter change
+        this.onFilterChange();
     }
 
     applyFilters(games) {
         return games.filter(game => {
             const nameMatch = game.name.toLowerCase().includes(this.searchTerm);
-            const priceMatch = game.rentalPrice >= this.minPrice && game.rentalPrice <= this.maxPrice;
             const platformMatch = this.platform === 'all' || game.platform === this.platform;
 
-            return nameMatch && priceMatch && platformMatch;
+            return nameMatch && platformMatch;
         });
     }
 

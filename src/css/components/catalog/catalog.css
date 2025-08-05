@@ -1,48 +1,4 @@
-/* ===== FEATURED SECTION ===== */
-.featured {
-    padding: 80px 15%;
-    background-color: white;
-}
 
-/* ===== CATALOG CONTROLS ===== */
-.catalog-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    padding: 15px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.filter-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.filter-group label {
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #333;
-}
-
-.filter-group select {
-    padding: 8px 12px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    background-color: #fff;
-    font-size: 14px;
-    color: #495057;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.filter-group select:hover {
-    border-color: #adb5bd;
-}
 
 /* ===== GAMES GRID ===== */
 .games-grid {
@@ -51,140 +7,6 @@
     gap: 30px;
     width: 100%;
     padding: 10px 0;
-}
-
-/* ===== GAME CARD ===== */
-.game-card {
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.game-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.game-image {
-    position: relative;
-    height: 300px;
-    overflow: hidden;
-}
-
-.game-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
-}
-
-.game-card:hover .game-image img {
-    transform: scale(1.05);
-}
-
-.platform {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px 10px;
-    border-radius: 4px;
-    color: white;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-.platform.playstation { background-color: #003087; }
-.platform.xbox { background-color: #107c10; }
-.platform.switch { background-color: #e60012; }
-.platform.pc { background-color: #333; }
-
-.game-info {
-    padding: 20px;
-}
-
-.game-info h3 {
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.game-rating {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    color: #f39c12;
-}
-
-.game-rating span {
-    margin-left: 5px;
-    color: #7f8c8d;
-    font-size: 0.9rem;
-}
-
-.game-price {
-    margin-bottom: 15px;
-}
-
-.original-price {
-    text-decoration: line-through;
-    color: #7f8c8d;
-    font-size: 0.9rem;
-    margin-right: 10px;
-}
-
-.rental-price {
-    font-weight: bold;
-    color: #2ecc71;
-    font-size: 1.1rem;
-}
-
-.show-description {
-    width: 100%;
-    padding: 10px;
-    background-color: #3498db;
-    color: white;
-    border-radius: 4px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    cursor: pointer;
-    border: none;
-}
-
-.show-description:hover {
-    background-color: #2980b9;
-}
-
-.game-description {
-    padding: 15px;
-    display: none;
-}
-
-.game-description p {
-    font-size: 0.95rem;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-.rent-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #2ecc71;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: background-color 0.3s;
-    cursor: pointer;
-}
-
-.rent-btn:hover {
-    background-color: #27ae60;
 }
 
 /* ===== PAGINATION ===== */
@@ -225,27 +47,6 @@
 }
 
 /* ===== ERROR MESSAGE ===== */
-.no-games-message {
-    width: 100%;
-    text-align: center;
-    padding: 40px;
-    border-radius: 8px;
-    color: #6c757d;
-}
-
-.no-games-message i {
-    font-size: 2rem;
-    color: #ffc107;
-    margin-bottom: 15px;
-    display: block;
-}
-
-.no-games-message strong {
-    display: block;
-    font-size: 1.2rem;
-    color: #343a40;
-    margin: 10px 0;
-}
 
 .reload-btn {
     padding: 10px 20px;
@@ -262,16 +63,7 @@
     background-color: #2980b9;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1200px) {
-    .games-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
 
-    .featured {
-        padding: 60px 10%;
-    }
-}
 
 @media (max-width: 900px) {
     .games-grid {
@@ -291,30 +83,6 @@
 
     .filter-group select {
         flex-grow: 1;
-    }
-}
-
-@media (max-width: 600px) {
-    .games-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .game-image {
-        height: 250px;
-    }
-
-    .featured {
-        padding: 40px 5%;
-    }
-
-    .pagination {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .pagination button {
-        width: 100%;
     }
 }
 

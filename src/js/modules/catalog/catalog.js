@@ -191,3 +191,16 @@ export class GameCatalog {
         });
     }
 }
+
+export function initCatalog() {
+    const button = document.querySelector('.cta-btn');
+
+    if (button) {
+        button.addEventListener('click', () => {
+            redirectToCatalog();
+        });
+    }
+}
+function redirectToCatalog() {
+    window.location.href = '../../components/catalog/catalog.html';
+}
