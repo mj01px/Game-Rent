@@ -71,6 +71,6 @@ export class PaginationManager {
         const startItem = ((this.currentPage - 1) * this.itemsPerPage) + 1;
         const endItem = Math.min(this.currentPage * this.itemsPerPage, this.totalItems);
 
-        this.pageInfo.textContent = `Page ${this.currentPage} of ${this.totalPages} | Items ${startItem}-${endItem} of ${this.totalItems}`;
+        this.pageInfo.textContent = `Page ${this.currentPage} of ${this.totalPages}`;
     }
 }
