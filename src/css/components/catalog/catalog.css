@@ -1,96 +1,75 @@
-/* ============================================= */
-/* CATÁLOGO DE JOGOS - ESTILOS PRINCIPAIS        */
-/* ============================================= */
-
-/* ===== Estrutura Principal ===== */
-.game-catalog {
-    padding: 40px 0;
-    background-color: #f5f5f5;
+/* ===== FEATURED SECTION ===== */
+.featured {
+    padding: 80px 15%;
+    background-color: white;
 }
 
-.catalog-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.catalog-header h1 {
-    font-size: 2.5rem;
-    color: #2c3e50;
-    position: relative;
-    margin-bottom: 15px;
-}
-
-.catalog-header h1::after {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 4px;
-    background-color: #3498db;
-    margin: 10px auto;
-}
-
-/* ===== Controles do Catálogo ===== */
+/* ===== CATALOG CONTROLS ===== */
 .catalog-controls {
     display: flex;
-    justify-content: center;
-    gap: 30px;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 30px;
-    flex-wrap: wrap;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .filter-group {
     display: flex;
-    flex-direction: column;
-    min-width: 200px;
+    align-items: center;
+    gap: 10px;
 }
 
 .filter-group label {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
     font-weight: 600;
-    margin-bottom: 8px;
-    color: #2c3e50;
-    font-size: 0.95rem;
+    color: #333;
 }
 
 .filter-group select {
-    padding: 10px 15px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    background-color: white;
-    font-size: 1rem;
-    transition: border-color 0.3s;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
-.filter-group select:focus {
-    border-color: #3498db;
-    outline: none;
+.filter-group select:hover {
+    border-color: #adb5bd;
 }
 
-/* ===== Grade de Jogos ===== */
+/* ===== GAMES GRID ===== */
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-    margin-bottom: 40px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+    padding: 10px 0;
 }
 
-/* ===== Cartão de Jogo ===== */
+/* ===== GAME CARD ===== */
 .game-card {
     background-color: white;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .game-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .game-image {
     position: relative;
-    height: 180px;
+    height: 300px;
     overflow: hidden;
 }
 
@@ -98,14 +77,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s;
 }
 
 .game-card:hover .game-image img {
     transform: scale(1.05);
 }
 
-/* Badges */
 .platform {
     position: absolute;
     top: 10px;
@@ -115,7 +93,6 @@
     color: white;
     font-size: 0.8rem;
     font-weight: bold;
-    z-index: 2;
 }
 
 .platform.playstation { background-color: #003087; }
@@ -123,55 +100,40 @@
 .platform.switch { background-color: #e60012; }
 .platform.pc { background-color: #333; }
 
-.featured-badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: #ffd166;
-    color: #2c3e50;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    z-index: 2;
-}
-
-/* Informações do Jogo */
 .game-info {
     padding: 20px;
 }
 
 .game-info h3 {
+    margin-bottom: 10px;
     font-size: 1.2rem;
-    margin-bottom: 12px;
-    color: #2c3e50;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.game-meta {
-    margin-bottom: 15px;
-}
-
 .game-rating {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     color: #f39c12;
 }
 
 .game-rating span {
-    margin-left: 6px;
+    margin-left: 5px;
     color: #7f8c8d;
     font-size: 0.9rem;
 }
 
 .game-price {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-right: 10px;
 }
 
 .rental-price {
@@ -180,320 +142,38 @@
     font-size: 1.1rem;
 }
 
-.original-price {
-    font-size: 0.9rem;
-    color: #7f8c8d;
-    text-decoration: line-through;
-}
-
-/* Botões */
-.game-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.show-description, .rent-btn {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-}
-
 .show-description {
+    width: 100%;
+    padding: 10px;
     background-color: #3498db;
     color: white;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    border: none;
 }
 
 .show-description:hover {
     background-color: #2980b9;
 }
 
-.rent-btn {
-    background-color: #2ecc71;
-    color: white;
-}
-
-.rent-btn:hover {
-    background-color: #27ae60;
-}
-
-/* Descrição do Jogo */
 .game-description {
     padding: 15px;
-    background-color: #f8f9fa;
-    border-radius: 0 0 8px 8px;
-    margin-top: -10px;
-    margin-bottom: 10px;
     display: none;
 }
 
 .game-description p {
-    color: #555;
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-/* Paginação */
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-top: 30px;
-}
-
-.pagination button {
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.pagination button:disabled {
-    background-color: #95a5a6;
-    cursor: not-allowed;
-}
-
-.pagination button:hover:not(:disabled) {
-    background-color: #2980b9;
-}
-
-.page-info {
-    font-size: 0.9rem;
-    color: #7f8c8d;
-}
-
-/* Mensagem de Erro */
-.error-message {
-    text-align: center;
-    padding: 40px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-
-.error-message i {
-    font-size: 2.5rem;
-    color: #e74c3c;
-    margin-bottom: 15px;
-}
-
-.error-message h3 {
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-
-.error-message p {
-    color: #7f8c8d;
-    margin-bottom: 20px;
-}
-
-.reload-btn {
-    padding: 10px 25px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.reload-btn:hover {
-    background-color: #2980b9;
-}
-
-/* ===== Responsividade ===== */
-@media (max-width: 1200px) {
-    .games-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    .catalog-controls {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .filter-group {
-        width: 100%;
-        max-width: 300px;
-    }
-
-    .game-actions {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 480px) {
-    .catalog-header h1 {
-        font-size: 2rem;
-    }
-
-    .games-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .game-image {
-        height: 220px;
-    }
-}
-
-/* ===== MODAL ===== */
-/* (Mantido do CSS existente) */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.75);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    z-index: 1000;
-}
-
-.modal-overlay.active {
-    visibility: visible;
-    opacity: 1;
-}
-
-.modal {
-    background: white;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 700px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
-}
-
-.modal-overlay.active .modal {
-    transform: translateY(0);
-}
-
-.modal__close {
-    position: absolute;
-    top: 0;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #7f8c8d;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.modal__close:hover {
-    color: #e74c3c;
-}
-
-.modal__content {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    gap: 20px;
-}
-
-.modal__image-wrapper {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-    border-radius: 8px;
-}
-
-.modal__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
-}
-
-.modal__platform-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px 10px;
-    border-radius: 4px;
-    color: white;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-.modal__platform-badge.ps5 { background-color: #003087; }
-.modal__platform-badge.xbox { background-color: #107c10; }
-.modal__platform-badge.switch { background-color: #e60012; }
-.modal__platform-badge.pc { background-color: #333; }
-
-.modal__info {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.modal__title {
-    font-size: 1.2rem;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.modal__rating {
-    display: flex;
-    align-items: center;
-    color: #f39c12;
-}
-
-.modal__rating span {
-    margin-left: 5px;
-    color: #7f8c8d;
-    font-size: 0.9rem;
-}
-
-.modal__desc {
     font-size: 0.95rem;
     color: #555;
     line-height: 1.6;
+    margin-bottom: 15px;
 }
 
-.modal__price-group {
-    margin-top: 10px;
-}
-
-.modal__price--original {
-    text-decoration: line-through;
-    color: #7f8c8d;
-    font-size: 0.9rem;
-    margin-right: 10px;
-}
-
-.modal__price--rental {
-    font-weight: bold;
-    color: #2ecc71;
-    font-size: 1.1rem;
-}
-
-.modal__action-btn {
+.rent-btn {
     width: 100%;
     padding: 10px;
-    background-color: #3498db;
+    background-color: #2ecc71;
     color: white;
     border: none;
     border-radius: 4px;
@@ -503,70 +183,11 @@
     cursor: pointer;
 }
 
-.modal__action-btn:hover {
-    background-color: #2980b9;
+.rent-btn:hover {
+    background-color: #27ae60;
 }
 
-@media (min-width: 768px) {
-    .modal__content {
-        flex-direction: row;
-    }
-
-    .modal__image-wrapper,
-    .modal__info {
-        flex: 1;
-    }
-
-    .modal__image-wrapper {
-        height: 300px;
-        max-height: 300px;
-    }
-}
-
-/* ============================================= */
-/* CATÁLOGO DE JOGOS - LAYOUT 4x4               */
-/* ============================================= */
-
-/* ===== Grade de Jogos 4x4 ===== */
-.games-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colunas */
-    gap: 20px;
-    margin-bottom: 40px;
-}
-
-/* ===== Ajustes nos Cards para Layout 4x4 ===== */
-.game-card {
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* Garante que todos os cards tenham a mesma altura */
-}
-
-.game-image {
-    position: relative;
-    height: 180px; /* Altura fixa para as imagens */
-    overflow: hidden;
-    flex-shrink: 0; /* Impede que a imagem diminua */
-}
-
-.game-info {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1; /* Faz com que o conteúdo ocupe o espaço restante */
-}
-
-.game-actions {
-    margin-top: auto; /* Empurra os botões para baixo */
-    padding-top: 15px;
-}
-
-/* ===== Paginação Ajustada ===== */
+/* ===== PAGINATION ===== */
 .pagination {
     display: flex;
     justify-content: center;
@@ -575,25 +196,124 @@
     margin-top: 40px;
 }
 
-/* ===== Responsividade ===== */
+.pagination button {
+    padding: 10px 20px;
+    min-width: 100px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: #2980b9;
+}
+
+.pagination button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.page-info {
+    font-size: 15px;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+/* ===== ERROR MESSAGE ===== */
+.no-games-message {
+    width: 100%;
+    text-align: center;
+    padding: 40px;
+    border-radius: 8px;
+    color: #6c757d;
+}
+
+.no-games-message i {
+    font-size: 2rem;
+    color: #ffc107;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.no-games-message strong {
+    display: block;
+    font-size: 1.2rem;
+    color: #343a40;
+    margin: 10px 0;
+}
+
+.reload-btn {
+    padding: 10px 20px;
+    margin-top: 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.reload-btn:hover {
+    background-color: #2980b9;
+}
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 1200px) {
     .games-grid {
-        grid-template-columns: repeat(3, 1fr); /* 3 colunas em telas médias */
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .featured {
+        padding: 60px 10%;
     }
 }
 
 @media (max-width: 900px) {
     .games-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablets */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .catalog-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .filter-group select {
+        flex-grow: 1;
     }
 }
 
 @media (max-width: 600px) {
     .games-grid {
-        grid-template-columns: 1fr; /* 1 coluna em mobile */
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
 
     .game-image {
-        height: 220px; /* Imagens um pouco maiores em mobile */
+        height: 250px;
+    }
+
+    .featured {
+        padding: 40px 5%;
+    }
+
+    .pagination {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .pagination button {
+        width: 100%;
     }
 }
