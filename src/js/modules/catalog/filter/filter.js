@@ -8,8 +8,7 @@ export class FilterManager {
             searchTerm: '',
             platform: 'all',
             genre: 'all',
-            availability: 'available',
-            rating: 0
+            availability: 'available'
         };
 
         this.sortBy = 'rating';
@@ -17,7 +16,6 @@ export class FilterManager {
 
         this.init();
         this.container.querySelector('#sort-by').value = 'rating';
-
     }
 
     init() {
@@ -52,10 +50,20 @@ export class FilterManager {
                         <option value="action">Action</option>
                         <option value="adventure">Adventure</option>
                         <option value="rpg">RPG</option>
+                        <option value="fps">FPS</option>
                         <option value="sports">Sports</option>
+                        <option value="racing">Racing</option>
+                        <option value="horror">Horror</option>
+                        <option value="strategy">Strategy</option>
+                        <option value="simulation">Simulation</option>
+                        <option value="fighting">Fighting</option>
+                        <option value="platform">Platform</option>
+                        <option value="rhythm">Rhythm</option>
+                        <option value="moba">MOBA</option>
+                        <option value="competitive">Competitive</option>
+                        <option value="party">Party</option>
                     </select>
                 </div>
-            </div>
                 
                 <div class="filter-group">
                     <label for="availability-filter">Availability:</label>
@@ -65,6 +73,7 @@ export class FilterManager {
                         <option value="unavailable">Unavailable</option>
                     </select>
                 </div>
+            </div>
             
             <div class="filter-actions">
                 <button class="clear-filters-btn">Reset Filters</button>
@@ -74,6 +83,7 @@ export class FilterManager {
                         <option value="name">Name</option>
                         <option value="price">Price</option>
                         <option value="rating">Rating</option>
+                        <option value="rentalPrice">Rental Price</option>
                     </select>
                     <button class="sort-direction-btn" aria-label="Toggle sort direction">
                         <span class="sort-icon">↑</span>
@@ -88,19 +98,6 @@ export class FilterManager {
         this.container.querySelector('#search-name').addEventListener('input', (e) => {
             this.filters.searchTerm = e.target.value.toLowerCase().trim();
             this.onFilterChange();
-
-            this.filters = {
-                searchTerm: '',
-                platform: 'all',
-                genre: 'all',
-                availability: 'all',
-                rating: 0
-            };
-
-            this.container.querySelector('#availability-filter').value = 'all';
-            this.container.querySelector('#sort-by').value = 'rating';
-
-
         });
 
         // Platform filter
@@ -120,8 +117,6 @@ export class FilterManager {
             this.filters.availability = e.target.value;
             this.onFilterChange();
         });
-
-
 
         // Sort by
         this.container.querySelector('#sort-by').addEventListener('change', (e) => {
@@ -153,8 +148,7 @@ export class FilterManager {
             searchTerm: '',
             platform: 'all',
             genre: 'all',
-            availability: 'available',
-            rating: 0
+            availability: 'available'
         };
 
         this.sortBy = 'rating';
@@ -178,16 +172,11 @@ export class FilterManager {
             const platformMatch = this.filters.platform === 'all' || game.platform === this.filters.platform;
             const genreMatch = this.filters.genre === 'all' ||
                 (game.category && game.category.includes(this.filters.genre));
-
-            // Updated availability filter to check the boolean 'available' property
             const availabilityMatch = this.filters.availability === 'all' ||
                 (this.filters.availability === 'available' && game.available) ||
-                (this.filters.availability === 'unavailable' && game.available === false);
+                (this.filters.availability === 'unavailable' && !game.available);
 
-            const ratingMatch = game.rating >= this.filters.rating;
-
-            return nameMatch && platformMatch && genreMatch &&
-                availabilityMatch && ratingMatch;
+            return nameMatch && platformMatch && genreMatch && availabilityMatch;
         });
     }
 
@@ -195,11 +184,15 @@ export class FilterManager {
         const directionModifier = this.sortDirection === 'asc' ? 1 : -1;
 
         switch(this.sortBy) {
-            case 'rating':
-                return (a, b) => (b.rating - a.rating) * directionModifier;
             case 'name':
-            default:
                 return (a, b) => a.name.localeCompare(b.name) * directionModifier;
+            case 'price':
+                return (a, b) => (a.originalPrice - b.originalPrice) * directionModifier;
+            case 'rentalPrice':
+                return (a, b) => (a.rentalPrice - b.rentalPrice) * directionModifier;
+            case 'rating':
+            default:
+                return (a, b) => (b.rating - a.rating) * directionModifier;
         }
     }
 }

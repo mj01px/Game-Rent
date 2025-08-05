@@ -31,7 +31,7 @@ export class GameCatalog {
         this.setupUI();
         this.initializeManagers();
         await this.loadGames();
-        this.renderGames();
+        this.renderInitialGames();
     }
 
     initializeManagers() {
@@ -52,17 +52,24 @@ export class GameCatalog {
         try {
             this.filteredGames = this.filterManager.applyFilters(games);
             this.sortGames();
+            return this.filteredGames;
         } catch (error) {
             console.error('Error loading games:', error);
             this.showErrorMessage();
+            return [];
         }
     }
 
+    renderInitialGames() {
+        this.paginationManager.update(this.filteredGames.length);
+        this.renderGames();
+    }
+
     handleFilterChange() {
-        this.paginationManager.reset();
-        this.loadGames().then(() => {
+        this.loadGames().then(filteredGames => {
+            this.paginationManager.reset();
+            this.paginationManager.update(filteredGames.length);
             this.renderGames();
-            this.paginationManager.update(this.filteredGames.length);
         });
     }
 
@@ -110,47 +117,48 @@ export class GameCatalog {
             starsHTML += '<i class="far fa-star"></i>';
         }
 
-        // Determina as classes CSS baseado na disponibilidade
         const cardClasses = `game-card ${game.available ? '' : 'unavailable'}`;
         const buttonHTML = game.available
             ? `<button class="show-description" data-id="${game.id}">Show Description</button>`
             : `<button class="show-description" data-id="${game.id}" disabled>Unavailable</button>`;
 
         return `
-    <div class="${cardClasses}" data-id="${game.id}" data-rating="${game.rating}" 
-         data-price="${game.rentalPrice}" data-platform="${game.platform}">
-        <div class="game-image">
-            <img src="${this.config.baseImagePath}${game.image}" 
-                 alt="${game.name}" 
-                 ${this.config.lazyLoad ? 'loading="lazy"' : ''}>
-            <span class="platform ${game.platform}">${game.platformName}</span>
-            ${!game.available ? '<span class="unavailable-badge">Unavailable</span>' : ''}
-        </div>
-        <div class="game-info">
-            <h3>${game.name}</h3>
-            <div class="game-rating">
-                ${starsHTML}
-                <span>${game.rating.toFixed(1)}</span>
+            <div class="${cardClasses}" data-id="${game.id}" data-rating="${game.rating}" 
+                 data-price="${game.rentalPrice}" data-platform="${game.platform}">
+                <div class="game-image">
+                    <img src="${this.config.baseImagePath}${game.image}" 
+                         alt="${game.name}" 
+                         ${this.config.lazyLoad ? 'loading="lazy"' : ''}>
+                    <span class="platform ${game.platform}">${game.platformName}</span>
+                    ${!game.available ? '<span class="unavailable-badge">Unavailable</span>' : ''}
+                </div>
+                <div class="game-info">
+                    <h3>${game.name}</h3>
+                    <div class="game-rating">
+                        ${starsHTML}
+                        <span>${game.rating.toFixed(1)}</span>
+                    </div>
+                    <div class="game-price">
+                        <span class="original-price">From: $${game.originalPrice.toFixed(2)}</span>
+                        <span class="rental-price">$${game.rentalPrice.toFixed(2)}/week</span>
+                    </div>
+                    ${buttonHTML}
+                </div>
             </div>
-            <div class="game-price">
-                <span class="original-price">From: $${game.originalPrice.toFixed(2)}</span>
-                <span class="rental-price">$${game.rentalPrice.toFixed(2)}/week</span>
-            </div>
-            ${buttonHTML}
-        </div>
-    </div>
-    `;
+        `;
     }
 
-// No método setupCardInteractions()
     setupCardInteractions() {
-        // Limpa event listeners anteriores para evitar duplicação
-        this.container.querySelectorAll('.rent-btn').forEach(btn => {
-            btn.replaceWith(btn.cloneNode(true));
+        this.container.querySelectorAll('.show-description').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const gameId = parseInt(e.currentTarget.getAttribute('data-id'));
+                this.handleShowDescription(gameId);
+            });
         });
 
-        // Adiciona os novos event listeners
         this.container.querySelectorAll('.rent-btn').forEach(button => {
+            button.replaceWith(button.cloneNode(true));
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 const gameId = parseInt(e.currentTarget.getAttribute('data-id'));
@@ -159,11 +167,17 @@ export class GameCatalog {
         });
     }
 
+    handleShowDescription(gameId) {
+        const game = this.filteredGames.find(g => g.id === gameId);
+        if (game) {
+            alert(game.description);
+        }
+    }
+
     handleRentGame(gameId) {
         const game = this.filteredGames.find(g => g.id === gameId);
         if (game) {
             console.log('Adding to cart:', game.name);
-            // Chama a função global para adicionar ao carrinho
             if (window.addToCart) {
                 window.addToCart(game);
             } else {
@@ -207,6 +221,7 @@ export function initCatalog() {
         });
     }
 }
+
 function redirectToCatalog() {
     window.location.href = '../../components/catalog/catalog.html';
 }
