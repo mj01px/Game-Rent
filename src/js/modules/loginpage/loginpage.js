@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('passwordError').style.display = password.length >= 6 ? 'none' : 'block';
 
         if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password.length < 6) return;
-        alert('Sign up successful!');
     });
 
     signInForm.addEventListener('submit', function(e) {
@@ -42,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('signinPasswordError').style.display = password ? 'none' : 'block';
 
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !password) return;
-        alert('Sign in successful!');
 
         // Redirect to the main page or perform further actions
         redirectToHomePage()
