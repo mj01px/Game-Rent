@@ -3,7 +3,7 @@ import {openDescriptionModal} from "../modules/homepage/Games/GameDescription.js
 import {openCartModal} from "../modules/homepage/Cart/Cart.js";
 import {initializeCart, updateCartUI} from "../modules/homepage/Cart/CartUI.js";
 import {games} from "../data/games.js";
-import {initCatalog} from "../modules/homepage/Catalog/catalog.js";
+import {initCatalog} from "../modules/catalog/catalog.js";
 
 /**
  * Loads an HTML partial asynchronously and injects it into the DOM element specified by containerId.
@@ -18,9 +18,12 @@ export function initContainer(containerId, filePath, basePath) {
             if (!res.ok) throw new Error(`Error loading ${filePath}`);
             return res.text();
         })
+
         .then(html => {
+
             document.getElementById(containerId).innerHTML = html;
         });
+
 }
 
 // Load all page components asynchronously
