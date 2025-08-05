@@ -1,4 +1,5 @@
 import { games } from '../../data/games.js';
+import {openDescriptionModal} from "../homepage/Games/GameDescription.js";
 
 export class GameCatalog {
     constructor(containerSelector, options = {}) {
@@ -6,7 +7,7 @@ export class GameCatalog {
             filterRating: 0,
             sortBy: 'name',
             baseImagePath: '../../../assets/images/games/',
-            itemsPerPage: 12, // 4 colunas x 3 linhas
+            itemsPerPage: 12, // 4 columns x 3 rows
             lazyLoad: true
         };
 
@@ -14,10 +15,8 @@ export class GameCatalog {
         this.container = document.querySelector(containerSelector);
         this.currentPage = 1;
         this.filteredGames = [];
-        this.currentIndex = 0;
-        this.cardsPerView = 4;
 
-        this.init().then(r => {
+        this.init().then(() => {
             console.log('GameCatalog initialized successfully');
         });
     }
@@ -63,18 +62,18 @@ export class GameCatalog {
             <div class="featured">
                 <div class="catalog-controls">
                     <div class="filter-group">
-                        <label for="sort-by">Ordenar por:</label>
+                        <label for="sort-by">Sort by:</label>
                         <select id="sort-by" class="sort-select">
-                            <option value="name" ${this.config.sortBy === 'name' ? 'selected' : ''}>Nome</option>
-                            <option value="rating" ${this.config.sortBy === 'rating' ? 'selected' : ''}>Avaliação</option>
-                            <option value="price" ${this.config.sortBy === 'price' ? 'selected' : ''}>Preço</option>
+                            <option value="name" ${this.config.sortBy === 'name' ? 'selected' : ''}>Name</option>
+                            <option value="rating" ${this.config.sortBy === 'rating' ? 'selected' : ''}>Rating</option>
+                            <option value="price" ${this.config.sortBy === 'price' ? 'selected' : ''}>Price</option>
                         </select>
                     </div>
                     
                     <div class="filter-group">
-                        <label for="platform-filter">Plataforma:</label>
+                        <label for="platform-filter">Platform:</label>
                         <select id="platform-filter" class="platform-filter">
-                            <option value="all">Todas</option>
+                            <option value="all">All</option>
                             <option value="playstation">PlayStation</option>
                             <option value="xbox">Xbox</option>
                             <option value="switch">Switch</option>
@@ -88,9 +87,9 @@ export class GameCatalog {
                 </div>
                 
                 <div class="pagination">
-                    <button class="prev-page" disabled>Anterior</button>
-                    <span class="page-info">Página 1</span>
-                    <button class="next-page">Próxima</button>
+                    <button class="prev-page" disabled>Previous</button>
+                    <span class="page-info">Page 1</span>
+                    <button class="next-page">Next</button>
                 </div>
             </div>
         `;
@@ -138,29 +137,27 @@ export class GameCatalog {
                     <span>${game.rating.toFixed(1)}</span>
                 </div>
                 <div class="game-price">
-                    <span class="original-price">De: R$ ${game.originalPrice.toFixed(2)}</span>
-                    <span class="rental-price">R$ ${game.rentalPrice.toFixed(2)}/semana</span>
+                    <span class="original-price">From: $${game.originalPrice.toFixed(2)}</span>
+                    <span class="rental-price">$${game.rentalPrice.toFixed(2)}/week</span>
                 </div>
-                <button class="show-description" data-id="${game.id}">Ver Descrição</button>
-                <div class="game-description" hidden>
-                    <p>${game.description || 'Descrição não disponível'}</p>
-                    <button class="rent-btn">Alugar Agora</button>
-                </div>
+                <button class="show-description" data-id="${game.id}">Show Description</button>
+     
             </div>
         </div>
         `;
     }
 
+    //open modal with game description
     setupCardInteractions() {
         this.container.querySelectorAll('.show-description').forEach(button => {
             button.addEventListener('click', (e) => {
-                const card = e.target.closest('.game-card');
-                const desc = card.querySelector('.game-description');
-                const isExpanded = desc.hidden;
+                e.preventDefault();
+                const gameId = parseInt(e.currentTarget.getAttribute('data-id'));
 
-                desc.hidden = !isExpanded;
-                e.target.setAttribute('aria-expanded', isExpanded);
-                e.target.textContent = isExpanded ? 'Ocultar' : 'Ver Descrição';
+                // Chama a função global para abrir o modal
+                if (window.openGameModal) {
+                    window.openGameModal(gameId);
+                }
             });
         });
 
@@ -174,8 +171,8 @@ export class GameCatalog {
 
     handleRentGame(gameId) {
         const game = this.filteredGames.find(g => g.id == gameId);
-        console.log('Iniciando aluguel do jogo:', game?.name);
-        alert(`Você está alugando: ${game?.name}`);
+        console.log('Renting game:', game?.name);
+        alert(`You are renting: ${game?.name}`);
     }
 
     setupEventListeners() {
@@ -223,16 +220,16 @@ export class GameCatalog {
 
         this.prevPageBtn.disabled = this.currentPage <= 1;
         this.nextPageBtn.disabled = this.currentPage >= totalPages;
-        this.pageInfo.textContent = `Página ${this.currentPage} de ${totalPages} | Itens ${startItem}-${endItem} de ${this.filteredGames.length}`;
+        this.pageInfo.textContent = `Page ${this.currentPage} of ${totalPages} | Items ${startItem}-${endItem} of ${this.filteredGames.length}`;
     }
 
     showErrorMessage() {
         this.container.innerHTML = `
             <div class="no-games-message">
                 <i class="fas fa-exclamation-triangle"></i>
-                <strong>Ocorreu um erro ao carregar os jogos</strong>
-                <p>Por favor, tente recarregar a página ou volte mais tarde.</p>
-                <button class="reload-btn">Recarregar</button>
+                <strong>Error loading games</strong>
+                <p>Please try reloading the page or come back later.</p>
+                <button class="reload-btn">Reload</button>
             </div>
         `;
 
@@ -240,4 +237,17 @@ export class GameCatalog {
             window.location.reload();
         });
     }
+}
+
+export function initCatalog() {
+    const button = document.querySelector('.cta-btn');
+
+    if (button) {
+        button.addEventListener('click', () => {
+            redirectToCatalog();
+        });
+    }
+}
+function redirectToCatalog() {
+    window.location.href = '../../components/catalog/catalog.html';
 }
