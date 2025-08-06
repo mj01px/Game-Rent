@@ -34,7 +34,7 @@ export class LoadGameData {
         }
 
         // Filter games by rating (only 4.5+)
-        const featuredGames = games.filter(game => game.rating >= 4.7);
+        const featuredGames = games.filter(game => game.rating >= 4.8);
 
         if (featuredGames.length === 0) {
             // Hide section if no featured games are available

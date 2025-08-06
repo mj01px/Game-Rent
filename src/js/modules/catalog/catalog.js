@@ -13,24 +13,27 @@ export class GameCatalog {
 
         this.config = { ...this.defaults, ...options };
         this.container = document.querySelector(containerSelector);
+        this.games = [];
         this.filteredGames = [];
         this.filterManager = null;
         this.paginationManager = null;
 
-        this.init().then(() => {
-            console.log('GameCatalog initialized successfully');
-        });
-    }
-
-    async init() {
         if (!this.container) {
             console.error('Container element not found!');
             return;
         }
 
+        this.init().catch(error => {
+            console.error('Failed to initialize GameCatalog:', error);
+            this.showErrorMessage();
+        });
+    }
+
+    async init() {
         this.setupUI();
         this.initializeManagers();
         await this.loadGames();
+        this.filterManager.setReady(); // Indica que os filtros podem ser aplicados
         this.renderInitialGames();
     }
 
@@ -50,27 +53,41 @@ export class GameCatalog {
 
     async loadGames() {
         try {
-            this.filteredGames = this.filterManager.applyFilters(games);
+            // Simula um carregamento assíncrono
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            // Aqui você pode substituir por uma chamada API real se necessário
+            this.games = [...games]; // Cria uma cópia dos dados
+            this.filteredGames = this.filterManager.applyFilters(this.games);
             this.sortGames();
             return this.filteredGames;
         } catch (error) {
             console.error('Error loading games:', error);
             this.showErrorMessage();
-            return [];
+            throw error;
         }
     }
 
     renderInitialGames() {
+        if (!this.filteredGames.length) {
+            this.showNoGamesMessage();
+            return;
+        }
+
         this.paginationManager.update(this.filteredGames.length);
         this.renderGames();
     }
 
     handleFilterChange() {
-        this.loadGames().then(filteredGames => {
+        try {
+            this.filteredGames = this.filterManager.applyFilters(this.games);
+            this.sortGames();
             this.paginationManager.reset();
-            this.paginationManager.update(filteredGames.length);
+            this.paginationManager.update(this.filteredGames.length);
             this.renderGames();
-        });
+        } catch (error) {
+            console.error('Error handling filter change:', error);
+        }
     }
 
     handlePageChange(page) {
@@ -88,6 +105,7 @@ export class GameCatalog {
                 <div class="catalog-controls"></div>
                 <div class="carousel-container">
                     <div class="games-grid"></div>
+                    <div class="pagination-container"></div>
                 </div>
             </div>
         `;
@@ -101,7 +119,9 @@ export class GameCatalog {
             return;
         }
 
+        const currentPage = this.paginationManager.currentPage;
         const gamesToShow = this.paginationManager.getPaginatedItems(this.filteredGames);
+
         this.gamesGrid.innerHTML = gamesToShow.map(game => this.createGameCard(game)).join('');
         this.setupCardInteractions();
     }
@@ -158,7 +178,6 @@ export class GameCatalog {
         });
 
         this.container.querySelectorAll('.rent-btn').forEach(button => {
-            button.replaceWith(button.cloneNode(true));
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 const gameId = parseInt(e.currentTarget.getAttribute('data-id'));
@@ -170,6 +189,8 @@ export class GameCatalog {
     handleShowDescription(gameId) {
         const game = this.filteredGames.find(g => g.id === gameId);
         if (game) {
+            // Implemente a lógica para mostrar a descrição do jogo
+            console.log('Showing description for:', game.name);
         }
     }
 
@@ -186,13 +207,15 @@ export class GameCatalog {
     }
 
     showNoGamesMessage() {
-        this.gamesGrid.innerHTML = `
-            <div class="no-games-message">
-                <i class="fas fa-gamepad"></i>
-                <strong>No Games Found</strong>
-                <p>Try adjusting your filters or search criteria.</p>
-            </div>
-        `;
+        if (this.gamesGrid) {
+            this.gamesGrid.innerHTML = `
+                <div class="no-games-message">
+                    <i class="fas fa-gamepad"></i>
+                    <strong>No Games Found</strong>
+                    <p>Try adjusting your filters or search criteria.</p>
+                </div>
+            `;
+        }
     }
 
     showErrorMessage() {
@@ -205,10 +228,20 @@ export class GameCatalog {
             </div>
         `;
 
-        this.container.querySelector('.reload-btn').addEventListener('click', () => {
+        this.container.querySelector('.reload-btn')?.addEventListener('click', () => {
             window.location.reload();
         });
     }
+}
+
+export function redirectToCatalog(filterOptions = {}) {
+    // Armazena os filtros no sessionStorage para serem aplicados após o redirecionamento
+    if (Object.keys(filterOptions).length > 0) {
+        sessionStorage.setItem('initialFilter', JSON.stringify(filterOptions));
+    }
+
+    // Redireciona para a página do catálogo
+    window.location.href = '../../components/catalog/catalog.html';
 }
 
 export function initCatalog() {
@@ -219,8 +252,4 @@ export function initCatalog() {
             redirectToCatalog();
         });
     }
-}
-
-function redirectToCatalog() {
-    window.location.href = '../../components/catalog/catalog.html';
 }

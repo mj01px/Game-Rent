@@ -25,6 +25,7 @@
 /* Hover effect to slightly lift the card */
 .category-card:hover {
     transform: translateY(-5px);
+    cursor: pointer;
 }
 
 /* Image inside the category card, centered with fixed size */

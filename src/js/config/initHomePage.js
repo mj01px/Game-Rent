@@ -4,7 +4,7 @@ import {openCartModal} from "../modules/homepage/Cart/Cart.js";
 import {initializeCart, updateCartUI} from "../modules/homepage/Cart/CartUI.js";
 import {games} from "../data/games.js";
 import {initCatalog} from "../modules/catalog/catalog.js";
-
+import {setupCategoryFilters} from "../modules/catalog/filter/homepage-category.js";
 /**
  * Loads an HTML partial asynchronously and injects it into the DOM element specified by containerId.
  * @param {string} containerId - The ID of the container where the HTML will be inserted.
@@ -57,6 +57,8 @@ Promise.all([
         updateCartUI();
 
         initCatalog()
+
+        setupCategoryFilters()
     })
     .catch(err => {
         // Handle any errors in loading the partials
