@@ -26,3 +26,7 @@
 @import url('components/homepage/game-card/game-modal.css');
 
 @import url('components/catalog/catalog.css');
+
+@import url('components/catalog/navbar-catalog/navbar-catalog.css');
+
+@import url('components/catalog/filter/filter.css');

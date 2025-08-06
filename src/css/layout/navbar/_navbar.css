@@ -64,23 +64,6 @@
     transition: all 0.3s;
 }
 
-/* Search button tweak: bigger icon size, smaller padding */
-.search-btn {
-    font-size: 1.2rem;
-    padding: 5px;
-}
-
-/* Login button style: white border and rounded corners */
-.login-btn {
-    border: 1px solid white;
-    border-radius: 4px;
-}
-
-/* Login hover: invert colors for clear feedback */
-.login-btn:hover {
-    background-color: white;
-    color: #2c3e50;
-}
 
 /* Cart icon styling: relative positioning for badge, pointer cursor */
 .cart-icon {

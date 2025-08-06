@@ -4,7 +4,6 @@ import {GameCatalog} from "../modules/catalog/catalog.js";
 import {openDescriptionModal} from "../modules/homepage/Games/GameDescription.js";
 import {games} from "../data/games.js";
 
-// Função auxiliar para carregar containers com verificação de existência
 export function initContainer(containerId, filePath, basePath) {
     const container = document.getElementById(containerId);
     if (!container) {
@@ -22,44 +21,64 @@ export function initContainer(containerId, filePath, basePath) {
         });
 }
 
-// Verifica se estamos na página de catálogo antes de executar
 if (document.getElementById('catalog-container')) {
-    // Load all page components asynchronously
+    let catalogInstance; // Variável para armazenar a instância do catálogo
+
     Promise.all([
         initContainer('head-container', 'head.html', '../../partials/shared/'),
-        initContainer('navbar-container', 'navbar.html', '../../partials/shared/'),
+        initContainer('navbar-container-catalog', 'navbar-catalog.html', '../../components/catalog/navbar-catalog/'),
         initContainer('footer-container', 'footer.html', '../../partials/shared/'),
         initContainer('cart-modal-container', 'cart-modal.html', '../../components/homepage/cart-modal/'),
         initContainer('game-description-container', 'game-modal.html', '../../components/homepage/game-card/'),
-        initContainer('game-description-container', 'game-modal.html', '../../components/homepage/game-card/'),
     ])
         .then(() => {
-            // Inicializa o carrinho
             initializeCart();
             openCartModal();
             updateCartUI();
 
-            // Inicializa o modal de descrição (mas desativa o listener automático)
             const modalInit = openDescriptionModal(games);
-
-            // Remove o listener padrão que procura por clicks em '.show-description'
-            // Assumindo que a função openDescriptionModal retorna o handler
             if (modalInit && modalInit.clickHandler) {
                 document.removeEventListener('click', modalInit.clickHandler);
             }
 
-            // Inicializa o catálogo
-            const catalog = new GameCatalog('#catalog-container', {
+            // Inicializa o catálogo e armazena a instância
+            catalogInstance = new GameCatalog('#catalog-container', {
                 itemsPerPage: 12,
                 sortBy: 'rating'
             });
 
-            // Configura uma forma de abrir o modal a partir do catálogo
+            // Configura o search da navbar - AGORA COM RETRY
+            const connectSearchInput = (attempts = 0) => {
+                const maxAttempts = 5;
+                const searchInput = document.querySelector('.catalog-navbar #search-name');
+
+                if (searchInput && catalogInstance.filterManager) {
+                    // Configura o evento de input
+                    searchInput.addEventListener('input', (e) => {
+                        catalogInstance.filterManager.setFilter('searchTerm', e.target.value.toLowerCase().trim());
+                    });
+
+                    // Sincroniza o valor do input com o estado atual do filtro
+                    if (catalogInstance.filterManager.filters.searchTerm) {
+                        searchInput.value = catalogInstance.filterManager.filters.searchTerm;
+                    }
+
+                } else if (attempts < maxAttempts) {
+                    console.log(`Tentativa ${attempts + 1}: Elementos não prontos, tentando novamente...`);
+                    setTimeout(() => connectSearchInput(attempts + 1), 200 * (attempts + 1));
+                } else {
+                    console.error('Não foi possível conectar o search input após várias tentativas');
+                }
+            };
+
+            // Primeira tentativa de conexão
+            setTimeout(() => connectSearchInput(), 300);
+
+            // Configuração do modal
             if (window) {
                 window.openGameModal = function(gameId) {
                     const game = games.find(g => g.id === gameId);
                     if (game) {
-                        // Atualiza o modal com o jogo específico
                         document.getElementById('modalGameTitle').textContent = game.name;
                         document.getElementById('modalGameDescription').textContent = game.description;
                         document.getElementById('modalGameImage').src = `../../../assets/images/games/${game.image}`;
@@ -76,7 +95,6 @@ if (document.getElementById('catalog-container')) {
                         const emptyStars = '☆'.repeat(5 - Math.floor(rating));
                         document.getElementById('modalGameRating').innerHTML = `${fullStars}${emptyStars} <span>${rating.toFixed(1)}</span>`;
 
-                        // Mostra o modal
                         document.getElementById('game-description-modal').classList.add('active');
                         document.body.style.overflow = 'hidden';
                     }
