@@ -139,7 +139,7 @@ export class GameCatalog {
                         <span>${game.rating.toFixed(1)}</span>
                     </div>
                     <div class="game-price">
-                        <span class="original-price">From: $${game.originalPrice.toFixed(2)}</span>
+                        <span class="original-price">$${game.originalPrice.toFixed(2)}</span>
                         <span class="rental-price">$${game.rentalPrice.toFixed(2)}/week</span>
                     </div>
                     ${buttonHTML}
@@ -170,7 +170,6 @@ export class GameCatalog {
     handleShowDescription(gameId) {
         const game = this.filteredGames.find(g => g.id === gameId);
         if (game) {
-            alert(game.description);
         }
     }
 

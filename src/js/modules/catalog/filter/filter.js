@@ -60,6 +60,7 @@ export class FilterManager {
                         <option value="platform">Platform</option>
                         <option value="rhythm">Rhythm</option>
                         <option value="moba">MOBA</option>
+                        <option value="sandbox">Sandbox</option>
                         <option value="competitive">Competitive</option>
                         <option value="party">Party</option>
                     </select>
