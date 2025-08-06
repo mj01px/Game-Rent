@@ -53,9 +53,11 @@ if (document.getElementById('catalog-container')) {
                 const searchInput = document.querySelector('.catalog-navbar #search-name');
 
                 if (searchInput && catalogInstance.filterManager) {
-                    // Configura o evento de input
+                    // Configura o evento de input (CORREÇÃO AQUI - usando setFilters em vez de setFilter)
                     searchInput.addEventListener('input', (e) => {
-                        catalogInstance.filterManager.setFilter('searchTerm', e.target.value.toLowerCase().trim());
+                        catalogInstance.filterManager.setFilters({
+                            searchTerm: e.target.value.toLowerCase().trim()
+                        });
                     });
 
                     // Sincroniza o valor do input com o estado atual do filtro
