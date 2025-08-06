@@ -2,18 +2,58 @@ export class FilterManager {
     constructor({ container, initialSort = 'name', onFilterChange }) {
         this.container = container;
         this.onFilterChange = onFilterChange;
-        this.isReady = false; // Flag para controlar quando está pronto
+        this.isReady = false;
 
         // Filter state
         this.filters = {
             searchTerm: '',
             platform: 'all',
             genre: 'all',
-            availability: 'available'
+            availability: 'all' // Alterado para 'all' como padrão
         };
 
         this.sortBy = initialSort;
-        this.sortDirection = 'asc'; // 'asc' or 'desc'
+        this.sortDirection = 'asc';
+
+        // Centralized filter options
+        this.filterOptions = {
+            platform: [
+                { value: 'all', text: 'All Platforms' },
+                { value: 'playstation', text: 'PlayStation' },
+                { value: 'xbox', text: 'Xbox' },
+                { value: 'switch', text: 'Switch' },
+                { value: 'pc', text: 'PC' }
+            ],
+            genre: [
+                { value: 'all', text: 'All Games' },
+                { value: 'action', text: 'Action' },
+                { value: 'adventure', text: 'Adventure' },
+                { value: 'rpg', text: 'RPG' },
+                { value: 'fps', text: 'FPS' },
+                { value: 'sports', text: 'Sports' },
+                { value: 'racing', text: 'Racing' },
+                { value: 'horror', text: 'Horror' },
+                { value: 'strategy', text: 'Strategy' },
+                { value: 'simulation', text: 'Simulation' },
+                { value: 'fighting', text: 'Fighting' },
+                { value: 'platform', text: 'Platform' },
+                { value: 'rhythm', text: 'Rhythm' },
+                { value: 'moba', text: 'MOBA' },
+                { value: 'sandbox', text: 'Sandbox' },
+                { value: 'competitive', text: 'Competitive' },
+                { value: 'party', text: 'Party' }
+            ],
+            availability: [
+                { value: 'all', text: 'All' },
+                { value: 'available', text: 'Available Now' },
+                { value: 'unavailable', text: 'Unavailable' }
+            ],
+            sortBy: [
+                { value: 'name', text: 'Name' },
+                { value: 'price', text: 'Price' },
+                { value: 'rating', text: 'Rating' },
+            ]
+        };
 
         this.init();
         this.checkInitialFilters();
@@ -24,10 +64,9 @@ export class FilterManager {
         this.setupEventListeners();
     }
 
-    // Método para indicar que o filtro está pronto para ser usado
     setReady() {
         this.isReady = true;
-        this.onFilterChange(); // Dispara uma atualização inicial
+        this.onFilterChange();
     }
 
     checkInitialFilters() {
@@ -47,17 +86,13 @@ export class FilterManager {
         Object.keys(filters).forEach(key => {
             if (key in this.filters) {
                 this.filters[key] = filters[key];
-                // Update UI if element exists
                 const element = this.container.querySelector(`#${key}-filter`);
                 if (element) {
                     element.value = filters[key];
                 }
-
-                // Atualiza o texto visível do dropdown
                 this.updateDropdownText(key, filters[key]);
             }
 
-            // Handle sort options
             if (key === 'sortBy') {
                 this.sortBy = filters[key];
                 const sortElement = this.container.querySelector('#sort-by');
@@ -76,271 +111,74 @@ export class FilterManager {
             }
         });
 
-        // Só dispara onFilterChange se estiver pronto
         if (this.isReady) {
             this.onFilterChange();
         }
     }
 
-// Novo método auxiliar para atualizar o texto de um dropdown específico
-    updateDropdownText(filterName, value) {
-        const options = this.getOptionsForFilter(filterName);
-        if (!options) return;
-
-        const selectedText = options.find(opt => opt.value === value)?.text || options[0].text;
-
-        let dropdownSelector;
-        switch(filterName) {
-            case 'platform':
-                dropdownSelector = '.platform-dropdown .dropdown-selected';
-                break;
-            case 'genre':
-                dropdownSelector = '.genre-dropdown .dropdown-selected';
-                break;
-            case 'availability':
-                dropdownSelector = '.availability-dropdown .dropdown-selected';
-                break;
-            case 'sortBy':
-                dropdownSelector = '.sort-dropdown .dropdown-selected';
-                break;
-            default:
-                return;
-        }
-
-        const dropdownSelected = this.container.querySelector(dropdownSelector);
-        if (dropdownSelected) {
-            dropdownSelected.textContent = selectedText;
-        }
-
-        // Atualiza a seleção visual das opções
-        const dropdown = this.container.querySelector(dropdownSelector)?.closest('.filter-pill');
-        if (dropdown) {
-            dropdown.querySelectorAll('.dropdown-option').forEach(opt => {
-                opt.classList.toggle('selected', opt.dataset.value === value);
-            });
-        }
+    getSelectedText(value, options) {
+        const option = options.find(opt => opt.value === value);
+        return option ? option.text : options[0].text;
     }
 
-// Método auxiliar para obter as opções de um filtro
-    getOptionsForFilter(filterName) {
-        switch(filterName) {
-            case 'platform':
-                return [
-                    { value: 'all', text: 'All Platforms' },
-                    { value: 'playstation', text: 'PlayStation' },
-                    { value: 'xbox', text: 'Xbox' },
-                    { value: 'switch', text: 'Switch' },
-                    { value: 'pc', text: 'PC' }
-                ];
-            case 'genre':
-                return [
-                    { value: 'all', text: 'All Games' },
-                    { value: 'action', text: 'Action' },
-                    { value: 'adventure', text: 'Adventure' },
-                    { value: 'rpg', text: 'RPG' },
-                    { value: 'fps', text: 'FPS' },
-                    { value: 'sports', text: 'Sports' },
-                    { value: 'racing', text: 'Racing' },
-                    { value: 'horror', text: 'Horror' },
-                    { value: 'strategy', text: 'Strategy' },
-                    { value: 'simulation', text: 'Simulation' },
-                    { value: 'fighting', text: 'Fighting' },
-                    { value: 'platform', text: 'Platform' },
-                    { value: 'rhythm', text: 'Rhythm' },
-                    { value: 'moba', text: 'MOBA' },
-                    { value: 'sandbox', text: 'Sandbox' },
-                    { value: 'competitive', text: 'Competitive' },
-                    { value: 'party', text: 'Party' }
-                ];
-            case 'availability':
-                return [
-                    { value: 'available', text: 'Available Now' },
-                    { value: 'all', text: 'All' },
-                    { value: 'unavailable', text: 'Unavailable' }
-                ];
-            case 'sortBy':
-                return [
-                    { value: 'name', text: 'Name' },
-                    { value: 'price', text: 'Price' },
-                    { value: 'rating', text: 'Rating' },
-                ];
-            default:
-                return null;
-        }
+    renderDropdown(filterName, label) {
+        const options = this.filterOptions[filterName];
+        const currentValue = filterName === 'sortBy' ? this.sortBy : this.filters[filterName];
+
+        return `
+            <div class="filter-pill ${filterName}-dropdown">
+                <label>${label}:</label>
+                <div class="dropdown-header">
+                    <span class="dropdown-selected">${this.getSelectedText(currentValue, options)}</span>
+                    <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+                    </svg>
+                </div>
+                <div class="dropdown-options">
+                    ${options.map(opt => `
+                        <div class="dropdown-option ${currentValue === opt.value ? 'selected' : ''}" 
+                             data-value="${opt.value}">
+                            ${opt.text}
+                        </div>
+                    `).join('')}
+                </div>
+                <select id="${filterName}-filter" style="display: none;">
+                    ${options.map(opt => `
+                        <option value="${opt.value}" ${currentValue === opt.value ? 'selected' : ''}>
+                            ${opt.text}
+                        </option>
+                    `).join('')}
+                </select>
+            </div>
+        `;
     }
 
     renderControls() {
         const controlsContainer = this.container.querySelector('.catalog-controls');
         if (!controlsContainer) return;
 
-        // Helper para criar texto selecionado
-        const getSelectedText = (value, options) => {
-            const option = options.find(opt => opt.value === value);
-            return option ? option.text : options[0].text;
-        };
-
-        // Opções para cada dropdown
-        const platformOptions = [
-            { value: 'all', text: 'All Platforms' },
-            { value: 'playstation', text: 'PlayStation' },
-            { value: 'xbox', text: 'Xbox' },
-            { value: 'switch', text: 'Switch' },
-            { value: 'pc', text: 'PC' }
-        ];
-
-        const genreOptions = [
-            { value: 'all', text: 'All Games' },
-            { value: 'action', text: 'Action' },
-            { value: 'adventure', text: 'Adventure' },
-            { value: 'rpg', text: 'RPG' },
-            { value: 'fps', text: 'FPS' },
-            { value: 'sports', text: 'Sports' },
-            { value: 'racing', text: 'Racing' },
-            { value: 'horror', text: 'Horror' },
-            { value: 'strategy', text: 'Strategy' },
-            { value: 'simulation', text: 'Simulation' },
-            { value: 'fighting', text: 'Fighting' },
-            { value: 'platform', text: 'Platform' },
-            { value: 'rhythm', text: 'Rhythm' },
-            { value: 'moba', text: 'MOBA' },
-            { value: 'sandbox', text: 'Sandbox' },
-            { value: 'competitive', text: 'Competitive' },
-            { value: 'party', text: 'Party' }
-        ];
-
-        const availabilityOptions = [
-            { value: 'available', text: 'Available Now' },
-            { value: 'all', text: 'All' },
-            { value: 'unavailable', text: 'Unavailable' }
-        ];
-
-        const sortOptions = [
-            { value: 'name', text: 'Name' },
-            { value: 'price', text: 'Price' },
-            { value: 'rating', text: 'Rating' },
-        ];
-
+        // Adicionando campo de busca
         controlsContainer.innerHTML = `
-    <div class="filter-row">
-        <!-- Platform Dropdown -->
-        <div class="filter-pill platform-dropdown">
-            <label>Platform:</label>
-            <div class="dropdown-header">
-                <span class="dropdown-selected">${getSelectedText(this.filters.platform, platformOptions)}</span>
-                <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M7 10l5 5 5-5z"/>
-                </svg>
+            <div class="filter-row">
+                <div class="search-box">
+                </div>
+                ${this.renderDropdown('platform', 'Platform')}
+                ${this.renderDropdown('genre', 'Game')}
+                ${this.renderDropdown('availability', 'Availability')}
+                ${this.renderDropdown('sortBy', 'Sort By')}
+                
+                <button class="sort-direction-btn" aria-label="Toggle sort direction">
+                    <span class="sort-icon">${this.sortDirection === 'asc' ? '↑' : '↓'}</span>
+                </button>
+                
+                <button class="clear-filters-btn">Reset Filters</button>
             </div>
-            <div class="dropdown-options">
-                ${platformOptions.map(opt => `
-                    <div class="dropdown-option ${this.filters.platform === opt.value ? 'selected' : ''}" 
-                         data-value="${opt.value}">
-                        ${opt.text}
-                    </div>
-                `).join('')}
-            </div>
-            <select id="platform-filter" style="display: none;">
-                ${platformOptions.map(opt => `
-                    <option value="${opt.value}" ${this.filters.platform === opt.value ? 'selected' : ''}>
-                        ${opt.text}
-                    </option>
-                `).join('')}
-            </select>
-        </div>
-        
-        <!-- Genre Dropdown -->
-        <div class="filter-pill genre-dropdown">
-            <label>Game:</label>
-            <div class="dropdown-header">
-                <span class="dropdown-selected">${getSelectedText(this.filters.genre, genreOptions)}</span>
-                <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M7 10l5 5 5-5z"/>
-                </svg>
-            </div>
-            <div class="dropdown-options">
-                ${genreOptions.map(opt => `
-                    <div class="dropdown-option ${this.filters.genre === opt.value ? 'selected' : ''}" 
-                         data-value="${opt.value}">
-                        ${opt.text}
-                    </div>
-                `).join('')}
-            </div>
-            <select id="genre-filter" style="display: none;">
-                ${genreOptions.map(opt => `
-                    <option value="${opt.value}" ${this.filters.genre === opt.value ? 'selected' : ''}>
-                        ${opt.text}
-                    </option>
-                `).join('')}
-            </select>
-        </div>
-        
-        <!-- Availability Dropdown -->
-        <div class="filter-pill availability-dropdown">
-            <label>Availability:</label>
-            <div class="dropdown-header">
-                <span class="dropdown-selected">${getSelectedText(this.filters.availability, availabilityOptions)}</span>
-                <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M7 10l5 5 5-5z"/>
-                </svg>
-            </div>
-            <div class="dropdown-options">
-                ${availabilityOptions.map(opt => `
-                    <div class="dropdown-option ${this.filters.availability === opt.value ? 'selected' : ''}" 
-                         data-value="${opt.value}">
-                        ${opt.text}
-                    </div>
-                `).join('')}
-            </div>
-            <select id="availability-filter" style="display: none;">
-                ${availabilityOptions.map(opt => `
-                    <option value="${opt.value}" ${this.filters.availability === opt.value ? 'selected' : ''}>
-                        ${opt.text}
-                    </option>
-                `).join('')}
-            </select>
-        </div>
-        
-        <!-- Sort By Dropdown -->
-        <div class="filter-pill sort-dropdown sort-group">
-            <label>Sort By:</label>
-            <div class="dropdown-header">
-                <span class="dropdown-selected">${getSelectedText(this.sortBy, sortOptions)}</span>
-                <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M7 10l5 5 5-5z"/>
-                </svg>
-            </div>
-            <div class="dropdown-options">
-                ${sortOptions.map(opt => `
-                    <div class="dropdown-option ${this.sortBy === opt.value ? 'selected' : ''}" 
-                         data-value="${opt.value}">
-                        ${opt.text}
-                    </div>
-                `).join('')}
-            </div>
-            <select id="sort-by" style="display: none;">
-                ${sortOptions.map(opt => `
-                    <option value="${opt.value}" ${this.sortBy === opt.value ? 'selected' : ''}>
-                        ${opt.text}
-                    </option>
-                `).join('')}
-            </select>
-        </div>
-        
-        <!-- Sort Direction Button -->
-        <button class="sort-direction-btn" aria-label="Toggle sort direction">
-            <span class="sort-icon">${this.sortDirection === 'asc' ? '↑' : '↓'}</span>
-        </button>
-        
-        <!-- Reset Button -->
-        <button class="clear-filters-btn">Reset Filters</button>
-    </div>
-`;
+        `;
 
         this.setupDropdowns();
     }
 
     setupDropdowns() {
-        // Fecha dropdowns ao clicar fora
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.filter-pill')) {
                 document.querySelectorAll('.filter-pill').forEach(pill => {
@@ -349,7 +187,6 @@ export class FilterManager {
             }
         });
 
-        // Configura cada dropdown
         document.querySelectorAll('.filter-pill').forEach(pill => {
             const header = pill.querySelector('.dropdown-header');
             const options = pill.querySelectorAll('.dropdown-option');
@@ -357,13 +194,9 @@ export class FilterManager {
 
             header.addEventListener('click', (e) => {
                 e.stopPropagation();
-
-                // Fecha outros dropdowns abertos
                 document.querySelectorAll('.filter-pill').forEach(p => {
                     if (p !== pill) p.classList.remove('open');
                 });
-
-                // Abre/fecha o atual
                 pill.classList.toggle('open');
             });
 
@@ -373,114 +206,65 @@ export class FilterManager {
                     const value = option.dataset.value;
                     const text = option.textContent;
 
-                    // Atualiza visual
                     pill.querySelector('.dropdown-selected').textContent = text;
                     pill.classList.remove('open');
 
-                    // Atualiza seleção
                     options.forEach(opt => opt.classList.remove('selected'));
                     option.classList.add('selected');
 
-                    // Atualiza o select hidden
                     hiddenSelect.value = value;
-
-                    // Dispara evento de change
-                    const event = new Event('change');
-                    hiddenSelect.dispatchEvent(event);
+                    hiddenSelect.dispatchEvent(new Event('change'));
                 });
             });
 
-            // Mantém sincronizado com eventos do select original
             hiddenSelect.addEventListener('change', () => {
-                if (hiddenSelect.id === 'platform-filter') {
-                    this.filters.platform = hiddenSelect.value;
-                } else if (hiddenSelect.id === 'genre-filter') {
-                    this.filters.genre = hiddenSelect.value;
-                } else if (hiddenSelect.id === 'availability-filter') {
-                    this.filters.availability = hiddenSelect.value;
-                } else if (hiddenSelect.id === 'sort-by') {
+                const filterName = hiddenSelect.id.replace('-filter', '');
+
+                if (filterName === 'sortBy') {
                     this.sortBy = hiddenSelect.value;
+                } else {
+                    this.filters[filterName] = hiddenSelect.value;
                 }
+
                 this.onFilterChange();
             });
         });
 
-        // Configura o botão Reset
         const resetBtn = this.container.querySelector('.clear-filters-btn');
         if (resetBtn) {
-            resetBtn.addEventListener('click', () => {
-                // Reseta os valores internos
-                this.filters = {
-                    platform: 'all',
-                    genre: 'all',
-                    availability: 'available'
-                };
-                this.sortBy = 'name';
-                this.sortDirection = 'asc';
+            resetBtn.addEventListener('click', () => this.clearFilters());
+        }
+    }
 
-                // Atualiza os textos dos dropdowns
-                this.updateDropdownTexts();
+    updateDropdownText(filterName, value) {
+        const options = this.filterOptions[filterName];
+        if (!options) return;
 
-                // Dispara a atualização
-                this.onFilterChange();
+        const selectedText = options.find(opt => opt.value === value)?.text || options[0].text;
+        const dropdownSelector = `.${filterName}-dropdown .dropdown-selected`;
+        const dropdownSelected = this.container.querySelector(dropdownSelector);
+
+        if (dropdownSelected) {
+            dropdownSelected.textContent = selectedText;
+        }
+
+        const dropdown = this.container.querySelector(dropdownSelector)?.closest('.filter-pill');
+        if (dropdown) {
+            dropdown.querySelectorAll('.dropdown-option').forEach(opt => {
+                opt.classList.toggle('selected', opt.dataset.value === value);
             });
         }
     }
 
-// Novo método para atualizar os textos dos dropdowns
-    updateDropdownTexts() {
-        const platformOptions = [
-            { value: 'all', text: 'All Platforms' },
-            // ... outras opções
-        ];
-
-        const genreOptions = [
-            { value: 'all', text: 'All Games' },
-            // ... outras opções
-        ];
-
-        const availabilityOptions = [
-            { value: 'available', text: 'Available Now' },
-            // ... outras opções
-        ];
-
-        const sortOptions = [
-            { value: 'name', text: 'Name' },
-            // ... outras opções
-        ];
-
-        // Atualiza os textos visíveis
-        const platformSelected = this.container.querySelector('.platform-dropdown .dropdown-selected');
-        if (platformSelected) platformSelected.textContent = 'All Platforms';
-
-        const genreSelected = this.container.querySelector('.genre-dropdown .dropdown-selected');
-        if (genreSelected) genreSelected.textContent = 'All Games';
-
-        const availabilitySelected = this.container.querySelector('.availability-dropdown .dropdown-selected');
-        if (availabilitySelected) availabilitySelected.textContent = 'Available Now';
-
-        const sortSelected = this.container.querySelector('.sort-dropdown .dropdown-selected');
-        if (sortSelected) sortSelected.textContent = 'Name';
-
-        const sortIcon = this.container.querySelector('.sort-icon');
-        if (sortIcon) sortIcon.textContent = '↑';
-
-        // Atualiza as seleções internas
-        document.querySelectorAll('.dropdown-option.selected').forEach(opt => {
-            opt.classList.remove('selected');
+    updateAllDropdownTexts() {
+        Object.keys(this.filters).forEach(filter => {
+            this.updateDropdownText(filter, this.filters[filter]);
         });
-
-        // Marca as opções padrão como selecionadas
-        document.querySelectorAll('.dropdown-option').forEach(opt => {
-            if (opt.dataset.value === 'all' ||
-                (opt.closest('.sort-dropdown') && opt.dataset.value === 'name')) {
-                opt.classList.add('selected');
-            }
-        });
+        this.updateDropdownText('sortBy', this.sortBy);
     }
 
     setupEventListeners() {
-        // Search input
+        // Configuração do input de busca
         const searchInput = this.container.querySelector('#search-name');
         if (searchInput) {
             searchInput.addEventListener('input', (e) => {
@@ -489,43 +273,33 @@ export class FilterManager {
             });
         }
 
-        // Platform filter
-        const platformFilter = this.container.querySelector('#platform-filter');
-        if (platformFilter) {
-            platformFilter.addEventListener('change', (e) => {
+        // Mapeamento de eventos genéricos
+        const eventMap = {
+            '#platform-filter': (e) => {
                 this.filters.platform = e.target.value;
                 this.onFilterChange();
-            });
-        }
-
-        // Genre filter
-        const genreFilter = this.container.querySelector('#genre-filter');
-        if (genreFilter) {
-            genreFilter.addEventListener('change', (e) => {
+            },
+            '#genre-filter': (e) => {
                 this.filters.genre = e.target.value;
                 this.onFilterChange();
-            });
-        }
-
-        // Availability filter
-        const availabilityFilter = this.container.querySelector('#availability-filter');
-        if (availabilityFilter) {
-            availabilityFilter.addEventListener('change', (e) => {
+            },
+            '#availability-filter': (e) => {
                 this.filters.availability = e.target.value;
                 this.onFilterChange();
-            });
-        }
-
-        // Sort by
-        const sortBy = this.container.querySelector('#sort-by');
-        if (sortBy) {
-            sortBy.addEventListener('change', (e) => {
+            },
+            '#sort-by': (e) => {
                 this.sortBy = e.target.value;
                 this.onFilterChange();
-            });
-        }
+            }
+        };
 
-        // Sort direction
+        Object.entries(eventMap).forEach(([selector, handler]) => {
+            const element = this.container.querySelector(selector);
+            if (element) {
+                element.addEventListener('change', handler);
+            }
+        });
+
         const sortDirectionBtn = this.container.querySelector('.sort-direction-btn');
         if (sortDirectionBtn) {
             sortDirectionBtn.addEventListener('click', () => {
@@ -534,12 +308,9 @@ export class FilterManager {
             });
         }
 
-        // Clear filters button
         const clearFiltersBtn = this.container.querySelector('.clear-filters-btn');
         if (clearFiltersBtn) {
-            clearFiltersBtn.addEventListener('click', () => {
-                this.clearFilters();
-            });
+            clearFiltersBtn.addEventListener('click', () => this.clearFilters());
         }
     }
 
@@ -557,30 +328,33 @@ export class FilterManager {
             searchTerm: '',
             platform: 'all',
             genre: 'all',
-            availability: 'available'
+            availability: 'all' // Alterado para 'all' como padrão
         };
-
-        this.sortBy = 'rating';
+        this.sortBy = 'name'; // Alterado para 'name' como padrão
         this.sortDirection = 'asc';
 
-        // Update UI elements to reflect cleared state
+        // Atualiza os valores dos inputs
         const searchInput = this.container.querySelector('#search-name');
         if (searchInput) searchInput.value = '';
 
-        const platformFilter = this.container.querySelector('#platform-filter');
-        if (platformFilter) platformFilter.value = 'all';
+        const elementsToUpdate = {
+            '#platform-filter': 'all',
+            '#genre-filter': 'all',
+            '#availability-filter': 'all',
+            '#sort-by': 'name'
+        };
 
-        const genreFilter = this.container.querySelector('#genre-filter');
-        if (genreFilter) genreFilter.value = 'all';
+        Object.entries(elementsToUpdate).forEach(([selector, value]) => {
+            const element = this.container.querySelector(selector);
+            if (element) element.value = value;
+        });
 
-        const availabilityFilter = this.container.querySelector('#availability-filter');
-        if (availabilityFilter) availabilityFilter.value = 'available';
-
-        const sortBy = this.container.querySelector('#sort-by');
-        if (sortBy) sortBy.value = 'rating';
-
+        // Atualiza ícone de direção
         const icon = this.container.querySelector('.sort-icon');
         if (icon) icon.textContent = '↑';
+
+        // Atualiza textos dos dropdowns
+        this.updateAllDropdownTexts();
 
         // Trigger filter change
         if (this.isReady) {
@@ -592,16 +366,22 @@ export class FilterManager {
         if (!games || !Array.isArray(games)) return [];
 
         return games.filter(game => {
-            const nameMatch = game.name.toLowerCase().includes(this.filters.searchTerm);
-            const platformMatch = this.filters.platform === 'all' || game.platform === this.filters.platform;
+            const nameMatch = this.filters.searchTerm === '' ||
+                game.name.toLowerCase().includes(this.filters.searchTerm);
+            const platformMatch = this.filters.platform === 'all' ||
+                game.platform === this.filters.platform;
             const genreMatch = this.filters.genre === 'all' ||
                 (game.category && game.category.includes(this.filters.genre));
-            const availabilityMatch = this.filters.availability === 'all' ||
-                (this.filters.availability === 'available' && game.available) ||
-                (this.filters.availability === 'unavailable' && !game.available);
+
+            // A disponibilidade não afeta quando estamos pesquisando por nome
+            const availabilityMatch = this.filters.searchTerm === ''
+                ? (this.filters.availability === 'all' ||
+                    (this.filters.availability === 'available' && game.available) ||
+                    (this.filters.availability === 'unavailable' && !game.available))
+                : true;
 
             return nameMatch && platformMatch && genreMatch && availabilityMatch;
-        });
+        }).sort(this.getSortFunction());
     }
 
     getSortFunction() {
@@ -611,12 +391,19 @@ export class FilterManager {
             case 'name':
                 return (a, b) => a.name.localeCompare(b.name) * directionModifier;
             case 'price':
-                return (a, b) => (a.originalPrice - b.originalPrice) * directionModifier;
-            case 'rentalPrice':
-                return (a, b) => (a.rentalPrice - b.rentalPrice) * directionModifier;
+                return (a, b) => {
+                    const priceA = a.originalPrice || 0;
+                    const priceB = b.originalPrice || 0;
+                    return (priceA - priceB) * directionModifier;
+                };
             case 'rating':
+                return (a, b) => {
+                    const ratingA = a.rating || 0;
+                    const ratingB = b.rating || 0;
+                    return (ratingB - ratingA) * directionModifier;
+                };
             default:
-                return (a, b) => (b.rating - a.rating) * directionModifier;
+                return (a, b) => a.name.localeCompare(b.name);
         }
     }
 }
