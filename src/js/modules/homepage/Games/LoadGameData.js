@@ -129,11 +129,6 @@ export class LoadGameData {
      * @param {Object} game - Game data object
      * @returns {string} - HTML string of the card
      */
-    /**
-     * Generates the HTML structure for a single game card
-     * @param {Object} game - Game data object
-     * @returns {string} - HTML string of the card
-     */
     createCardHTML(game) {
         const fullStars = Math.floor(game.rating);
         const halfStar = game.rating % 1 >= 0.5;
