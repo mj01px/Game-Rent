@@ -10,6 +10,14 @@ export function openCartModal() {
     const closeCart = document.getElementById('close-cart');
     const openCartBtn = document.querySelector('.cart-icon');
 
+    const button = document.querySelector('.checkout-btn');
+
+    if (button) {
+        button.addEventListener('click', () => {
+            window.location.href = '../../components/finishBuy/finish-buy.html'; // Adjust the path as necessary
+        });
+    }
+
     // If any required element is missing, retry initialization after 100ms
     if (!cartModal || !closeCart || !openCartBtn) {
         console.warn('Cart modal elements not found, retrying in 100ms');

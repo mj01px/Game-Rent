@@ -1,0 +1,81 @@
+.game-item {
+    display: flex;
+    padding: 20px 0;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.game-item:last-child {
+    border-bottom: none;
+}
+
+.game-item-image {
+    width: 100px;
+    height: 130px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.game-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.game-item:hover .game-item-image img {
+    transform: scale(1.05);
+}
+
+.game-item-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.game-item-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+.platform {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+}
+
+.platform.xbox { background: #107c10; }
+.platform.playstation { background: #003087; }
+
+.rental-price-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.price-amount {
+    font-weight: 600;
+    color: #2ecc71;
+    font-size: 1.1rem;
+}
+
+.price-period {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-top: 4px;
+}
+
+/* Responsivo para jogos */
+@media (max-width: 768px) {
+    .game-item-image {
+        width: 80px;
+        height: 110px;
+    }
+}

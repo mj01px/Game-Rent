@@ -4,18 +4,21 @@ export class FilterManager {
         this.onFilterChange = onFilterChange;
         this.isReady = false;
 
+        // Referência ao input de busca na navbar
+        this.navbarSearchInput = document.querySelector('.catalog-navbar #search-name');
+
         // Filter state
         this.filters = {
             searchTerm: '',
             platform: 'all',
             genre: 'all',
-            availability: 'all' // Alterado para 'all' como padrão
+            availability: 'all'
         };
 
         this.sortBy = initialSort;
         this.sortDirection = 'asc';
 
-        // Centralized filter options
+        // Centralized filter options (mantido igual)
         this.filterOptions = {
             platform: [
                 { value: 'all', text: 'All Platforms' },
@@ -58,7 +61,6 @@ export class FilterManager {
         this.init();
         this.checkInitialFilters();
     }
-
     init() {
         this.renderControls();
         this.setupEventListeners();
@@ -328,15 +330,17 @@ export class FilterManager {
             searchTerm: '',
             platform: 'all',
             genre: 'all',
-            availability: 'all' // Alterado para 'all' como padrão
+            availability: 'all'
         };
-        this.sortBy = 'name'; // Alterado para 'name' como padrão
+        this.sortBy = 'name';
         this.sortDirection = 'asc';
 
-        // Atualiza os valores dos inputs
-        const searchInput = this.container.querySelector('#search-name');
-        if (searchInput) searchInput.value = '';
+        // Limpa o input da navbar
+        if (this.navbarSearchInput) {
+            this.navbarSearchInput.value = '';
+        }
 
+        // Atualiza os selects
         const elementsToUpdate = {
             '#platform-filter': 'all',
             '#genre-filter': 'all',
@@ -360,7 +364,7 @@ export class FilterManager {
         if (this.isReady) {
             this.onFilterChange();
         }
-    }
+    }   
 
     applyFilters(games) {
         if (!games || !Array.isArray(games)) return [];
