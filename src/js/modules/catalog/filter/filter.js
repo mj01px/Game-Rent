@@ -404,10 +404,10 @@ export class FilterManager {
                 return (a, b) => {
                     const ratingA = a.rating || 0;
                     const ratingB = b.rating || 0;
-                    return (ratingB - ratingA) * directionModifier;
+                    return (ratingA - ratingB) * directionModifier;
                 };
             default:
-                return (a, b) => a.name.localeCompare(b.name);
+                return (a, b) => a.name.localeCompare(b.name) * directionModifier;
         }
     }
 }
