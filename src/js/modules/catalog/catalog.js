@@ -1,6 +1,7 @@
 import { games } from '../../data/games.js';
 import { FilterManager } from './filter/filter.js';
 import { PaginationManager } from './pagination/pagination.js';
+import { addToCart } from '../homepage/Cart/CartUI.js';
 
 export class GameCatalog {
     constructor(containerSelector, options = {}) {
@@ -198,10 +199,10 @@ export class GameCatalog {
         const game = this.filteredGames.find(g => g.id === gameId);
         if (game) {
             console.log('Adding to cart:', game.name);
-            if (window.addToCart) {
-                window.addToCart(game);
-            } else {
-                console.error('addToCart function not found');
+            try {
+                addToCart(game);
+            } catch (error) {
+                console.error('Failed to add game to cart:', error);
             }
         }
     }
