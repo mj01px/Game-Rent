@@ -1,0 +1,700 @@
+/* ==============================
+   GameRent — Finish Buy (from scratch)
+   ============================== */
+@import url('payment-modal/payment-modal.css');
+
+@import url('sucess-modal/sucess-modal.css');
+
+@import url('empty-cart/empty-cart.css');
+/* 🎨 Variáveis globais de cor, espaçamento e estilo */
+:root{
+    --blue:#3498db;      /* Azul principal */
+    --blue-700:#2980b9;  /* Azul mais escuro (hover) */
+    --green:#509140;     /* Verde principal */
+    --green-700:#468536; /* Verde mais escuro (hover) */
+    --text:#2c3e50;      /* Texto padrão */
+    --muted:#7f8c8d;     /* Texto secundário / apagado */
+    --bg:#f5f6f8;        /* Fundo geral da página */
+    --card:#ffffff;      /* Fundo dos cards */
+    --border:#e8ecf1;    /* Cor padrão de bordas */
+    --shadow:0 12px 30px rgba(0,0,0,.08); /* Sombra padrão */
+    --radius:14px;       /* Raio padrão de borda */
+}
+
+/* Reset para box-sizing em todos elementos */
+*{box-sizing:border-box}
+
+/* HTML e BODY ocupando toda altura */
+html,body{height:100%}
+
+/* Configurações gerais do body */
+body{
+    margin:0;
+    font-family:'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; /* Fonte */
+    background:var(--bg);  /* Cor de fundo */
+    color:var(--text);     /* Cor de texto */
+}
+
+/* ===== Layout base ===== */
+
+.fb-col-left{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+
+/* Área principal da página de finalização */
+.fb-page{
+    padding:56px 0px 72px; /* Espaçamento vertical */
+}
+
+/* Container central com largura máxima */
+.fb-container{
+    max-width:1300px;   /* Largura máxima */
+    margin:0 auto;      /* Centraliza */
+    padding:0 20px;     /* Espaçamento interno horizontal */
+
+}
+
+/* Título principal */
+.fb-title{
+    margin:0 0 24px;    /* Margem inferior */
+    font-size:2rem;     /* Tamanho da fonte */
+    font-weight:800;    /* Negrito */
+    text-align:center;  /* Centralizado */
+    position:relative;  /* Necessário para o ::after */
+    padding-bottom:12px;/* Espaço para a barra decorativa */
+}
+
+/* Linha decorativa abaixo do título */
+.fb-title::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%); /* Centraliza horizontalmente */
+    bottom:0;
+    width:90px;
+    height:4px;
+    background:var(--blue); /* Azul principal */
+    border-radius:3px;
+    box-shadow:0 2px 10px rgba(52,152,219,.35); /* Sombra suave */
+}
+
+/* ===== Grid principal ===== */
+.fb-grid{
+    display:grid;
+    gap:28px; /* Espaçamento entre colunas */
+    grid-template-columns: minmax(0,1.6fr) minmax(320px,1fr); /* Coluna maior à esquerda e menor à direita */
+}
+
+/* Responsividade: em telas menores, vira uma coluna só */
+@media (max-width:980px){
+    .fb-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+/* ===== Cards ===== */
+.fb-card{
+    background:var(--card);          /* Fundo branco */
+    border:1px solid var(--border);  /* Borda leve */
+    border-radius:var(--radius);     /* Bordas arredondadas */
+    box-shadow:var(--shadow);        /* Sombra */
+    overflow:hidden;                 /* Esconde conteúdo que sair */
+    display:flex;
+    flex-direction:column;           /* Layout em coluna */
+}
+
+/* Cabeçalho do card */
+.fb-card__header{
+    display:flex;
+    align-items:center;
+    gap:10px; /* Espaço entre ícone e título */
+    padding:18px 20px;
+    border-bottom:1px solid var(--border);
+
+}
+
+/* Texto do cabeçalho */
+.fb-card__header h2{
+    margin:0;
+    font-size:1.15rem;
+    font-weight:800;
+}
+
+/* Ícone do cabeçalho */
+.fb-card__header i{
+    color:var(--blue);
+}
+
+/* Corpo do card */
+.fb-card__body {
+    padding: 8px 12px; /* menos espaçamento interno */
+}
+
+/* ===== Lista de itens ===== */
+
+/* Contêiner dos itens */
+#fb-items{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+/* Cada item da lista */
+.fb-item{
+    display:grid;
+    grid-template-columns:110px 1fr auto; /* Imagem | infos | preço */
+    gap:14px;
+    align-items:center;
+    padding:10px 0;
+    border-bottom:1px solid var(--border);]
+
+}
+
+/* Remove borda do último item */
+.fb-item:last-child{
+    border-bottom:none;
+}
+
+/* Área da imagem */
+.fb-item__img{
+    position:relative;
+    width:110px;
+    height:140px;
+    border-radius:10px;
+    overflow:hidden;
+    background:#ddd;
+    box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+/* Imagem interna */
+.fb-item__img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .35s;
+}
+
+/* Zoom leve no hover */
+.fb-item:hover .fb-item__img img{
+    transform:scale(1.05);
+}
+
+/* Badge da plataforma (dentro da imagem) */
+.fb-item__img .platform{
+    position:absolute;
+    top:8px;
+    left:8px;
+    font-size:.72rem;
+    padding:4px 8px;
+    border-radius:4px;
+}
+
+/* Badge de indisponível */
+.fb-item__img .unavailable-badge{
+    position:absolute;
+    bottom:8px;
+    right:8px;
+    font-size:.72rem;
+    padding:4px 6px;
+}
+
+/* Infos do jogo */
+.fb-item__meta{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+/* Nome do jogo */
+.fb-item__title{
+    font-weight:800;
+    font-size:1rem;
+    margin:0;
+}
+
+/* Avaliação */
+.game-rating{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:#f39c12;
+}
+.game-rating span{
+    color:var(--muted);
+    font-size:.92rem;
+}
+
+/* Preços */
+.game-price{
+    margin-top:6px;
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+}
+.original-price{
+    text-decoration:line-through;
+    color:#7f8c8d;
+    font-size:.9rem;
+}
+.rental-price{
+    font-weight:700;
+    color:#2ecc71;
+}
+
+/* Preço à direita */
+.fb-item__price{
+    text-align:right;
+    font-weight:800;
+    color:#2ecc71;
+}
+
+/* ===== Resumo da compra ===== */
+
+/* Container das linhas do resumo */
+#fb-summary-lines{
+    display:flex;
+    flex-direction:column;
+}
+
+/* Linha do resumo (nome e valor) */
+.fb-row{
+    display:flex;
+    justify-content:space-between; /* Nome à esquerda, valor à direita */
+    align-items:center;
+    padding:10px 0;
+    border-top:1px solid #f0f2f6;
+}
+
+/* Remove a borda da primeira linha */
+.fb-row:first-child{
+    border-top:none;
+}
+
+/* Separador visual entre blocos */
+.fb-sep{
+    border:none;
+    border-top:2px solid #eef1f5;
+    margin:8px 0 6px;
+}
+
+.fb-total{
+text-align: end;
+}
+
+/* Linha de total final */
+.fb-row--total{
+    padding-top: 10px ;
+    font-size:1.15rem;
+    font-weight:800;
+    color:#2c3e50;
+}
+
+/* Valores positivos (descontos) */
+.is-discount{
+    color:#2ecc71;
+}
+
+/* ===== Botões ===== */
+.fb-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px; /* Espaço entre ícone e texto */
+    padding:14px 18px;
+    border-radius:12px;
+    border:none;
+    cursor:pointer;
+    font-weight:500;
+    transition:all .15s ease;
+    user-select:none;
+}
+
+/* Botão principal (azul) */
+.fb-btn--primary{
+    background:var(--blue);
+    color:#fff;
+    width:100%;
+    margin-top:12px;
+    box-shadow:0 12px 24px rgba(52,152,219,.25);
+}
+.fb-btn--primary:hover{
+    background:var(--blue-700);
+    transform:translateY(-1px);
+}
+
+/* Botão de sucesso (verde) */
+.fb-btn--success{
+    background:var(--green);
+    color:#fff;
+}
+.fb-btn--success:hover{
+    background:var(--green-700);
+    transform:translateY(-1px);
+}
+
+/* Botão "fantasma" */
+.fb-btn--ghost{
+    background:#f4f7fb;
+    border:1px solid #e6ecf5;
+    color:#1b2a3a;
+}
+
+/* Foco acessível */
+.fb-btn:focus-visible{
+    outline:3px solid rgba(52,152,219,.45);
+    outline-offset:2px;
+}
+
+/* ===== Endereço de entrega ===== */
+.fb-address{
+    background:#f7fbff;
+    border:1px solid #e6f0fb;
+    border-radius:12px;
+    padding:12px 14px;
+    margin-bottom:16px;
+}
+.fb-address p{
+    margin:4px 0;
+}
+
+/* ===== Linha do tempo (status do pedido) ===== */
+.fb-timeline{
+    position:relative;
+    margin:6px 0 12px 34px; /* Espaço para o traço vertical */
+}
+
+/* Linha vertical */
+.fb-timeline::before{
+    content:"";
+    position:absolute;
+    left:-14px;
+    top:0;
+    bottom:0;
+    width:3px;
+    background:linear-gradient(180deg,#dfe9f3 0%,#cfd9e7 100%);
+    border-radius:3px;
+}
+
+/* Item da timeline */
+.fb-tl-item{
+    position:relative;
+    padding:10px 0 16px;
+}
+.fb-tl-item:last-child{
+    padding-bottom:8px;
+}
+
+/* Bolinha da timeline */
+.fb-tl-dot{
+    position:absolute;
+    left:-23px;
+    top:4px;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#dfe9f3;
+    border:2px solid #fff;
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+
+/* Estados ativos e concluídos */
+.fb-tl-item.active .fb-tl-dot,
+.fb-tl-item.done .fb-tl-dot{
+    background:#10b981;
+}
+
+/* Texto da timeline */
+.fb-tl-item h3{
+    margin:0 0 4px;
+    font-size:1rem;
+    font-weight:900;
+}
+.fb-tl-item p{
+    margin:0;
+    color:var(--muted);
+    font-size:.92rem;
+}
+
+/* ===== Rastreamento ===== */
+.fb-track label{
+    display:block;
+    font-weight:800;
+    margin:8px 0 6px;
+}
+.fb-track__row{
+    display:flex;
+    gap:8px;
+}
+.fb-track input{
+    flex:1;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #e6ecf5;
+    background:#fff;
+    font-weight:700;
+}
+
+/* ===== Overlays / Modal ===== */
+.fb-overlay{
+    position:fixed;
+    inset:0; /* top/right/bottom/left = 0 */
+    background:rgba(0,0,0,.6);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+    backdrop-filter: blur(4px); /* Efeito vidro fosco */
+}
+.fb-overlay.active{
+    display:flex;
+}
+
+/* Caixa do modal */
+.fb-modal{
+    width:min(560px,92vw);
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 32px 70px rgba(0,0,0,.35);
+    overflow:hidden;
+    transform:translateY(8px);
+    animation:fb-pop .2s ease-out forwards;
+}
+
+/* Animação do modal */
+@keyframes fb-pop{
+    to{transform:translateY(0)}
+}
+
+/* Cabeçalho do modal */
+.fb-modal__header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 18px;
+    border-bottom:1px solid var(--border);
+}
+.fb-modal__header h3{
+    margin:0;
+    font-weight:900;
+}
+
+/* Botão de fechar modal */
+.fb-modal__close{
+    background:transparent;
+    border:none;
+    font-size:1.6rem;
+    color:#8b97a4;
+    cursor:pointer;
+}
+.fb-modal__close:hover{
+    color:#5f6b76;
+}
+
+/* Corpo do modal */
+.fb-modal__body{
+    padding:16px 18px;
+}
+.fb-modal__body--center{
+    text-align:center;
+}
+
+/* Texto apagado */
+.fb-muted{
+    color:var(--muted);
+    margin:0 0 10px;
+}
+
+/* ===== Formulários ===== */
+.fb-form__row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+/* Em telas pequenas, uma coluna só */
+@media (max-width:520px){
+    .fb-form__row{
+        grid-template-columns:1fr;
+    }
+}
+
+/* Grupo de campo */
+.fb-form__group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin-bottom:12px;
+}
+.fb-form__group label{
+    font-weight:800;
+}
+.fb-form__group input{
+    padding:12px;
+    border:1px solid #e6ecf5;
+    border-radius:10px;
+    background:#fff;
+}
+
+/* Ícone de confirmação */
+.fb-ok-icon{
+    font-size:46px;
+    margin:8px auto 6px;
+}
+
+/* ===== Utilitários ===== */
+.hidden{
+    display:none!important;
+}
+
+/* ===== Controles de quantidade (checkout) ===== */
+.fb-cart-controls{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:8px;
+}
+.fb-qty-btn{
+    width:28px;
+    height:28px;
+    border:1px solid #e1e6ef;
+    background:#f7f9fc;
+    border-radius:6px;
+    font-weight:800;
+    cursor:pointer;
+    line-height:1;
+}
+.fb-qty-btn:hover{
+    background:#eef3fb;
+}
+.fb-qty{
+    min-width:20px;
+    text-align:center;
+    font-weight:700;
+}
+.fb-remove{
+    background:none;
+    border:1px solid #ffe1e1;
+    color:#e74c3c;
+    padding:6px 10px;
+    border-radius:6px;
+    font-weight:700;
+    cursor:pointer;
+}
+.fb-remove:hover{
+    background:#ffecec;
+}
+
+/* ===== Badge da plataforma (abaixo do nome) ===== */
+.fb-platform-row{
+    margin:2px 0 4px;
+}
+/* Reseta posição da badge quando está nessa área */
+.fb-platform-row .platform{
+    position: static; /* remove posicionamento absoluto */
+    top: auto;
+    right: auto;
+    display: inline-block;
+    font-size: .78rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+
+
+/* ===== Success Modal — upgrades ===== */
+
+.ok-header{
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(90deg, #e8f8f0, #f3fff8);
+}
+
+.ok-body{ position: relative; padding-top: 20px; }
+
+.ok-hero{ display:flex; flex-direction:column; align-items:center; gap:6px; margin-bottom:8px; }
+.ok-badge{
+    width:72px; height:72px; border-radius:50%;
+    display:grid; place-items:center;
+    background: linear-gradient(135deg, #34d399, #10b981);
+    box-shadow: 0 12px 22px rgba(16,185,129,.35);
+}
+.ok-badge svg{ display:block; }
+.ok-circle{ fill: none; stroke: #ffffff55; stroke-width: 2; }
+.ok-check{ fill:none; stroke:#fff; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:22; stroke-dashoffset:22; animation: ok-check 600ms ease forwards 250ms; }
+@keyframes ok-check { to { stroke-dashoffset: 0; } }
+
+.ok-title{ font-weight:900; font-size:1.25rem; margin:6px 0 0; }
+.ok-subtitle{ color: var(--muted); margin:0; }
+
+.ok-summary{
+    margin:14px auto 8px;
+    background:#f6fbf8;
+    border:1px solid #e6f5ec;
+    border-radius:12px;
+    padding:10px 12px;
+    max-width: 520px;
+}
+.ok-row{
+    display:grid;
+    grid-template-columns: 1fr auto auto;
+    align-items:center;
+    gap:8px;
+    padding:6px 0;
+    border-bottom:1px dashed #e3efe7;
+}
+.ok-row:last-child{ border-bottom:none; }
+.ok-row span{ color:var(--muted); font-size:.92rem; }
+.ok-row strong{ font-weight:800; }
+.ok-copy{
+    border:none; background:#eef6ff; color:#1b2a3a;
+    padding:6px 8px; border-radius:6px; cursor:pointer;
+}
+.ok-copy:hover{ background:#e4f0ff; }
+
+.ok-steps{
+    list-style:none; padding:0; margin:8px 0 12px;
+    display:flex; flex-direction:column; gap:6px;
+    color:#1b2a3a;
+}
+.ok-steps li{ display:flex; gap:8px; align-items:center; }
+.ok-steps i{ color:#10b981; }
+
+.ok-actions{
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+    margin-top:6px;
+}
+.ok-continue{ text-decoration:none; }
+
+.ok-note{
+    margin:10px 0 0;
+    color:var(--muted);
+    font-size:.9rem;
+}
+
+/* Confetti */
+.ok-confetti{
+    position:absolute; inset:0; pointer-events:none; overflow:hidden;
+}
+.ok-confetti .piece{
+    position:absolute; top:-12px; width:8px; height:12px; border-radius:2px;
+    animation: confetti-fall 1400ms ease-in forwards, confetti-spin 1400ms linear forwards;
+    opacity:.95;
+}
+@keyframes confetti-fall{
+    to{ transform: translateY(120%); opacity: 1; }
+}
+@keyframes confetti-spin{
+    from{ transform: rotate(0deg); }
+    to{ transform: rotate(360deg); }
+}
+
+/* Small screens */
+@media (max-width:520px){
+    .ok-row{ grid-template-columns: 1fr auto; }
+    .ok-copy{ grid-column: 2 / 3; }
+}
+
+
+
+

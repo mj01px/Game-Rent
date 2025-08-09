@@ -14,7 +14,7 @@ export function openCartModal() {
 
     if (button) {
         button.addEventListener('click', () => {
-            window.location.href = '../../components/finishBuy/finish-buy.html'; // Adjust the path as necessary
+            window.location.href = '../../components/checkout/checkout-page.html'; // Adjust the path as necessary
         });
     }
 

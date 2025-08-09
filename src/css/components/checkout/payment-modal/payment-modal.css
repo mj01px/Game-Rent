@@ -1,0 +1,75 @@
+/* ===== Payment — visual upgrades ===== */
+
+.pay-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:8px;
+}
+.pay-amount{ font-weight:900; font-size:1.25rem; }
+
+.brand-accept{
+    display:flex; align-items:center; gap:10px; margin:6px 0 12px;
+}
+.brand-accept span{ color: var(--muted); font-size:.92rem; }
+.brand-icons{ display:flex; gap:10px; font-size:1.4rem; color:#233445; }
+.brand-icons i{ opacity:.9 }
+
+.card-preview{
+    position:relative; margin:10px 0 16px; height:170px; border-radius:16px; padding:16px;
+    color:#fff; box-shadow:0 16px 36px rgba(0,0,0,.18);
+    background: linear-gradient(135deg, #2980b9 0%, #6dd5fa 50%, #2c3e50 100%);
+    overflow:hidden;
+}
+.card-chip{
+    width:36px;height:26px;border-radius:6px;
+    background:linear-gradient(180deg,#ffd37a,#e8b453); box-shadow:0 2px 8px rgba(0,0,0,.25);
+}
+.card-brand{ position:absolute; right:14px; top:12px; font-weight:800; letter-spacing:.12em; opacity:.9; }
+.card-number{
+    position:absolute; left:16px; bottom:66px; font-size:1.1rem; letter-spacing:.16em; font-weight:800;
+    text-shadow:0 1px 2px rgba(0,0,0,.35);
+}
+.card-footer{ position:absolute; left:16px; right:16px; bottom:12px; display:flex; justify-content:space-between; gap:16px; }
+.card-footer span{ display:block; font-size:.65rem; opacity:.8; }
+.card-footer strong{ font-size:.95rem; letter-spacing:.06em; }
+
+.input-with-icon{
+    display:flex; align-items:center; gap:8px;
+     border-radius:10px; background:#fff; padding:10px 12px;
+}
+.input-with-icon i{ color:#7f8c8d; font-size:1rem; }
+.input-with-icon input{
+    border:none; outline:none; flex:1; background:transparent; font-weight:700;
+}
+.input-with-icon:focus-within{
+    box-shadow:0 0 0 3px rgba(52,152,219,.25);
+    border-color:#cfe6f9;
+}
+
+.inline-brand{ font-size:.8rem; color:#7f8c8d; min-width:2ch; text-align:right; }
+
+.cvv-hint{
+    border:none; background:#eef3fb; width:24px; height:24px; border-radius:50%;
+    cursor:pointer; font-weight:900; line-height:24px; text-align:center; color:#2c3e50;
+}
+.cvv-hint:hover{ background:#e6edf8; }
+
+.pay-options{ display:flex; flex-direction:column; gap:8px; margin-top:6px; }
+.toggle{ display:flex; align-items:center; gap:8px; cursor:pointer; color:#2c3e50; }
+.toggle input{ accent-color: var(--blue); }
+
+.trust-row{
+    display:flex; align-items:center; justify-content:space-between; margin:12px 0 6px;
+}
+.badges{ display:flex; flex-wrap:wrap; gap:8px; }
+.badge{
+    display:inline-flex; align-items:center; gap:6px;
+    background:#f4f7fb; border:1px solid #e6ecf5; color:#1b2a3a;
+    padding:6px 10px; border-radius:999px; font-weight:700; font-size:.8rem;
+}
+.secure-seal{ height:28px; opacity:.9 }
+
+.pay-submit{ margin-top:10px; }
+
+.secure-note{ color:var(--muted); font-size:.9rem; margin:8px 0 0; }

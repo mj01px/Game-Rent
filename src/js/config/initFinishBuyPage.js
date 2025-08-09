@@ -17,15 +17,14 @@ export function initContainer(containerId, filePath, basePath) {
 Promise.all([
     initContainer('navbar-container', 'navbar.html', '../../partials/shared/'),
     initContainer('footer-container', 'footer.html', '../../partials/shared/'),
-    initContainer('cart-modal-container', 'cart-modal.html', '../../components/homepage/cart-modal/'),
-    initContainer('game-rent-container', 'game-card-rent.html', '../../components/finishBuy/gamesToRent/'),
-    // initContainer('resume-rent-container', 'resume-rent.html', '../../components/finishBuy/resume/')
+    initContainer('cart-modal-container', 'cart-modal.html', '../../components/homepage/cart-modal/')
 
 ])
     .then(() => {
         initializeCart();
         openCartModal();
         updateCartUI();
+
 
     })
     .catch(err => {

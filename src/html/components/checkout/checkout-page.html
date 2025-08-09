@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Complete Rental — GameRent</title>
+
+  <!-- libs -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../../../css/main.css"/>
+</head>
+<body>
+<!-- Header (your partial) -->
+<div id="navbar-container"></div>
+
+<!-- (if you inject the cart modal via partial, keep it here) -->
+<div id="cart-modal-container"></div>
+
+<main class="fb-page">
+  <div class="fb-container">
+
+    <section class="fb-grid">
+      <!-- LEFT: Items + Summary -->
+      <div class="fb-col-left">
+        <!-- Items -->
+        <article class="fb-card">
+          <header class="fb-card__header">
+            <i class="fa-solid fa-gamepad"></i>
+            <h2>Your Games</h2>
+          </header>
+          <div class="fb-card__body" id="fb-items">
+            <!-- items via JS -->
+          </div>
+        </article>
+
+        <!-- Summary -->
+        <article class="fb-card">
+          <header class="fb-card__header">
+            <i class="fa-solid fa-receipt"></i>
+            <h2>Summary</h2>
+          </header>
+          <div class="fb-card__body">
+            <div id="fb-summary-lines"><!-- lines via JS --></div>
+
+            <div class="fb-row">
+              <span>Discount</span>
+              <strong id="fb-disc" class="is-discount">$0.00</strong>
+            </div>
+
+            <hr class="fb-sep"/>
+
+            <div class="fb-row--total">
+              <span>Total</span>
+
+              <strong class="fb-total" id="fb-total">$0.00</strong>
+            </div>
+
+            <button id="fb-pay" class="fb-btn fb-btn--primary">
+              <i class="fa-solid fa-lock"></i>
+              Pay Now
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <!-- RIGHT: Delivery/Tracking (hidden until clicking track) -->
+      <aside class="fb-col-right hidden " id="fb-delivery-wrapper">
+        <article class="fb-card" id="fb-delivery">
+          <header class="fb-card__header">
+            <i class="fa-solid fa-keyboard"></i>
+            <h2>Game Code</h2>
+          </header>
+          <div class="fb-card__body">
+            <div class="fb-address">
+              <p><strong>Delivery E-mail</strong></p>
+              <p>The key has been sent to user@domain.com</p>
+            </div>
+
+            <div class="fb-timeline" id="fb-timeline">
+              <div class="fb-tl-item" id="tl-pay">
+                <div class="fb-tl-dot"></div>
+                <div>
+                  <h3>Payment</h3>
+                  <p>Pending…</p>
+                </div>
+              </div>
+
+              <div class="fb-tl-item" id="tl-pack">
+                <div class="fb-tl-dot"></div>
+                <div>
+                  <h3>Preparation</h3>
+                  <p>Preparing your games</p>
+                </div>
+              </div>
+
+              <div class="fb-tl-item" id="tl-ship">
+                <div class="fb-tl-dot"></div>
+                <div>
+                  <h3>Sent</h3>
+                  <p>Your game code is available</p>
+                </div>
+              </div>
+
+              <div class="fb-tl-item" id="tl-done">
+                <div class="fb-tl-dot"></div>
+                <div>
+                  <h3>Delivered</h3>
+                  <p>Enjoy your games!</p>
+                </div>
+            </div>
+
+          </div>
+        </article>
+      </aside>
+    </section>
+  </div>
+</main>
+
+<!-- Payment Modal (UPGRADED) -->
+<div class="fb-overlay" id="pay-overlay" aria-hidden="true">
+  <div class="fb-modal" role="dialog" aria-modal="true" aria-labelledby="pay-title">
+    <header class="fb-modal__header">
+      <h3 id="pay-title">Credit Card Payment</h3>
+      <button class="fb-modal__close" id="pay-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="fb-modal__body">
+      <div class="pay-header">
+        <p class="fb-muted">Total:</p>
+        <div class="pay-amount" id="pay-total">$0.00</div>
+      </div>
+
+      <div class="brand-accept">
+        <span>We accept:</span>
+        <div class="brand-icons" aria-hidden="true">
+          <i class="fa-brands fa-cc-visa" title="Visa"></i>
+          <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+          <i class="fa-brands fa-cc-amex" title="American Express"></i>
+          <i class="fa-brands fa-cc-discover" title="Discover"></i>
+        </div>
+      </div>
+
+      <div class="card-preview" aria-hidden="true">
+        <div class="card-chip"></div>
+        <div class="card-brand" id="card-brand">CARD</div>
+        <div class="card-number" id="preview-number">•••• •••• •••• ••••</div>
+        <div class="card-footer">
+          <div class="card-holder">
+            <span>CARDHOLDER</span>
+            <strong id="preview-name">YOUR NAME</strong>
+          </div>
+          <div class="card-exp">
+            <span>EXPIRES</span>
+            <strong id="preview-exp">MM/YY</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="fb-form pay-form">
+        <div class="fb-form__group">
+          <label for="card-number">Card Number</label>
+          <div class="input-with-icon">
+            <i class="fa-regular fa-credit-card"></i>
+            <input id="card-number" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" aria-describedby="card-number-help" />
+            <span class="inline-brand" id="inline-brand">•••</span>
+          </div>
+          <small id="card-number-help" class="help">No spaces or dashes required — we’ll format it.</small>
+        </div>
+
+        <div class="fb-form__group">
+          <label for="card-name">Name on Card</label>
+          <div class="input-with-icon">
+            <i class="fa-regular fa-user"></i>
+            <input id="card-name" autocomplete="cc-name" placeholder="As on card" />
+          </div>
+        </div>
+
+        <div class="fb-form__row">
+          <div class="fb-form__group">
+            <label for="card-exp">Expiration</label>
+            <div class="input-with-icon">
+              <i class="fa-regular fa-calendar"></i>
+              <input id="card-exp" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" />
+            </div>
+          </div>
+          <div class="fb-form__group">
+            <label for="card-cvv">CVV</label>
+            <div class="input-with-icon">
+              <i class="fa-solid fa-shield-halved"></i>
+              <input id="card-cvv" inputmode="numeric" autocomplete="cc-csc" placeholder="123" />
+              <button class="cvv-hint" type="button" aria-label="Where to find CVV?" title="Where to find CVV?">?</button>
+            </div>
+            <small class="help">3 digits (4 for Amex)</small>
+          </div>
+        </div>
+      </div>
+
+      <button id="pay-confirm" class="fb-btn fb-btn--primary pay-submit">
+        <i class="fa-solid fa-lock"></i>
+        Confirm Payment
+      </button>
+
+      <p class="secure-note">
+        Your payment information is encrypted. We do not store full card numbers.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="fb-overlay" id="ok-overlay" aria-hidden="true">
+  <div class="fb-modal fb-modal--success" role="dialog" aria-modal="true" aria-labelledby="ok-title">
+    <header class="fb-modal__header">
+      <h3 id="ok-title">Payment Approved!</h3>
+      <button class="fb-modal__close" id="ok-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="fb-modal__body fb-modal__body--center">
+      <div class="ok-icon">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <p class="ok-message">
+        Your purchase of <strong id="ok-total">$0.00</strong> has been completed successfully.
+      </p>
+      <button id="see-tracking" class="fb-btn fb-btn--success">
+        Track Order
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Empty Cart Modal -->
+<div class="fb-overlay" id="empty-overlay" aria-hidden="true">
+  <div class="fb-modal fb-modal--empty" role="dialog" aria-modal="true" aria-labelledby="empty-title">
+    <header class="fb-modal__header">
+      <h3 id="empty-title">Your cart is empty</h3>
+      <button class="fb-modal__close" id="empty-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="fb-modal__body fb-modal__body--center">
+      <div class="empty-hero" aria-hidden="true">
+        <svg class="empty-icon" viewBox="0 0 64 64" width="80" height="80">
+          <path class="basket" d="M10 22h44l-4 28a6 6 0 0 1-6 5H20a6 6 0 0 1-6-5l-4-28Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path class="handle" d="M24 22l8-12 8 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle class="wheel" cx="24" cy="56" r="2" />
+          <circle class="wheel" cx="40" cy="56" r="2" />
+        </svg>
+        <p class="empty-title">No games here… yet</p>
+        <p class="empty-subtitle">Add some titles to proceed to checkout.</p>
+      </div>
+
+      <ul class="empty-suggestions">
+        <li><i class="fa-solid fa-ranking-star" aria-hidden="true"></i> Check top-rated games</li>
+        <li><i class="fa-solid fa-tags" aria-hidden="true"></i> Browse deals & bundles</li>
+      </ul>
+
+      <div class="empty-actions">
+        <a id="empty-go" class="fb-btn fb-btn--primary" href="../../../html/components/catalog/catalog.html">
+          Browse catalog
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Footer -->
+<div id="footer-container"></div>
+
+<!-- JS -->
+<script type="module" src="../../../js/config/initFinishBuyPage.js"></script>
+<script type="module" src="../../../js/modules/checkout/checkout.js"></script>
+
+<!-- Optional: live preview + formatters -->
+<script type="module">
+  const num = document.getElementById('card-number');
+  const name = document.getElementById('card-name');
+  const exp = document.getElementById('card-exp');
+  const cvv = document.getElementById('card-cvv');
+
+  const prevNum = document.getElementById('preview-number');
+  const prevName = document.getElementById('preview-name');
+  const prevExp = document.getElementById('preview-exp');
+  const brand = document.getElementById('card-brand');
+  const inlineBrand = document.getElementById('inline-brand');
+
+  const detectBrand = (val) => {
+    const v = val.replace(/\D/g,'');
+    if(/^4/.test(v)) return 'VISA';
+    if(/^(5[1-5])/.test(v)) return 'MC';
+    if(/^3[47]/.test(v)) return 'AMEX';
+    if(/^6(011|5)/.test(v)) return 'DISC';
+    return 'CARD';
+  };
+
+  const formatCard = (val) => {
+    const v = val.replace(/\D/g,'').slice(0,16);
+    return v.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+  };
+
+  const formatExp = (val) => {
+    const v = val.replace(/\D/g,'').slice(0,4);
+    if(v.length <= 2) return v;
+    return v.slice(0,2) + '/' + v.slice(2);
+  };
+
+  num?.addEventListener('input', (e)=>{
+    const f = formatCard(e.target.value);
+    e.target.value = f;
+    prevNum.textContent = f || '•••• •••• •••• ••••';
+    const b = detectBrand(f);
+    brand.textContent = b;
+    inlineBrand.textContent = b === 'CARD' ? '•••' : b;
+  });
+
+  name?.addEventListener('input', (e)=>{
+    prevName.textContent = e.target.value.trim().toUpperCase() || 'YOUR NAME';
+  });
+
+  exp?.addEventListener('input', (e)=>{
+    const f = formatExp(e.target.value);
+    e.target.value = f;
+    prevExp.textContent = f || 'MM/YY';
+  });
+
+  cvv?.addEventListener('input', (e)=>{
+    e.target.value = e.target.value.replace(/\D/g,'').slice(0,4);
+  });
+</script>
+</body>
+</html>
